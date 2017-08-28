@@ -133,6 +133,14 @@
     <Compile Include="Infrastructure\Entities\WorkItem.cs" />
     <Compile Include="Infrastructure\Enums\Status.cs" />
     <Compile Include="Infrastructure\Entities\DailyPlan.cs" />
+    <Compile Include="Models\ProjectsViewModel\AddProjectViewModel.cs" />
+    <Compile Include="Models\ProjectsViewModel\ListOfProjectsViewModel.cs" />
+    <Compile Include="Models\ProjectsViewModel\ProjectViewModel.cs" />
+    <Compile Include="Models\ProjectsViewModel\UpdateProjectViewModel.cs" />
+    <Compile Include="Models\WorkItemsViewModel\AddWorkItemViewModel.cs" />
+    <Compile Include="Models\WorkItemsViewModel\ListOfWorkItemsViewModel.cs" />
+    <Compile Include="Models\WorkItemsViewModel\UpdateWorkItemViewModel.cs" />
+    <Compile Include="Models\WorkItemsViewModel\WorkItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,8 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infrastructure\Entities\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
