@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DailyPlanning.Models
+namespace DailyPlanning.Infrastructure.Entities
 {
     public class DailyPlan
     {
