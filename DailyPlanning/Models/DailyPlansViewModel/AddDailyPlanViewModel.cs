@@ -1,4 +1,5 @@
 ﻿using DailyPlanning.Infrastructure.Entities;
+using DailyPlanning.Models.WorkItemsViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace DailyPlanning.Models.DailyPlansViewModel
 {
     public class AddDailyPlanViewModel
     {
-        public ICollection<WorkItem> Today { get; set; } 
+        public ICollection<WorkItemViewModel> Today { get; set; } 
 
         public string Note { get; set; }
     }
