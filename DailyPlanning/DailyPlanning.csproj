@@ -128,6 +128,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Context\DailyPlanningContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infrastructure\Context\" />
     <Folder Include="Infrastructure\Entities\" />
     <Folder Include="Models\" />
   </ItemGroup>
