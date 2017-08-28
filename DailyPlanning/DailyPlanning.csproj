@@ -129,6 +129,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Context\DailyPlanningContext.cs" />
+    <Compile Include="Infrastructure\Entities\Project.cs" />
+    <Compile Include="Infrastructure\Entities\WorkItem.cs" />
+    <Compile Include="Infrastructure\Enums\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -187,7 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infrastructure\Entities\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
