@@ -7,6 +7,7 @@ namespace DailyPlanning.Models.ProjectsViewModel
 {
     public class UpdateProjectViewModel
     {
+        public int ProjectID { get; set; }
         public string Title { get; set; }        
     }
 }
