@@ -136,6 +136,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Context\DailyPlanningContext.cs" />
+    <Compile Include="Infrastructure\Database\DailyPlanningDBInitializer.cs" />
     <Compile Include="Infrastructure\Entities\Project.cs" />
     <Compile Include="Infrastructure\Entities\WorkItem.cs" />
     <Compile Include="Infrastructure\Enums\Status.cs" />
