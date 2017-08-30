@@ -57,7 +57,6 @@ namespace DailyPlanning.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-             
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, UpdateProjectViewModel>());
             IMapper mapper = config.CreateMapper();
 
@@ -70,7 +69,6 @@ namespace DailyPlanning.Controllers
             }
 
             return RedirectToAction("Index");
-            
         }
 
         [HttpPost]
@@ -92,7 +90,6 @@ namespace DailyPlanning.Controllers
             }
 
             return View();
-            
         }
 
         public ActionResult Details(int id)
@@ -123,36 +120,18 @@ namespace DailyPlanning.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+        
         public ActionResult Delete(int id)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectViewModel>());
-            IMapper mapper = config.CreateMapper();
-
             using (var dbContext = new DailyPlanningContext())
             {
                 var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
-                var projectViewModel = mapper.Map<Project, ProjectViewModel>(projectEntity);
 
-                if (projectViewModel != null)
+                if (projectEntity != null)
                 {
-                    return View(projectViewModel);
+                    dbContext.Entry(projectEntity).State = EntityState.Deleted;
+                    dbContext.SaveChanges();
                 }
-
-                return RedirectToAction("Index");
-            }
-        }
-
-        public ActionResult Delete(ProjectViewModel deletedProject)
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, Project>());
-            IMapper mapper = config.CreateMapper();
-
-            using (var dbContext = new DailyPlanningContext())
-            {
-                var deletedProjectEntity = mapper.Map<ProjectViewModel, Project>(deletedProject);
-
-                dbContext.Projects.Remove(deletedProjectEntity);
 
                 return RedirectToAction("Index");
             }
