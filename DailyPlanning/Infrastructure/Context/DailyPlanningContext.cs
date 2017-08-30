@@ -6,12 +6,6 @@ namespace DailyPlanning.Infrastructure.Context
 {
     public class DailyPlanningContext : DbContext
     {
-
-        public DailyPlanningContext() : base()
-        {
-            System.Data.Entity.Database.SetInitializer(new DailyPlanningDBInitializer());
-        }
-
         public DbSet<Project> Projects { get; set; }
 
         public DbSet<WorkItem> WorkItems { get; set; }

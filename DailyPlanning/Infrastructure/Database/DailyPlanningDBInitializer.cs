@@ -30,6 +30,15 @@ namespace DailyPlanning.Infrastructure.Database
             foreach (WorkItem witem in defaultWorkitems)
                 context.WorkItems.Add(witem);
 
+            IList<DailyPlan> defaultDailyPlan = new List<DailyPlan>();
+
+            defaultDailyPlan.Add(new DailyPlan() { Date = DateTime.Now, Today = defaultWorkitems, DayBefore = defaultWorkitems, Note = "Daily Plan 1"});
+            defaultDailyPlan.Add(new DailyPlan() { Date = DateTime.Now, Today = defaultWorkitems, DayBefore = defaultWorkitems, Note = "Daily Plan 2"});
+            defaultDailyPlan.Add(new DailyPlan() { Date = DateTime.Now, Today = defaultWorkitems, DayBefore = defaultWorkitems, Note = "Daily Plan 3"});
+
+            foreach (DailyPlan dplan in defaultDailyPlan)
+                context.DailyPlans.Add(dplan);
+
             base.Seed(context);
         }
 
