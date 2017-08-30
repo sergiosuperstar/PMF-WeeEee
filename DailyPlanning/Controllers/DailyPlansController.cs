@@ -41,6 +41,17 @@ namespace DailyPlanning.Controllers
         }
         public ActionResult AddDailyPlan()
         {
+            MapperConfiguration config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DailyPlan, AddDailyPlanViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+
+            using(var dbContext = new DailyPlanningContext)
+            {
+
+            }
+
             return View();
         }
 
