@@ -47,7 +47,7 @@ namespace DailyPlanning.Controllers
             });
             IMapper mapper = config.CreateMapper();
 
-            using(var dbContext = new DailyPlanningContext)
+            using(var dbContext = new DailyPlanningContext())
             {
 
             }
