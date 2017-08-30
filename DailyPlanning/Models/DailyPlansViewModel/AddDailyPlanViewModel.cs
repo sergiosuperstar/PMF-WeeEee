@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DailyPlanning.Models.DailyPlansViewModel
 {
@@ -13,9 +14,13 @@ namespace DailyPlanning.Models.DailyPlansViewModel
 
         public DateTime Date { get; set; }
 
-        public ICollection<WorkItem> DayBefore { get; set; }
+        public IEnumerable<WorkItem> SelectedWorkItemsToday { get; set; }
 
-        public ICollection<WorkItemViewModel> Today { get; set; }
+        public IEnumerable<WorkItem> SelectedWOrkItemsDayBefore { get; set; }
+
+        public IEnumerable<WorkItemViewModel> DayBefore { get; set; }
+
+        public IEnumerable<WorkItemViewModel> Today { get; set; }
 
         [StringLength(500)]
         public string Note { get; set; }
