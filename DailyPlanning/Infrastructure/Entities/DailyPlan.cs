@@ -17,11 +17,14 @@ namespace DailyPlanning.Infrastructure.Entities
 
         [Key]
         public int DailyPlanID { get; set; }
+
         [Required]
         public DateTime Date { get; set; }
+
         public ICollection<WorkItem> DayBefore { get; set; }
 
         public ICollection<WorkItem> Today { get; set; }
+
         [StringLength(500)]
         public string Note { get; set; }
         
