@@ -215,6 +215,7 @@
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\DailyPlans\Index.cshtml" />
     <Content Include="Views\DailyPlans\AddDailyPlan.cshtml" />
+    <Content Include="Views\Project\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

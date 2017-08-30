@@ -20,8 +20,9 @@ namespace DailyPlanning.Controllers
             using (var dbContext = new DailyPlanningContext())
             {
                 var projectsEntity = dbContext.Projects.AsEnumerable();
-                var projectsViewModel = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(projectsEntity);
                 
+                var projectsViewModel = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(projectsEntity);
+
                 return View(projectsViewModel);
             }
         }
@@ -118,6 +119,40 @@ namespace DailyPlanning.Controllers
 
                     return View(projectDetails);
                 }
+
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectViewModel>());
+            IMapper mapper = config.CreateMapper();
+
+            using (var dbContext = new DailyPlanningContext())
+            {
+                var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
+                var projectViewModel = mapper.Map<Project, ProjectViewModel>(projectEntity);
+
+                if (projectViewModel != null)
+                {
+                    return View(projectViewModel);
+                }
+
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult Delete(ProjectViewModel deletedProject)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProjectViewModel, Project>());
+            IMapper mapper = config.CreateMapper();
+
+            using (var dbContext = new DailyPlanningContext())
+            {
+                var deletedProjectEntity = mapper.Map<ProjectViewModel, Project>(deletedProject);
+
+                dbContext.Projects.Remove(deletedProjectEntity);
 
                 return RedirectToAction("Index");
             }

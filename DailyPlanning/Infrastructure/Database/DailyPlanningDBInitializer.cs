@@ -12,23 +12,25 @@ namespace DailyPlanning.Infrastructure.Database
     {
         protected override void Seed(DailyPlanningContext context)
         {
-            IList<Project> defaultProjects = new List<Project>();
+            var project1 = new Project() { Title = "Project 1" };
+            var project2 = new Project() { Title = "Project 2" };
+            var project3 = new Project() { Title = "Project 3" };
+            
+            context.Projects.Add(project1);
+            context.Projects.Add(project2);
+            context.Projects.Add(project3);
 
-            defaultProjects.Add(new Project() { Title = "Project 1" });
-            defaultProjects.Add(new Project() { Title = "Project 2" });
-            defaultProjects.Add(new Project() { Title = "Project 3" });
+            context.SaveChanges();
 
-            foreach (Project p in defaultProjects)
-                context.Projects.Add(p);
+            var workitem1 = new WorkItem() { Title = "WorkItem 1", Description = "First WorkItem", Status = Enums.Status.TODO, ProjectID = project1.ProjectID };
+            var workitem2 = new WorkItem() { Title = "WorkItem 2", Description = "Second WorkItem", Status = Enums.Status.IN_PROGRESS, ProjectID = project2.ProjectID };
+            var workitem3 = new WorkItem() { Title = "WorkItem 3", Description = "Third WorkItem", Status = Enums.Status.DONE, ProjectID = project3.ProjectID };
 
-            IList<WorkItem> defaultWorkitems = new List<WorkItem>();
+            context.WorkItems.Add(workitem1);
+            context.WorkItems.Add(workitem2);
+            context.WorkItems.Add(workitem3);
 
-            defaultWorkitems.Add(new WorkItem() { Title = "WorkItem 1", Description = "First WorkItem", Status = Enums.Status.TODO, ProjectID = 5 });
-            defaultWorkitems.Add(new WorkItem() { Title = "WorkItem 2", Description = "Second WorkItem", Status = Enums.Status.IN_PROGRESS, ProjectID = 6 });
-            defaultWorkitems.Add(new WorkItem() { Title = "WorkItem 3", Description = "Third WorkItem", Status = Enums.Status.DONE, ProjectID = 7 });
-
-            foreach (WorkItem witem in defaultWorkitems)
-                context.WorkItems.Add(witem);
+            context.SaveChanges();
 
             IList<DailyPlan> defaultDailyPlan = new List<DailyPlan>();
 
