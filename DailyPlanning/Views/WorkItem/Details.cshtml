@@ -1,0 +1,64 @@
+﻿@model DailyPlanning.Models.WorkItemsViewModel.WorkItemDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkItem.WorkItemID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkItem.WorkItemID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkItem.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkItem.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkItem.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkItem.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkItem.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkItem.Status)
+        </dd>
+
+    </dl>
+    <h4>Projects</h4>
+    <div>
+        <table class="table">
+            <thead>
+            <th>@Html.DisplayNameFor(model => model.Project.ProjectID)</th>
+            <th>@Html.DisplayNameFor(model => model.Project.Title)</th>
+            </thead>
+            
+                <tr>
+                    <td>@Html.DisplayFor(model => model.Project.ProjectID)</td>
+                    <td>@Html.DisplayFor(model => model.Project.Title)</td>
+                </tr>
+            
+        </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

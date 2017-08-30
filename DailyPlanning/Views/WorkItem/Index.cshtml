@@ -1,0 +1,59 @@
+﻿@model IEnumerable<DailyPlanning.Models.WorkItemsViewModel.WorkItemViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Work Items</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkItemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkItemID)
+        </td>
+        <td>
+            @Html.ActionLink(item.Title, "Details", new { id = item.WorkItemID })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.WorkItemID }, new { @class = "btn btn-default" })
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.WorkItemID }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>
+
+<p>
+    @Html.ActionLink("Add", "AddWorkItem", "", new { @class = "btn btn-default" })
+</p>

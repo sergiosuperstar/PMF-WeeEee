@@ -19,9 +19,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.ProjectID</td>
+                <td>@Html.DisplayFor(modelItem => item.ProjectID)</td>
                 <td>@Html.ActionLink(item.Title, "Details", new { id = item.ProjectID })</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { @class = "btn btn-default" })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { @class = "btn btn-default" })</td>
             </tr>
         }
 
@@ -31,4 +32,5 @@
 <div>
     @Html.ActionLink("Add", "AddProject", "", new { @class = "btn btn-default" })
 </div>
+
 

@@ -43,8 +43,8 @@ namespace DailyPlanning.Infrastructure.Database
             var DailyPlan3 = new DailyPlan() { Date = DateTime.Now, Today = witems, DayBefore = witems, Note = "Daily Plan 3" };
 
             context.DailyPlans.Add(DailyPlan1);
-            context.DailyPlans.Add(DailyPlan2);
-            context.DailyPlans.Add(DailyPlan3);
+            //context.DailyPlans.Add(DailyPlan2);
+            //context.DailyPlans.Add(DailyPlan3);
 
             base.Seed(context);
         }

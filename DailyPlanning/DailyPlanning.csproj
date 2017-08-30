@@ -154,6 +154,7 @@
     <Compile Include="Models\WorkItemsViewModel\AddWorkItemViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\ListOfWorkItemsViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\UpdateWorkItemViewModel.cs" />
+    <Compile Include="Models\WorkItemsViewModel\WorkItemDetailsViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\WorkItemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -214,12 +215,19 @@
     <Content Include="Views\Project\AddProject.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
+    <Content Include="Views\DailyPlans\Index.cshtml" />
+    <Content Include="Views\DailyPlans\AddDailyPlan.cshtml" />
+    <Content Include="Views\WorkItem\Index.cshtml" />
+    <Content Include="Views\WorkItem\AddWorkItem.cshtml" />
+    <Content Include="Views\WorkItem\Edit.cshtml" />
+    <Content Include="Views\WorkItem\Details.cshtml" />
     <Content Include="Views\DailyPlan\Index.cshtml" />
     <Content Include="Views\DailyPlan\AddDailyPlan.cshtml" />
     <Content Include="Views\Project\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DailyPlan\" />
     <Folder Include="Views\WorkItem\" />
   </ItemGroup>
   <ItemGroup>
