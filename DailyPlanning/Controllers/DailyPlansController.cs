@@ -45,9 +45,26 @@ namespace DailyPlanning.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddDailyPlan(DailyPlan dailyPlan)
+        public ActionResult AddDailyPlan(AddDailyPlanViewModel newDailyPlanViewModel)
         {
-           
+            if (ModelState.IsValid)
+            {
+                MapperConfiguration config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<AddDailyPlanViewModel, DailyPlan>();
+                });
+                IMapper mapper = config.CreateMapper();
+
+                using (var dbContext = new DailyPlanningContext())
+                {
+                    var dailyPlanEntity = mapper.Map<AddDailyPlanViewModel, DailyPlan>(newDailyPlanViewModel);
+                    dbContext.DailyPlans.Add(dailyPlanEntity);
+                    dbContext.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                
+            }
 
             return View();
         }

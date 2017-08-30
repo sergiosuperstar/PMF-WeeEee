@@ -10,7 +10,10 @@ namespace DailyPlanning.Models.DailyPlansViewModel
 {
     public class AddDailyPlanViewModel
     {
-     
+
+        public DateTime Date { get; set; }
+
+        public ICollection<WorkItem> DayBefore { get; set; }
 
         public ICollection<WorkItemViewModel> Today { get; set; }
 
