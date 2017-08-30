@@ -130,6 +130,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DailyPlansController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\WorkItemController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -144,6 +146,7 @@
     <Compile Include="Models\DailyPlansViewModel\UpdateDailyPlanViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\AddProjectViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\ListOfProjectsViewModel.cs" />
+    <Compile Include="Models\ProjectsViewModel\ProjectDetailsViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\ProjectViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\UpdateProjectViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\AddWorkItemViewModel.cs" />
@@ -205,11 +208,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\AddProject.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
+    <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\DailyPlans\Index.cshtml" />
     <Content Include="Views\DailyPlans\AddDailyPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DailyPlan\" />
+    <Folder Include="Views\WorkItem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

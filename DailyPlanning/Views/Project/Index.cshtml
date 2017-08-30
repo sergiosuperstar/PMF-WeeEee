@@ -1,0 +1,33 @@
+﻿@using DailyPlanning.Models.ProjectsViewModel
+@model IEnumerable<ProjectViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Projects</h2>
+<hr />
+<div>
+    <table class="table">
+        <thead>
+            <th>@Html.DisplayNameFor(model => model.ProjectID)</th>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th></th>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProjectID</td>
+                <td>@Html.ActionLink(item.Title, "Details", new { id = item.ProjectID })</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { @class = "btn btn-default" })</td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div>
+    @Html.ActionLink("Add", "AddProject", "", new { @class = "btn btn-default" })
+</div>
+
