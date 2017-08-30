@@ -32,6 +32,20 @@ namespace DailyPlanning.Infrastructure.Database
 
             context.SaveChanges();
 
+            List<WorkItem> witems = new List<WorkItem>();
+
+            witems.Add(workitem1);
+            witems.Add(workitem2);
+            witems.Add(workitem3);
+
+            var DailyPlan1 = new DailyPlan() { Date = DateTime.Now, Today = witems, DayBefore = witems, Note = "Daily Plan 1" };
+            var DailyPlan2 = new DailyPlan() { Date = DateTime.Now, Today = witems, DayBefore = witems, Note = "Daily Plan 2" };
+            var DailyPlan3 = new DailyPlan() { Date = DateTime.Now, Today = witems, DayBefore = witems, Note = "Daily Plan 3" };
+
+            context.DailyPlans.Add(DailyPlan1);
+            //context.DailyPlans.Add(DailyPlan2);
+            //context.DailyPlans.Add(DailyPlan3);
+
             base.Seed(context);
         }
 
