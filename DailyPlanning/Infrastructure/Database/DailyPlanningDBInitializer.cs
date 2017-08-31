@@ -12,9 +12,9 @@ namespace DailyPlanning.Infrastructure.Database
     {
         protected override void Seed(DailyPlanningContext context)
         {
-            var project1 = new Project() { Title = "Project 1" };
-            var project2 = new Project() { Title = "Project 2" };
-            var project3 = new Project() { Title = "Project 3" };
+            var project1 = new Project() { Title = "Project 1", IsEnabled = true, IsDeleted = false };
+            var project2 = new Project() { Title = "Project 2", IsEnabled = true, IsDeleted = false };
+            var project3 = new Project() { Title = "Project 3", IsEnabled = true, IsDeleted = false };
             
             context.Projects.Add(project1);
             context.Projects.Add(project2);
@@ -22,9 +22,9 @@ namespace DailyPlanning.Infrastructure.Database
 
             context.SaveChanges();
 
-            var workitem1 = new WorkItem() { Title = "WorkItem 1", Description = "First WorkItem", Status = Enums.Status.TODO, ProjectID = project1.ProjectID };
-            var workitem2 = new WorkItem() { Title = "WorkItem 2", Description = "Second WorkItem", Status = Enums.Status.IN_PROGRESS, ProjectID = project2.ProjectID };
-            var workitem3 = new WorkItem() { Title = "WorkItem 3", Description = "Third WorkItem", Status = Enums.Status.DONE, ProjectID = project3.ProjectID };
+            var workitem1 = new WorkItem() { Title = "WorkItem 1", Description = "First WorkItem", Status = Enums.Status.TODO, ProjectID = project1.ProjectID, IsEnabled = true, IsDeleted = false };
+            var workitem2 = new WorkItem() { Title = "WorkItem 2", Description = "Second WorkItem", Status = Enums.Status.IN_PROGRESS, ProjectID = project2.ProjectID, IsEnabled = true, IsDeleted = false };
+            var workitem3 = new WorkItem() { Title = "WorkItem 3", Description = "Third WorkItem", Status = Enums.Status.DONE, ProjectID = project3.ProjectID, IsEnabled = true, IsDeleted = false };
 
             context.WorkItems.Add(workitem1);
             context.WorkItems.Add(workitem2);

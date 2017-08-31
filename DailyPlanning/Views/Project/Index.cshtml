@@ -9,13 +9,15 @@
 <hr />
 
 
-
-<th>@Html.DisplayNameFor(model => model.ProjectID)</th>
-<th>@Html.DisplayNameFor(model => model.Title)</th>
-<th></th>
-
 <div>
     <table class="table">
+        <thead>
+
+        <th>@Html.DisplayNameFor(model => model.ProjectID)</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th></th>
+
+        </thead>
         @foreach (var item in Model)
         {
             <tr>
