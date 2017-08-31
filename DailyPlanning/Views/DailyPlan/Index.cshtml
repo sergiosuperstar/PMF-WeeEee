@@ -6,11 +6,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Daily Plans</h2>
 
-<p>
-    @Html.ActionLink("Create New", "AddDailyPlan")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -38,26 +36,35 @@
                 <ul>
                     @foreach (var workItem in item.Today)
                     {
-                       
-
+                        <li>@Html.ActionLink(workItem.Title, "Details" , "WorkItem" , new { id = workItem.WorkItemID }, null)</li>
                     }
                 </ul>
-
             </td>
             <td>
-                
+                <ul>
+                    @foreach (var workItem in item.DayBefore)
+                    {
+                        <li>@Html.ActionLink(workItem.Title, "Details", new { id = workItem.WorkItemID })</li>
+                    }
+                </ul>
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Note)
             </td>
 
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.DailyPlanID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.DailyPlanID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID })
             </td>
         </tr>
     }
 
+    
+
 </table>
+
+<p>
+
+    @Html.ActionLink("Add Daily Plan", "AddDailyPlan","", new { @class = "btn btn-default" })
+</p>

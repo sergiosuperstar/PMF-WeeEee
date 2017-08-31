@@ -19,7 +19,7 @@ namespace DailyPlanning.Controllers
     
             using (var dbContext = new DailyPlanningContext())
             {
-                var projectsEntity = dbContext.Projects.AsEnumerable();
+                var projectsEntity = dbContext.Projects.Where(p => p.IsDeleted == false && p.IsEnabled == true).AsEnumerable();
                 
                 var projectsViewModel = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(projectsEntity);
 
@@ -44,6 +44,7 @@ namespace DailyPlanning.Controllers
                 using (var dbContext = new DailyPlanningContext())
                 {
                     Project newProjectEntity = mapper.Map<AddProjectViewModel, Project>(newProjectViewModel);
+                    newProjectEntity.IsEnabled = true;
                     dbContext.Projects.Add(newProjectEntity);
                     dbContext.SaveChanges();
 
@@ -129,7 +130,10 @@ namespace DailyPlanning.Controllers
 
                 if (projectEntity != null)
                 {
-                    dbContext.Entry(projectEntity).State = EntityState.Deleted;
+                    projectEntity.IsDeleted = true;
+                    projectEntity.IsEnabled = false;
+
+                    dbContext.Entry(projectEntity).State = EntityState.Modified;
                     dbContext.SaveChanges();
                 }
 

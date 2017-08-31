@@ -6,7 +6,7 @@
 <h2>Work Items</h2>
 
 <table class="table">
-    <tr>
+    <thead>
         <th>
             @Html.DisplayNameFor(model => model.WorkItemID)
         </th>
@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.ProjectID)
         </th>
         <th></th>
-    </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
@@ -35,7 +35,7 @@
                 @Html.ActionLink(item.Title, "Details", new { id = item.WorkItemID })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.Raw(item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)

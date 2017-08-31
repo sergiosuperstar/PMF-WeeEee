@@ -19,7 +19,7 @@ namespace DailyPlanning.Controllers
 
             using (var dbContext = new DailyPlanningContext())
             {
-                var workitemsEntity = dbContext.WorkItems.AsEnumerable();
+                var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable();
                 
                 var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
                 
@@ -51,6 +51,7 @@ namespace DailyPlanning.Controllers
                 using (var dbContext = new DailyPlanningContext())
                 {
                     WorkItem newWorkItemEntity = mapper.Map<AddWorkItemViewModel, WorkItem>(newWorkItemViewModel);
+                    newWorkItemEntity.IsEnabled = true;
                     dbContext.WorkItems.Add(newWorkItemEntity);
                     dbContext.SaveChanges();
 
@@ -111,7 +112,10 @@ namespace DailyPlanning.Controllers
 
                 if (workItemEntity != null)
                 {
-                    dbContext.Entry(workItemEntity).State = EntityState.Deleted;
+                    workItemEntity.IsDeleted = true;
+                    workItemEntity.IsEnabled = false;
+
+                    dbContext.Entry(workItemEntity).State = EntityState.Modified;
                     dbContext.SaveChanges();
                 }
 
@@ -152,13 +156,13 @@ namespace DailyPlanning.Controllers
         {
             using (var dbContext = new DailyPlanningContext())
             {
-                var allProjectIDs = dbContext.Projects.Select(p =>
+                var allProjects = dbContext.Projects.Where(p => p.IsEnabled == true && p.IsDeleted == false).Select(p =>
                         new SelectListItem
                         {
                             Value = p.ProjectID.ToString(),
                             Text = p.Title
                         }).ToList();
-                var projectIDs = new SelectList(allProjectIDs, "Value", "Text");
+                var projectIDs = new SelectList(allProjects, "Value", "Text");
 
                 return projectIDs;
             }

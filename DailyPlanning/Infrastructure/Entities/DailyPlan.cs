@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +12,8 @@ namespace DailyPlanning.Infrastructure.Entities
     {
         public DailyPlan()
         {
-            this.DayBefore = new Collection<WorkItem>();
-            this.Today = new Collection<WorkItem>();
+            this.DayBefore = new HashSet<WorkItem>();
+            //this.Today = new HashSet<WorkItem>();
         }
 
         [Key]
@@ -21,9 +22,11 @@ namespace DailyPlanning.Infrastructure.Entities
         [Required]
         public DateTime Date { get; set; }
 
-        public ICollection<WorkItem> DayBefore { get; set; }
+        [InverseProperty("DailyPlansDayBefore")]
+        public virtual ICollection<WorkItem> DayBefore { get; set; }
 
-        public ICollection<WorkItem> Today { get; set; }
+        [InverseProperty("DailyPlansToday")]
+        public virtual ICollection<WorkItem> Today { get; set; }
 
         [StringLength(500)]
         public string Note { get; set; }

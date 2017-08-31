@@ -22,10 +22,20 @@
         </div>
         
         <div class="form-group">
+            @Html.LabelFor(model => model.DayBefore, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.ListBoxFor(model => model.SelectedWorkItemsDayBefore, new MultiSelectList(Model.DayBefore, "WorkItemId", "Title"))
+
+
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.Today, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                
-                    @Html.ListBoxFor(model => Model.Today, new MultiSelectList(Model.Today, "WorkItemId", "Title", Model.SelectedWorkItemsToday))
+                    @Html.ListBoxFor(model => model.SelectedWorkItemsToday, new MultiSelectList(Model.Today, "WorkItemId" ,"Title"))
                
 
             </div>
