@@ -12,6 +12,7 @@ using AutoMapper;
 using DailyPlanning.Models.DailyPlansViewModel;
 using System.Collections;
 using DailyPlanning.Models.WorkItemsViewModel;
+using DailyPlanning.Infrastructure.Enums;
 
 namespace DailyPlanning.Controllers
 {
@@ -24,14 +25,14 @@ namespace DailyPlanning.Controllers
 
             using (var db = new DailyPlanningContext())
             {
-
-
                 MapperConfiguration config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<DailyPlan, DailyPlanViewModel>();
                 });
 
-                var dailyPlansEntities = db.DailyPlans.AsEnumerable();
+                var dailyPlansEntities = db.DailyPlans.Where(dp => dp.DayBefore.Any(wi => db.WorkItems.Select(x => x.WorkItemID).Contains(wi.WorkItemID)) ||
+                                                             dp.Today.Any(wi => db.WorkItems.Select(x => x.WorkItemID).Contains(wi.WorkItemID)));
+
                 IMapper iMapper = config.CreateMapper();
                 var dailyPlanViewModel = iMapper.Map<IEnumerable<DailyPlan>, IEnumerable<DailyPlanViewModel>>(dailyPlansEntities);
 
@@ -52,11 +53,14 @@ namespace DailyPlanning.Controllers
             using (var dbContext = new DailyPlanningContext())
             {
 
-                var workItemEntities = dbContext.WorkItems.AsEnumerable();
-                var workItemViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntities); // pokupio sam podatke iz entiteta i stavio ih u ViewModel
+                var workItemEntitiesToday = dbContext.WorkItems.Where(w => w.Status == Status.TODO || w.Status == Status.IN_PROGRESS);
+                var workItemEntitiesDayBefore = dbContext.WorkItems.Where(w => w.Status == Status.IN_PROGRESS || w.Status == Status.DONE);
+                var workItemViewModelToday = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesToday); // pokupio sam podatke iz entiteta i stavio ih u ViewModel
+                var workItemViewModelDayBefore = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesDayBefore);
 
-                dailyPlanViewModel.Date = DateTime.Now; // setovao sam vreme
-                dailyPlanViewModel.Today = workItemViewModel; // postavio dostupne Work Item-e
+                dailyPlanViewModel.Date = DateTime.UtcNow; // setovao sam vreme
+                dailyPlanViewModel.Today = workItemViewModelToday; // postavio dostupne Work Item-e
+                dailyPlanViewModel.DayBefore = workItemViewModelDayBefore;
             }
             return View(dailyPlanViewModel);
         }
@@ -69,14 +73,37 @@ namespace DailyPlanning.Controllers
                 MapperConfiguration config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<AddDailyPlanViewModel, DailyPlan>();
+                    cfg.CreateMap<WorkItemViewModel, WorkItem>();
                 });
                 IMapper mapper = config.CreateMapper();
-
-
-
                 using (var dbContext = new DailyPlanningContext())
                 {
+
                     var dailyPlanEntity = mapper.Map<AddDailyPlanViewModel, DailyPlan>(newDailyPlanViewModel);
+
+                    // napraviti listu koja je tipa work items i dodati pronadjene iteme u nju
+
+                    List<WorkItem> workItemsToday = new List<WorkItem>();
+                    List<WorkItem> workItemsDayBefore = new List<WorkItem>();
+
+                    foreach (var id in newDailyPlanViewModel.SelectedWorkItemsToday)
+                    {
+
+                        var workItem = dbContext.WorkItems.Where(x => x.WorkItemID == id).FirstOrDefault();
+                        workItemsToday.Add(workItem);
+
+                    }
+
+                    foreach (var id in newDailyPlanViewModel.SelectedWorkItemsDayBefore)
+                    {
+
+                        var workItem = dbContext.WorkItems.Where(x => x.WorkItemID == id).FirstOrDefault();
+                        workItemsDayBefore.Add(workItem);
+
+                    }
+                    dailyPlanEntity.Date = DateTime.Now;
+                    dailyPlanEntity.Today = workItemsToday;
+                    dailyPlanEntity.DayBefore = workItemsDayBefore;
                     dbContext.DailyPlans.Add(dailyPlanEntity);
                     dbContext.SaveChanges();
 
@@ -86,6 +113,22 @@ namespace DailyPlanning.Controllers
             }
 
             return View(newDailyPlanViewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+
+            MapperConfiguration config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DailyPlan, UpdateDailyPlanViewModel>();
+            });
+            IMapper mapper = config.CreateMapper();
+
+            //var dailyplan
+
+
+
+            return View();
         }
 
     }

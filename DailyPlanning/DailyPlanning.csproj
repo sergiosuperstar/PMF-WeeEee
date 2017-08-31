@@ -215,8 +215,6 @@
     <Content Include="Views\Project\AddProject.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
-    <Content Include="Views\DailyPlans\Index.cshtml" />
-    <Content Include="Views\DailyPlans\AddDailyPlan.cshtml" />
     <Content Include="Views\WorkItem\Index.cshtml" />
     <Content Include="Views\WorkItem\AddWorkItem.cshtml" />
     <Content Include="Views\WorkItem\Edit.cshtml" />
@@ -227,8 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\DailyPlan\" />
-    <Folder Include="Views\WorkItem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

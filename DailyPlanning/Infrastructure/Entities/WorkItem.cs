@@ -10,7 +10,8 @@ namespace DailyPlanning.Infrastructure.Entities
     {
         public WorkItem()
         {
-            this.DailyPlans = new Collection<DailyPlan>();
+            this.DailyPlansDayBefore = new HashSet<DailyPlan>();
+            this.DailyPlansToday = new HashSet<DailyPlan>();
         }
 
         [Key]
@@ -31,6 +32,10 @@ namespace DailyPlanning.Infrastructure.Entities
         [ForeignKey("ProjectID")]
         public virtual Project Project { get; set; }
 
-        public ICollection<DailyPlan> DailyPlans { get; set; }
+        [InverseProperty("DayBefore")]
+        public virtual ICollection<DailyPlan> DailyPlansDayBefore { get; set; }
+
+        [InverseProperty("Today")]
+        public virtual ICollection<DailyPlan> DailyPlansToday { get; set; }
     }
 }
