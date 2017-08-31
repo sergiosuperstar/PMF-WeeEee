@@ -9,28 +9,68 @@
 <hr />
 
 
-
-<th>@Html.DisplayNameFor(model => model.ProjectID)</th>
-<th>@Html.DisplayNameFor(model => model.Title)</th>
-<th></th>
-
 <div>
     <table class="table">
+        <thead>
+
+        <th>@Html.DisplayNameFor(model => model.ProjectID)</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th></th>
+
+        </thead>
         @foreach (var item in Model)
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.ProjectID)</td>
                 <td>@Html.ActionLink(item.Title, "Details", new { id = item.ProjectID })</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { @class = "btn btn-default" })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { @class = "btn btn-default" })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { @class = "delete btn btn-default" })</td>
             </tr>
         }
 
     </table>
 </div>
 
+<div id="dialog" title="Confirm delete" hidden>
+    <p>Are you sure you want to delete this?</p>
+</div>
+
 <div>
     @Html.ActionLink("Add", "AddProject", "", new { @class = "btn btn-default" })
 </div>
 
+@section Scripts {
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $("#dialog").hide();
+        $(document).ready(function () {
+
+            $(".delete").click(function (e) {
+                var url = $(this).attr("href");
+                e.preventDefault();
+                $("#dialog").dialog({
+                    height: 220,
+                    width: 475,
+                    modal: true,
+                    position: {
+                        my: "center",
+                        at: "center",
+                        of: $("body"),
+                        within: $("body")
+                    },
+                    buttons: {
+                        "Confirm": function () {
+                            window.location.href = url;
+                        },
+                        "Cancel": function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+                $('#dialog').parent().position({ my: 'center', of: 'center', collison: 'fit' });
+            });
+        });
+    </script>
+}
 

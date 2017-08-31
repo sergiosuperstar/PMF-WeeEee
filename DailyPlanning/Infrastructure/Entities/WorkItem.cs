@@ -27,11 +27,16 @@ namespace DailyPlanning.Infrastructure.Entities
         [Required]
         public Status Status { get; set; }
         
-        public int ProjectID { get; set; }
+        public int? ProjectID { get; set; }
 
         [ForeignKey("ProjectID")]
         public virtual Project Project { get; set; }
 
+        public bool IsEnabled { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public ICollection<DailyPlan> DailyPlans { get; set; }
         [InverseProperty("DayBefore")]
         public virtual ICollection<DailyPlan> DailyPlansDayBefore { get; set; }
 

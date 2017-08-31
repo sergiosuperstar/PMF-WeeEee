@@ -19,7 +19,7 @@ namespace DailyPlanning.Controllers
 
             using (var dbContext = new DailyPlanningContext())
             {
-                var workitemsEntity = dbContext.WorkItems.AsEnumerable();
+                var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable();
                 
                 var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
                 
@@ -34,7 +34,7 @@ namespace DailyPlanning.Controllers
             {
                 var model = new AddWorkItemViewModel();
                 
-                model.ListOfProjectIDs = getAllProjectIDs();
+                model.ListOfProjectIDs = getAllProjects();
 
                 return View(model);
             }
@@ -51,6 +51,7 @@ namespace DailyPlanning.Controllers
                 using (var dbContext = new DailyPlanningContext())
                 {
                     WorkItem newWorkItemEntity = mapper.Map<AddWorkItemViewModel, WorkItem>(newWorkItemViewModel);
+                    newWorkItemEntity.IsEnabled = true;
                     dbContext.WorkItems.Add(newWorkItemEntity);
                     dbContext.SaveChanges();
 
@@ -72,7 +73,7 @@ namespace DailyPlanning.Controllers
             {
                 var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
                 var workItemViewModel = mapper.Map<WorkItem, UpdateWorkItemViewModel>(workItemEntity);
-                workItemViewModel.ListOfProjectIDs = getAllProjectIDs();
+                workItemViewModel.ListOfProjectIDs = getAllProjects();
 
                 if (workItemViewModel != null)
                     return View(workItemViewModel);
@@ -111,7 +112,10 @@ namespace DailyPlanning.Controllers
 
                 if (workItemEntity != null)
                 {
-                    dbContext.Entry(workItemEntity).State = EntityState.Deleted;
+                    workItemEntity.IsDeleted = true;
+                    workItemEntity.IsEnabled = false;
+
+                    dbContext.Entry(workItemEntity).State = EntityState.Modified;
                     dbContext.SaveChanges();
                 }
 
@@ -148,17 +152,17 @@ namespace DailyPlanning.Controllers
             }
         }
 
-        private IEnumerable<SelectListItem> getAllProjectIDs()
+        private IEnumerable<SelectListItem> getAllProjects()
         {
             using (var dbContext = new DailyPlanningContext())
             {
-                var allProjectIDs = dbContext.Projects.Select(p =>
+                var allProjects = dbContext.Projects.Where(p => p.IsEnabled == true && p.IsDeleted == false).Select(p =>
                         new SelectListItem
                         {
                             Value = p.ProjectID.ToString(),
                             Text = p.Title
                         }).ToList();
-                var projectIDs = new SelectList(allProjectIDs, "Value", "Text");
+                var projectIDs = new SelectList(allProjects, "Value", "Text");
 
                 return projectIDs;
             }
