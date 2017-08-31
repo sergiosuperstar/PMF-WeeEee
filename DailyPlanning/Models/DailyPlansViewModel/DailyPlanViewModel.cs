@@ -13,9 +13,9 @@ namespace DailyPlanning.Models.DailyPlansViewModel
 
         public DateTime Date { get; set; }
 
-        public ICollection<WorkItemViewModel> DayBefore { get; set; }
+        public IEnumerable<WorkItemViewModel> DayBefore { get; set; }
 
-        public ICollection<WorkItemViewModel> Today { get; set; }
+        public IEnumerable<WorkItemViewModel> Today { get; set; }
 
         public string Note { get; set; }
     }

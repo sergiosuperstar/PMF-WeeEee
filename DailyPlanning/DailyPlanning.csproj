@@ -128,7 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DailyPlansController.cs" />
+    <Compile Include="Controllers\DailyPlanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\WorkItemController.cs" />
@@ -142,6 +142,7 @@
     <Compile Include="Infrastructure\Enums\Status.cs" />
     <Compile Include="Infrastructure\Entities\DailyPlan.cs" />
     <Compile Include="Models\DailyPlansViewModel\AddDailyPlanViewModel.cs" />
+    <Compile Include="Models\DailyPlansViewModel\ListBoxWorkItemsViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\ListOfDailyPlansViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\DailyPlanViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\UpdateDailyPlanViewModel.cs" />
@@ -220,10 +221,14 @@
     <Content Include="Views\WorkItem\AddWorkItem.cshtml" />
     <Content Include="Views\WorkItem\Edit.cshtml" />
     <Content Include="Views\WorkItem\Details.cshtml" />
+    <Content Include="Views\DailyPlan\Index.cshtml" />
+    <Content Include="Views\DailyPlan\AddDailyPlan.cshtml" />
+    <Content Include="Views\Project\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\DailyPlan\" />
+    <Folder Include="Views\WorkItem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

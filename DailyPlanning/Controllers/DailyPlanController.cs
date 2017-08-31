@@ -11,10 +11,11 @@ using DailyPlanning.Infrastructure.Entities;
 using AutoMapper;
 using DailyPlanning.Models.DailyPlansViewModel;
 using System.Collections;
+using DailyPlanning.Models.WorkItemsViewModel;
 
 namespace DailyPlanning.Controllers
 {
-    public class DailyPlansController : Controller
+    public class DailyPlanController : Controller
     {
 
         // GET: DailyPlans
@@ -33,26 +34,31 @@ namespace DailyPlanning.Controllers
                 var dailyPlansEntities = db.DailyPlans.AsEnumerable();
                 IMapper iMapper = config.CreateMapper();
                 var dailyPlanViewModel = iMapper.Map<IEnumerable<DailyPlan>, IEnumerable<DailyPlanViewModel>>(dailyPlansEntities);
-                          
+
                 return View(dailyPlanViewModel);
             }
 
-            
+
         }
         public ActionResult AddDailyPlan()
         {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
+            var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<DailyPlan, AddDailyPlanViewModel>();
+                cfg.CreateMap<WorkItem, WorkItemViewModel>();
             });
             IMapper mapper = config.CreateMapper();
 
-            using(var dbContext = new DailyPlanningContext())
+            var dailyPlanViewModel = new AddDailyPlanViewModel();
+            using (var dbContext = new DailyPlanningContext())
             {
 
-            }
+                var workItemEntities = dbContext.WorkItems.AsEnumerable();
+                var workItemViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntities); // pokupio sam podatke iz entiteta i stavio ih u ViewModel
 
-            return View();
+                dailyPlanViewModel.Date = DateTime.Now; // setovao sam vreme
+                dailyPlanViewModel.Today = workItemViewModel; // postavio dostupne Work Item-e
+            }
+            return View(dailyPlanViewModel);
         }
 
         [HttpPost]
@@ -66,6 +72,8 @@ namespace DailyPlanning.Controllers
                 });
                 IMapper mapper = config.CreateMapper();
 
+
+
                 using (var dbContext = new DailyPlanningContext())
                 {
                     var dailyPlanEntity = mapper.Map<AddDailyPlanViewModel, DailyPlan>(newDailyPlanViewModel);
@@ -74,17 +82,17 @@ namespace DailyPlanning.Controllers
 
                     return RedirectToAction("Index");
                 }
-                
+
             }
 
-            return View();
+            return View(newDailyPlanViewModel);
         }
 
     }
 
-    
 
-      
 
-    
+
+
+
 }
