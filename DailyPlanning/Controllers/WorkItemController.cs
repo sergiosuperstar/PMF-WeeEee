@@ -34,7 +34,7 @@ namespace DailyPlanning.Controllers
             {
                 var model = new AddWorkItemViewModel();
                 
-                model.ListOfProjectIDs = getAllProjectIDs();
+                model.ListOfProjectIDs = getAllProjects();
 
                 return View(model);
             }
@@ -72,7 +72,7 @@ namespace DailyPlanning.Controllers
             {
                 var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
                 var workItemViewModel = mapper.Map<WorkItem, UpdateWorkItemViewModel>(workItemEntity);
-                workItemViewModel.ListOfProjectIDs = getAllProjectIDs();
+                workItemViewModel.ListOfProjectIDs = getAllProjects();
 
                 if (workItemViewModel != null)
                     return View(workItemViewModel);
@@ -148,7 +148,7 @@ namespace DailyPlanning.Controllers
             }
         }
 
-        private IEnumerable<SelectListItem> getAllProjectIDs()
+        private IEnumerable<SelectListItem> getAllProjects()
         {
             using (var dbContext = new DailyPlanningContext())
             {
