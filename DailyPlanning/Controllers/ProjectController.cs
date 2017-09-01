@@ -12,19 +12,25 @@ namespace DailyPlanning.Controllers
 {
     public class ProjectController : Controller
     {
+        private DailyPlanningContext dbContext;
+
+        public ProjectController(DailyPlanningContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public ActionResult Index()
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectViewModel>());
             IMapper mapper = config.CreateMapper();
-    
-            using (var dbContext = new DailyPlanningContext())
-            {
-                var projectsEntity = dbContext.Projects.Where(p => p.IsDeleted == false && p.IsEnabled == true).AsEnumerable();
-                
-                var projectsViewModel = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(projectsEntity);
 
-                return View(projectsViewModel);
-            }
+
+            var projectsEntity = dbContext.Projects.Where(p => p.IsDeleted == false && p.IsEnabled == true).AsEnumerable();
+
+            var projectsViewModel = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(projectsEntity);
+
+            return View(projectsViewModel);
+
         }
 
         [HttpGet]
@@ -41,16 +47,15 @@ namespace DailyPlanning.Controllers
                 var config = new MapperConfiguration(cfg => cfg.CreateMap<AddProjectViewModel, Project>());
                 IMapper mapper = config.CreateMapper();
 
-                using (var dbContext = new DailyPlanningContext())
-                {
-                    Project newProjectEntity = mapper.Map<AddProjectViewModel, Project>(newProjectViewModel);
-                    newProjectEntity.IsEnabled = true;
-                    dbContext.Projects.Add(newProjectEntity);
-                    dbContext.SaveChanges();
 
-                    return RedirectToAction("Index");
-                }
-            } 
+                Project newProjectEntity = mapper.Map<AddProjectViewModel, Project>(newProjectViewModel);
+                newProjectEntity.IsEnabled = true;
+                dbContext.Projects.Add(newProjectEntity);
+                dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+
+            }
 
             return View();
         }
@@ -61,13 +66,16 @@ namespace DailyPlanning.Controllers
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, UpdateProjectViewModel>());
             IMapper mapper = config.CreateMapper();
 
-            using (var dbContext = new DailyPlanningContext())
+
+            var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
+            var projectViewModel = mapper.Map<Project, UpdateProjectViewModel>(projectEntity);
+
+            if (projectViewModel != null)
             {
-                var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
-                var projectViewModel = mapper.Map<Project, UpdateProjectViewModel>(projectEntity);
-                if (projectViewModel != null)
-                    return View(projectViewModel);
+                return View(projectViewModel);
             }
+
+
 
             return RedirectToAction("Index");
         }
@@ -80,14 +88,13 @@ namespace DailyPlanning.Controllers
                 var config = new MapperConfiguration(cfg => cfg.CreateMap<UpdateProjectViewModel, Project>());
                 IMapper mapper = config.CreateMapper();
 
-                using (var dbContext = new DailyPlanningContext())
-                {
-                    var updatedProjectEntity = mapper.Map<UpdateProjectViewModel, Project>(projectViewModel);
-                    dbContext.Entry(updatedProjectEntity).State = EntityState.Modified;
-                    dbContext.SaveChanges();
 
-                    return RedirectToAction("Index");
-                }
+                var updatedProjectEntity = mapper.Map<UpdateProjectViewModel, Project>(projectViewModel);
+                dbContext.Entry(updatedProjectEntity).State = EntityState.Modified;
+                dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+
             }
 
             return View();
@@ -98,47 +105,45 @@ namespace DailyPlanning.Controllers
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectViewModel>());
             IMapper mapper = config.CreateMapper();
 
-            using (var dbContext = new DailyPlanningContext())
+
+            var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
+            var projectViewModel = mapper.Map<Project, ProjectViewModel>(projectEntity);
+
+            if (projectViewModel != null)
             {
-                var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
-                var projectViewModel = mapper.Map<Project, ProjectViewModel>(projectEntity);
+                var workItemsEntity = dbContext.WorkItems.Where(w => w.ProjectID == projectViewModel.ProjectID).AsEnumerable();
 
-                if (projectViewModel != null)
-                {
-                    var workItemsEntity = dbContext.WorkItems.Where(w => w.ProjectID == projectViewModel.ProjectID).AsEnumerable();
+                config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, WorkItemViewModel>());
+                mapper = config.CreateMapper();
+                var workItemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemsEntity);
 
-                    config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, WorkItemViewModel>());
-                    mapper = config.CreateMapper();
-                    var workItemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemsEntity);
+                var projectDetails = new ProjectDetailsViewModel();
+                projectDetails.Project = projectViewModel;
+                projectDetails.WorkItems = workItemsViewModel;
 
-                    var projectDetails = new ProjectDetailsViewModel();
-                    projectDetails.Project = projectViewModel;
-                    projectDetails.WorkItems = workItemsViewModel;
-
-                    return View(projectDetails);
-                }
-
-                return RedirectToAction("Index");
+                return View(projectDetails);
             }
+
+            return RedirectToAction("Index");
+
         }
-        
+
         public ActionResult Delete(int id)
         {
-            using (var dbContext = new DailyPlanningContext())
+
+            var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
+
+            if (projectEntity != null)
             {
-                var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
+                projectEntity.IsDeleted = true;
+                projectEntity.IsEnabled = false;
 
-                if (projectEntity != null)
-                {
-                    projectEntity.IsDeleted = true;
-                    projectEntity.IsEnabled = false;
-
-                    dbContext.Entry(projectEntity).State = EntityState.Modified;
-                    dbContext.SaveChanges();
-                }
-
-                return RedirectToAction("Index");
+                dbContext.Entry(projectEntity).State = EntityState.Modified;
+                dbContext.SaveChanges();
             }
+
+            return RedirectToAction("Index");
+
         }
     }
 }

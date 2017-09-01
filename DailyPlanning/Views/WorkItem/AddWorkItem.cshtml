@@ -29,14 +29,27 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ProjectID, Model.ListOfProjectIDs, string.Empty, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectID, "", new { @class = "text-danger" })
+        @if (Model.ProjectID != null)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProjectID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ProjectID, new { htmlAttributes = new { @readonly = "readonly"  } })
+                    @Html.ValidationMessageFor(model => model.ProjectID, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProjectID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ProjectID, Model.ListOfProjectIDs, string.Empty, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProjectID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

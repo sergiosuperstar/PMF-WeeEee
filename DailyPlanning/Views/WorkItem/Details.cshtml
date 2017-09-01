@@ -30,7 +30,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WorkItem.Description)
+            @Html.Raw(Model.WorkItem.Description)
         </dd>
 
         <dt>
@@ -42,7 +42,7 @@
         </dd>
 
     </dl>
-    <h4>Projects</h4>
+    <h4>Project</h4>
     <div>
         <table class="table">
             <thead>
@@ -52,9 +52,8 @@
             
                 <tr>
                     <td>@Html.DisplayFor(model => model.Project.ProjectID)</td>
-                    <td>@Html.DisplayFor(model => model.Project.Title)</td>
+                    <td>@Html.ActionLink(Model.Project.Title, "Details", "Project", new { id = Model.Project.ProjectID }, "")</td>
                 </tr>
-            
         </table>
     </div>
 </div>

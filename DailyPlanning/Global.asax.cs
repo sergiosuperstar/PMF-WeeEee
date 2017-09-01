@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Autofac.Core;
 using Autofac.Integration.Mvc;
 using DailyPlanning.Infrastructure.Context;
 using DailyPlanning.Infrastructure.Database;
