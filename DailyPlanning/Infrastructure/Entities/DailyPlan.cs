@@ -23,7 +23,7 @@ namespace DailyPlanning.Infrastructure.Entities
         public DateTime Date { get; set; }
 
         [InverseProperty("DailyPlansDayBefore")]
-        public virtual ICollection<WorkItem> DayBefore { get; set; }
+        public virtual ICollection<WorkItem> DayBefore { get; set; } 
 
         [InverseProperty("DailyPlansToday")]
         public virtual ICollection<WorkItem> Today { get; set; }
