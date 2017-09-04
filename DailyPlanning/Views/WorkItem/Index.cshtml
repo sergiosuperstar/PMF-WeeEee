@@ -20,7 +20,7 @@
             @Html.DisplayNameFor(model => model.Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectID)
+            @Html.Label("", "Project")
         </th>
         <th></th>
     </thead>
@@ -41,7 +41,14 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProjectID)
+                @if (item.ProjectID == 0)
+                {
+                    @:-
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Project.Title)
+                }
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.WorkItemID }, new { @class = "btn btn-default" })

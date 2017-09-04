@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 
 namespace DailyPlanning.ExtendedMethods
 {
     public static class HtmlParser
     {
-        public static IEnumerable<string> Tags = new List<string> { "<p", "</p", "<table", "</table>", "<tr", "</tr", "<td", "</td", "<th", "</th", "<img", "<s", "</s", "<em", "</em", "<strong", "</strong", "<ul", "</ul", "<ol", "</ol", "<li", "</li", "<blockquote", "</blockquote", "<h1", "<h2", "<h3", "<h4", "<h5", "<h6", "</h1", "</h2", "</h3", "</h4", "</h5", "</h6" };
+        public static IEnumerable<string> Tags = new List<string> { "<p", "</p", "<a", "</a", "<table", "</table>", "<tr", "</tr", "<td", "</td", "<th", "</th", "<img", "<s", "</s", "<em", "</em", "<strong", "</strong", "<ul", "</ul", "<ol", "</ol", "<li", "</li", "<blockquote", "</blockquote", "<h1", "<h2", "<h3", "<h4", "<h5", "<h6", "</h1", "</h2", "</h3", "</h4", "</h5", "</h6" };
 
         public static string Parse(this String html)
         {

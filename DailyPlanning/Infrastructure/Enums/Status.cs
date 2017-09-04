@@ -7,7 +7,7 @@ namespace DailyPlanning.Infrastructure.Enums
 {
     public enum Status
     {
-        TODO = 0,
+        TO_DO = 0,
         IN_PROGRESS = 1,
         DONE = 2
     }

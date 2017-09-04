@@ -42,21 +42,25 @@
         </dd>
 
     </dl>
-    <h4>Project</h4>
-    <div>
-        <table class="table">
-            <thead>
-            <th>@Html.DisplayNameFor(model => model.Project.ProjectID)</th>
-            <th>@Html.DisplayNameFor(model => model.Project.Title)</th>
-            </thead>
-            
+    @if (Model.Project != null)
+    {
+        <h4>Project</h4>
+        <div>
+            <table class="table">
+                <thead>
+                <th>@Html.DisplayNameFor(model => model.Project.ProjectID)</th>
+                <th>@Html.DisplayNameFor(model => model.Project.Title)</th>
+                </thead>
+
                 <tr>
                     <td>@Html.DisplayFor(model => model.Project.ProjectID)</td>
                     <td>@Html.ActionLink(Model.Project.Title, "Details", "Project", new { id = Model.Project.ProjectID }, "")</td>
                 </tr>
-        </table>
-    </div>
+            </table>
+        </div>
+    }
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.WorkItem.WorkItemID }, new { @class = "btn btn-default" }) &nbsp;&nbsp;
     @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-default" })

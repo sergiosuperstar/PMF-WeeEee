@@ -4,6 +4,7 @@ using DailyPlanning.Infrastructure.Context;
 using DailyPlanning.Infrastructure.Entities;
 using DailyPlanning.Models.ProjectsViewModel;
 using DailyPlanning.Models.WorkItemsViewModel;
+using Ganss.XSS;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -25,8 +26,7 @@ namespace DailyPlanning.Controllers
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, WorkItemViewModel>());
             IMapper mapper = config.CreateMapper();
-
-
+            
             var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable();
 
             var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
@@ -58,8 +58,7 @@ namespace DailyPlanning.Controllers
             {
                 var config = new MapperConfiguration(cfg => cfg.CreateMap<AddWorkItemViewModel, WorkItem>());
                 IMapper mapper = config.CreateMapper();
-
-
+                
                 WorkItem newWorkItemEntity = mapper.Map<AddWorkItemViewModel, WorkItem>(newWorkItemViewModel);
                 newWorkItemEntity.IsEnabled = true;
                 newWorkItemEntity.Description = newWorkItemEntity.Description.Parse();
@@ -79,8 +78,7 @@ namespace DailyPlanning.Controllers
 
             var config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, UpdateWorkItemViewModel>());
             IMapper mapper = config.CreateMapper();
-
-
+            
             var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
             var workItemViewModel = mapper.Map<WorkItem, UpdateWorkItemViewModel>(workItemEntity);
             workItemViewModel.ListOfProjectIDs = getAllProjects();
@@ -99,10 +97,12 @@ namespace DailyPlanning.Controllers
             {
                 var config = new MapperConfiguration(cfg => cfg.CreateMap<UpdateWorkItemViewModel, WorkItem>());
                 IMapper mapper = config.CreateMapper();
-
-
+                
                 var updatedWorkItemEntity = mapper.Map<UpdateWorkItemViewModel, WorkItem>(workItemViewModel);
-                updatedWorkItemEntity.Description = updatedWorkItemEntity.Description.Parse();
+
+                var sanitizer = new HtmlSanitizer();
+                updatedWorkItemEntity.Description = sanitizer.Sanitize(updatedWorkItemEntity.Description);
+
                 dbContext.Entry(updatedWorkItemEntity).State = EntityState.Modified;
                 dbContext.SaveChanges();
 
@@ -133,18 +133,17 @@ namespace DailyPlanning.Controllers
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, WorkItemViewModel>());
             IMapper mapper = config.CreateMapper();
-
-
+            
             var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
             var workItemViewModel = mapper.Map<WorkItem, WorkItemViewModel>(workItemEntity);
 
             if (workItemViewModel != null)
             {
-                var projectsEntity = dbContext.Projects.Where(p => p.ProjectID == workItemViewModel.ProjectID).FirstOrDefault();
+                var projectEntity = dbContext.Projects.Where(p => p.ProjectID == workItemViewModel.ProjectID).FirstOrDefault();
 
                 config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectViewModel>());
                 mapper = config.CreateMapper();
-                var projectsViewModel = mapper.Map<Project, ProjectViewModel>(projectsEntity);
+                var projectsViewModel = mapper.Map<Project, ProjectViewModel>(projectEntity);
 
                 var workItemDetails = new WorkItemDetailsViewModel();
                 workItemDetails.WorkItem = workItemViewModel;
@@ -158,7 +157,6 @@ namespace DailyPlanning.Controllers
 
         private IEnumerable<SelectListItem> getAllProjects()
         {
-
             var allProjects = dbContext.Projects.Where(p => p.IsEnabled == true && p.IsDeleted == false).Select(p =>
                     new SelectListItem
                     {
