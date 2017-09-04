@@ -8,44 +8,31 @@ namespace DailyPlanning.ExtendedMethods
 {
     public static class HtmlParser
     {
-        public static IEnumerable<string> Tags = new List<string> { "<p", "<table", "<tr", "<td", "<th" };
+        public static IEnumerable<string> Tags = new List<string> { "<p", "</p", "<table", "</table>", "<tr", "</tr", "<td", "</td", "<th", "</th", "<img", "<s", "</s", "<em", "</em", "<strong", "</strong", "<ul", "</ul", "<ol", "</ol", "<li", "</li", "<blockquote", "</blockquote", "<h1", "<h2", "<h3", "<h4", "<h5", "<h6", "</h1", "</h2", "</h3", "</h4", "</h5", "</h6" };
 
-        public static string Parse(this String str)
+        public static string Parse(this String html)
         {
-            var index = str.IndexOf("<");
 
-            var substr = str;
-            bool found = false;
-
-            while (index > -1)
+            if (String.IsNullOrEmpty(html))
             {
-                substr = substr.Substring(index);
-                foreach (string tag in Tags)
-                {
-                    if (substr.ToLower().StartsWith(tag) || substr.StartsWith("</"))
-                    {
-                        found = true;
-                        substr = substr.Substring(substr.IndexOf(">"));
-                        break;
-                    }
-                }
-
-                if (!found)
-                {
-                    var notAllowed = substr.Substring(substr.IndexOf("<") + 1, substr.IndexOf(">"));
-
-                    substr = substr.Replace("<" + notAllowed, "");
-                    substr = substr.Replace("</" + notAllowed, "");
-
-                    str = str.Replace("<" + notAllowed, "");
-                    str = str.Replace("</" + notAllowed, "");
-                }
-
-                found = false;
-                index = substr.IndexOf("<");
+                return html;
             }
 
-            return str;
+            Regex regex = new Regex(@"<[^>]*(>|$)");
+
+            MatchCollection allTags = regex.Matches(html);
+
+            foreach (Match tag in allTags)
+            {
+                var str = tag.Value.IndexOf(" ") == -1 ? tag.Value.Substring(0, tag.Value.IndexOf(">")) : tag.Value.Substring(0, tag.Value.IndexOf(" "));
+                
+                if (!Tags.Contains(str))
+                {
+                    html = html.Replace(tag.Value, tag.Value.StartsWith("</") ? "</p>" : "<p>");
+                }
+            }
+
+            return html;
         }
     }
 }

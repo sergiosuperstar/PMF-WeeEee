@@ -62,7 +62,7 @@ namespace DailyPlanning.Controllers
 
                 WorkItem newWorkItemEntity = mapper.Map<AddWorkItemViewModel, WorkItem>(newWorkItemViewModel);
                 newWorkItemEntity.IsEnabled = true;
-                newWorkItemEntity.Description = ParseHtml(newWorkItemEntity.Description);
+                newWorkItemEntity.Description = newWorkItemEntity.Description.Parse();
                 dbContext.WorkItems.Add(newWorkItemEntity);
                 dbContext.SaveChanges();
 
@@ -168,15 +168,6 @@ namespace DailyPlanning.Controllers
             var projectIDs = new SelectList(allProjects, "Value", "Text");
 
             return projectIDs;
-        }
-
-        private string ParseHtml(string description)
-        {
-            Regex removeScript = new Regex(@"<script[^>]*>");
-            var output = removeScript.Replace(description, " Potentionally dangerous text: ");
-            output = output.Replace("</script>", "");
-
-            return output;
         }
     }
 }
