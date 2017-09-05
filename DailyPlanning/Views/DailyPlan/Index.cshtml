@@ -36,7 +36,7 @@
                 <ul>
                     @foreach (var workItem in item.Today)
                     {
-                        <li>@Html.ActionLink(workItem.Title, "Details" , "WorkItem" , new { id = workItem.WorkItemID }, null)</li>
+                        <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID }, null)</li>
                     }
                 </ul>
             </td>
@@ -55,16 +55,34 @@
 
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID })
+                @if (item.Date.Date == DateTime.Now.Date)
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID }, new { @class = "btn btn=default", @id = "edit" })
+
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.DailyPlanID}, new {@class = "btn btn=default", @id = "details"})
             </td>
         </tr>
     }
 
-    
+
 
 </table>
 
-<p>
-
-    @Html.ActionLink("Add Daily Plan", "AddDailyPlan","", new { @class = "btn btn-default" })
+<p id="button">
+        @Html.ActionLink("Add Daily Plan", "AddDailyPlan", null, new {@id = "add", @class = "btn btn-default" })
 </p>
+@section Scripts{
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+        <script type="text/javascript">
+            if ($('#edit').length > 0) {
+                $('#add').attr('disabled', 'disabled');
+                $('#add').attr('href', '#');
+            }
+            
+
+    </script>
+}

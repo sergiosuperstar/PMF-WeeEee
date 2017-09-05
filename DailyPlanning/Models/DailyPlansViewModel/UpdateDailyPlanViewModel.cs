@@ -10,10 +10,12 @@ namespace DailyPlanning.Models.DailyPlansViewModel
 {
     public class UpdateDailyPlanViewModel
     {
+        public int DailyPlanID { get; set; }
         public DateTime Date { get; set; }
 
+        [Required(ErrorMessage = "Select one item at least")]
         public IEnumerable<int> SelectedWorkItemsToday { get; set; }
-
+        [Required(ErrorMessage = "Select one item at least")]
         public IEnumerable<int> SelectedWorkItemsDayBefore { get; set; }
 
         public IEnumerable<WorkItemViewModel> DayBefore { get; set; }
