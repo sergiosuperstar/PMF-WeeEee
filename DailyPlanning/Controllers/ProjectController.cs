@@ -13,18 +13,16 @@ namespace DailyPlanning.Controllers
     public class ProjectController : Controller
     {
         private DailyPlanningContext dbContext;
+        private IMapper mapper;
 
-        public ProjectController(DailyPlanningContext dbContext)
+        public ProjectController(DailyPlanningContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
         public ActionResult Index()
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectViewModel>());
-            IMapper mapper = config.CreateMapper();
-
-
             var projectsEntity = dbContext.Projects.Where(p => p.IsDeleted == false && p.IsEnabled == true).AsEnumerable();
 
             var projectsViewModel = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(projectsEntity);
@@ -44,10 +42,6 @@ namespace DailyPlanning.Controllers
         {
             if (ModelState.IsValid)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<AddProjectViewModel, Project>());
-                IMapper mapper = config.CreateMapper();
-
-
                 Project newProjectEntity = mapper.Map<AddProjectViewModel, Project>(newProjectViewModel);
                 newProjectEntity.IsEnabled = true;
                 dbContext.Projects.Add(newProjectEntity);
@@ -63,10 +57,6 @@ namespace DailyPlanning.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, UpdateProjectViewModel>());
-            IMapper mapper = config.CreateMapper();
-
-
             var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
             var projectViewModel = mapper.Map<Project, UpdateProjectViewModel>(projectEntity);
 
@@ -85,10 +75,6 @@ namespace DailyPlanning.Controllers
         {
             if (ModelState.IsValid)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<UpdateProjectViewModel, Project>());
-                IMapper mapper = config.CreateMapper();
-
-
                 var updatedProjectEntity = mapper.Map<UpdateProjectViewModel, Project>(projectViewModel);
                 dbContext.Entry(updatedProjectEntity).State = EntityState.Modified;
                 dbContext.SaveChanges();
@@ -102,19 +88,12 @@ namespace DailyPlanning.Controllers
 
         public ActionResult Details(int id)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectViewModel>());
-            IMapper mapper = config.CreateMapper();
-
-
             var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
             var projectViewModel = mapper.Map<Project, ProjectViewModel>(projectEntity);
 
             if (projectViewModel != null)
             {
                 var workItemsEntity = dbContext.WorkItems.Where(w => w.ProjectID == projectViewModel.ProjectID).AsEnumerable();
-
-                config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, WorkItemViewModel>());
-                mapper = config.CreateMapper();
                 var workItemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemsEntity);
 
                 var projectDetails = new ProjectDetailsViewModel();

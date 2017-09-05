@@ -16,17 +16,16 @@ namespace DailyPlanning.Controllers
     public class WorkItemController : Controller
     {
         private DailyPlanningContext dbContext;
+        private IMapper mapper;
 
-        public WorkItemController(DailyPlanningContext dbContext)
+        public WorkItemController(DailyPlanningContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
         public ActionResult Index()
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, WorkItemViewModel>());
-            IMapper mapper = config.CreateMapper();
-            
+        {            
             var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable();
 
             var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
@@ -56,9 +55,6 @@ namespace DailyPlanning.Controllers
         {
             if (ModelState.IsValid)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<AddWorkItemViewModel, WorkItem>());
-                IMapper mapper = config.CreateMapper();
-                
                 WorkItem newWorkItemEntity = mapper.Map<AddWorkItemViewModel, WorkItem>(newWorkItemViewModel);
                 newWorkItemEntity.IsEnabled = true;
                 newWorkItemEntity.Description = newWorkItemEntity.Description.Parse();
@@ -75,10 +71,6 @@ namespace DailyPlanning.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, UpdateWorkItemViewModel>());
-            IMapper mapper = config.CreateMapper();
-            
             var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
             var workItemViewModel = mapper.Map<WorkItem, UpdateWorkItemViewModel>(workItemEntity);
             workItemViewModel.ListOfProjectIDs = getAllProjects();
@@ -95,9 +87,6 @@ namespace DailyPlanning.Controllers
         {
             if (ModelState.IsValid)
             {
-                var config = new MapperConfiguration(cfg => cfg.CreateMap<UpdateWorkItemViewModel, WorkItem>());
-                IMapper mapper = config.CreateMapper();
-                
                 var updatedWorkItemEntity = mapper.Map<UpdateWorkItemViewModel, WorkItem>(workItemViewModel);
 
                 var sanitizer = new HtmlSanitizer();
@@ -130,19 +119,13 @@ namespace DailyPlanning.Controllers
         }
 
         public ActionResult Details(int id)
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<WorkItem, WorkItemViewModel>());
-            IMapper mapper = config.CreateMapper();
-            
+        { 
             var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
             var workItemViewModel = mapper.Map<WorkItem, WorkItemViewModel>(workItemEntity);
 
             if (workItemViewModel != null)
             {
                 var projectEntity = dbContext.Projects.Where(p => p.ProjectID == workItemViewModel.ProjectID).FirstOrDefault();
-
-                config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectViewModel>());
-                mapper = config.CreateMapper();
                 var projectsViewModel = mapper.Map<Project, ProjectViewModel>(projectEntity);
 
                 var workItemDetails = new WorkItemDetailsViewModel();

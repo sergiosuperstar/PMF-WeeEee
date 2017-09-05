@@ -158,6 +158,7 @@
     <Compile Include="Infrastructure\Entities\WorkItem.cs" />
     <Compile Include="Infrastructure\Enums\Status.cs" />
     <Compile Include="Infrastructure\Entities\DailyPlan.cs" />
+    <Compile Include="MapperConfig\MapperProvider.cs" />
     <Compile Include="Models\DailyPlansViewModel\AddDailyPlanViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\ListBoxWorkItemsViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\ListOfDailyPlansViewModel.cs" />

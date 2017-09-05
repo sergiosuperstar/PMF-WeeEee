@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using DailyPlanning.Infrastructure.Context;
 using DailyPlanning.Infrastructure.Database;
+using DailyPlanning.MapperConfig;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -18,6 +19,7 @@ namespace DailyPlanning
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            var mapper = MapperProvider.Initialize().CreateMapper();
 
             // Dependency injection:
             var builder = new ContainerBuilder();
@@ -27,6 +29,8 @@ namespace DailyPlanning
             builder.RegisterType<DailyPlanningContext>()
                    .AsSelf()
                    .InstancePerLifetimeScope();
+
+            builder.RegisterInstance(mapper);
 
             var container = builder.Build();
 

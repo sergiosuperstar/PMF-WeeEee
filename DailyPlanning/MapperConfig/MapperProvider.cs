@@ -1,0 +1,38 @@
+﻿using AutoMapper;
+using DailyPlanning.Infrastructure.Entities;
+using DailyPlanning.Models.DailyPlansViewModel;
+using DailyPlanning.Models.ProjectsViewModel;
+using DailyPlanning.Models.WorkItemsViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace DailyPlanning.MapperConfig
+{
+    public static class MapperProvider
+    {
+        public static MapperConfiguration Initialize()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Project, ProjectViewModel>();
+                cfg.CreateMap<AddProjectViewModel, Project>();
+                cfg.CreateMap<Project, UpdateProjectViewModel>();
+                cfg.CreateMap<UpdateProjectViewModel, Project>();
+
+                cfg.CreateMap<WorkItem, WorkItemViewModel>();
+                cfg.CreateMap<WorkItemViewModel, WorkItem>();
+                cfg.CreateMap<AddWorkItemViewModel, WorkItem>();
+                cfg.CreateMap<WorkItem, UpdateWorkItemViewModel>();
+                cfg.CreateMap<UpdateWorkItemViewModel, WorkItem>();
+
+                cfg.CreateMap<DailyPlan, DailyPlanViewModel>();
+                cfg.CreateMap<AddDailyPlanViewModel, DailyPlan>();
+                cfg.CreateMap<DailyPlan, UpdateDailyPlanViewModel>();
+            });
+
+            return config;
+        }
+    }
+}
