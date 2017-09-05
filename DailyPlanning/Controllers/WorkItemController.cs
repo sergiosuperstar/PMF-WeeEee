@@ -8,7 +8,6 @@ using Ganss.XSS;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web.Mvc;
 
 namespace DailyPlanning.Controllers
@@ -24,6 +23,10 @@ namespace DailyPlanning.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Returns a view that displays list of WorkItems.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {            
             var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable();
@@ -33,6 +36,11 @@ namespace DailyPlanning.Controllers
             return View(workitemsViewModel);
         }
 
+        /// <summary>
+        /// Returns a view that displays form for adding new WorkItem.
+        /// </summary>
+        /// <param name="id">A <see cref="int"/> type representing an ProjectID.</param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult AddWorkItem(int? id)
         {
@@ -50,6 +58,11 @@ namespace DailyPlanning.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Saves new WorkItem to database.
+        /// </summary>
+        /// <param name="newWorkItemViewModel">Object that contains information about WorkItem that will be saved in database.</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AddWorkItem(AddWorkItemViewModel newWorkItemViewModel)
         {
@@ -68,6 +81,11 @@ namespace DailyPlanning.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Returns a view that displays form for editing existing WorkItem.
+        /// </summary>
+        /// <param name="id">Id of the WorkItem that will be updated.</param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -82,6 +100,11 @@ namespace DailyPlanning.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Saves changes from existing WorkItem to database.
+        /// </summary>
+        /// <param name="workItemViewModel">Object that contains changed information about WorkItem that will be saved in database.</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Edit(UpdateWorkItemViewModel workItemViewModel)
         {
@@ -101,6 +124,11 @@ namespace DailyPlanning.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Removes WorkItem from database.
+        /// </summary>
+        /// <param name="id">Represents an id of WorkItem that will be removed from database.</param>
+        /// <returns></returns>
         public ActionResult Delete(int id)
         {
 
@@ -118,6 +146,11 @@ namespace DailyPlanning.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Returns a view that displays information about WorkItem.
+        /// </summary>
+        /// <param name="id">Represents an id of WorkItem which information will be displayed.</param>
+        /// <returns></returns>
         public ActionResult Details(int id)
         { 
             var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
@@ -138,6 +171,10 @@ namespace DailyPlanning.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Helper method for retrieving all projects from database and puts them in a list, which will be used for dropdown list.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<SelectListItem> getAllProjects()
         {
             var allProjects = dbContext.Projects.Where(p => p.IsEnabled == true && p.IsDeleted == false).Select(p =>
