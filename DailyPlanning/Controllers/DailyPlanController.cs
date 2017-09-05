@@ -20,11 +20,13 @@ namespace DailyPlanning.Controllers
     public class DailyPlanController : Controller
     {
         DailyPlanningContext context;
+        IMapper mapper;
 
 
-        public DailyPlanController(DailyPlanningContext context)
+        public DailyPlanController(DailyPlanningContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         // GET: DailyPlans
@@ -32,16 +34,11 @@ namespace DailyPlanning.Controllers
         {
 
             var dbContext = context;
-            MapperConfiguration config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<DailyPlan, DailyPlanViewModel>();
-            });
-
+           
             var dailyPlansEntities = dbContext.DailyPlans.Where(dp => dp.DayBefore.Any(wi => dbContext.WorkItems.Select(x => x.WorkItemID).Contains(wi.WorkItemID)) ||
                                                          dp.Today.Any(wi => dbContext.WorkItems.Select(x => x.WorkItemID).Contains(wi.WorkItemID))).OrderBy(dp => dp.Date);
 
-            IMapper iMapper = config.CreateMapper();
-            var dailyPlanViewModel = iMapper.Map<IEnumerable<DailyPlan>, IEnumerable<DailyPlanViewModel>>(dailyPlansEntities);
+            var dailyPlanViewModel = mapper.Map<IEnumerable<DailyPlan>, IEnumerable<DailyPlanViewModel>>(dailyPlansEntities);
 
             return View(dailyPlanViewModel);
 
@@ -50,11 +47,7 @@ namespace DailyPlanning.Controllers
         }
         public ActionResult AddDailyPlan()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<WorkItem, WorkItemViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
+            
 
             var dailyPlanViewModel = new AddDailyPlanViewModel();
             var dbContext = context;
@@ -75,13 +68,7 @@ namespace DailyPlanning.Controllers
         [HttpPost]
         public ActionResult AddDailyPlan(AddDailyPlanViewModel newDailyPlanViewModel)
         {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<AddDailyPlanViewModel, DailyPlan>();
-                cfg.CreateMap<WorkItemViewModel, WorkItem>();
-                cfg.CreateMap<WorkItem, WorkItemViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
+            
             var dbContext = context;
 
             if (ModelState.IsValid)
@@ -129,12 +116,7 @@ namespace DailyPlanning.Controllers
         public ActionResult Edit(int id)
         {
 
-            MapperConfiguration config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<DailyPlan, UpdateDailyPlanViewModel>();
-                cfg.CreateMap<WorkItem, WorkItemViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
+          
 
             var dailyPlanViewModel = new UpdateDailyPlanViewModel();
 
@@ -161,14 +143,7 @@ namespace DailyPlanning.Controllers
         [HttpPost]
         public ActionResult Edit(UpdateDailyPlanViewModel newDailyPlanViewModel)
         {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<UpdateDailyPlanViewModel, DailyPlan>();
-                cfg.CreateMap<WorkItemViewModel, WorkItem>();
-                cfg.CreateMap<WorkItem, WorkItemViewModel>();
-            });
-            IMapper mapper = config.CreateMapper();
-
+           
             var dbContext = context;
             if (ModelState.IsValid)
             {
@@ -225,12 +200,7 @@ namespace DailyPlanning.Controllers
 
         public ActionResult Details(int id)
         {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<DailyPlan, DetailsDailyPlanViewModel>();
-            });
-
-            IMapper mapper = config.CreateMapper();
+          
 
             var dbContext = context;
             var dailyPlanEntity = dbContext.DailyPlans.Where(model => model.DailyPlanID == id).FirstOrDefault();
