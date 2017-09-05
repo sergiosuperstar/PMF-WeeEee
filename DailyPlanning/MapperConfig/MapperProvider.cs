@@ -30,6 +30,8 @@ namespace DailyPlanning.MapperConfig
                 cfg.CreateMap<DailyPlan, DailyPlanViewModel>();
                 cfg.CreateMap<AddDailyPlanViewModel, DailyPlan>();
                 cfg.CreateMap<DailyPlan, UpdateDailyPlanViewModel>();
+                cfg.CreateMap<DailyPlan, DetailsDailyPlanViewModel>();
+                cfg.CreateMap<UpdateDailyPlanViewModel, DailyPlan>();
             });
 
             return config;

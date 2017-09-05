@@ -21,6 +21,7 @@ namespace DailyPlanning.Controllers
     {
         DailyPlanningContext context;
 
+
         public DailyPlanController(DailyPlanningContext context)
         {
             this.context = context;
@@ -191,8 +192,8 @@ namespace DailyPlanning.Controllers
                     workItemsDayBefore.Add(workItem);
                 }
 
-                
 
+                //dbContext.DailyPlans.Find(newDailyPlanViewModel.DailyPlanID).Today.Where(m => m.WorkItemID);
 
 
 
