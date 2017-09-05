@@ -22,7 +22,7 @@ namespace DailyPlanning.Infrastructure.Database
 
             context.SaveChanges();
 
-            var workitem1 = new WorkItem() { Title = "WorkItem 1", Description = "First WorkItem", Status = Enums.Status.TODO, ProjectID = project1.ProjectID, IsEnabled = true, IsDeleted = false };
+            var workitem1 = new WorkItem() { Title = "WorkItem 1", Description = "First WorkItem", Status = Enums.Status.TO_DO, ProjectID = project1.ProjectID, IsEnabled = true, IsDeleted = false };
             var workitem2 = new WorkItem() { Title = "WorkItem 2", Description = "Second WorkItem", Status = Enums.Status.IN_PROGRESS, ProjectID = project2.ProjectID, IsEnabled = true, IsDeleted = false };
             var workitem3 = new WorkItem() { Title = "WorkItem 3", Description = "Third WorkItem", Status = Enums.Status.DONE, ProjectID = project3.ProjectID, IsEnabled = true, IsDeleted = false };
 
