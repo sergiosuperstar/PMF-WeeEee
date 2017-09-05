@@ -113,7 +113,7 @@ namespace DailyPlanning.Controllers
 
             }
 
-            var workItemEntitiesToday = dbContext.WorkItems.Where(w => w.Status == Status.TODO || w.Status == Status.IN_PROGRESS);
+            var workItemEntitiesToday = dbContext.WorkItems.Where(w => w.Status == Status.TO_DO || w.Status == Status.IN_PROGRESS);
             var workItemEntitiesDayBefore = dbContext.WorkItems.Where(w => w.Status == Status.IN_PROGRESS || w.Status == Status.DONE);
             var workItemViewModelToday = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesToday); // pokupio sam podatke iz entiteta i stavio ih u ViewModel
             var workItemViewModelDayBefore = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesDayBefore);
@@ -141,7 +141,7 @@ namespace DailyPlanning.Controllers
             var dailyPlanEntity = dbContext.DailyPlans.Where(dp => dp.DailyPlanID == id).FirstOrDefault();
             dailyPlanViewModel = mapper.Map<DailyPlan, UpdateDailyPlanViewModel>(dailyPlanEntity);
 
-            var workItemEntitiesToday = dbContext.WorkItems.Where(w => w.Status == Status.TODO || w.Status == Status.IN_PROGRESS);
+            var workItemEntitiesToday = dbContext.WorkItems.Where(w => w.Status == Status.TO_DO || w.Status == Status.IN_PROGRESS);
             var workItemEntitiesDayBefore = dbContext.WorkItems.Where(w => w.Status == Status.IN_PROGRESS || w.Status == Status.DONE);
             var workItemViewModelToday = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesToday); // pokupio sam podatke iz entiteta i stavio ih u ViewModel
             var workItemViewModelDayBefore = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesDayBefore);
@@ -209,7 +209,7 @@ namespace DailyPlanning.Controllers
 
             }
 
-            var workItemEntitiesToday = dbContext.WorkItems.Where(w => w.Status == Status.TODO || w.Status == Status.IN_PROGRESS);
+            var workItemEntitiesToday = dbContext.WorkItems.Where(w => w.Status == Status.TO_DO || w.Status == Status.IN_PROGRESS);
             var workItemEntitiesDayBefore = dbContext.WorkItems.Where(w => w.Status == Status.IN_PROGRESS || w.Status == Status.DONE);
             var workItemViewModelToday = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesToday); // pokupio sam podatke iz entiteta i stavio ih u ViewModel
             var workItemViewModelDayBefore = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesDayBefore);
