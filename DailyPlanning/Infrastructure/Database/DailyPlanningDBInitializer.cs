@@ -40,9 +40,9 @@ namespace DailyPlanning.Infrastructure.Database
             witems2.Add(workitem2);
             witems2.Add(workitem3);
 
-            var DailyPlan1 = new DailyPlan() { Date = DateTime.Now, Today = witems1, DayBefore = witems2, Note = "Daily Plan 1" };
-            var DailyPlan2 = new DailyPlan() { Date = DateTime.Now, Today = witems1, DayBefore = witems2, Note = "Daily Plan 2" };
-            var DailyPlan3 = new DailyPlan() { Date = DateTime.Now, Today = witems1, DayBefore = witems2, Note = "Daily Plan 3" };
+            var DailyPlan1 = new DailyPlan() { Date = DateTime.Now.AddDays(-1), Today = witems1, DayBefore = witems2, Note = "Daily Plan 1" };
+            var DailyPlan2 = new DailyPlan() { Date = DateTime.Now.AddDays(-1), Today = witems1, DayBefore = witems2, Note = "Daily Plan 2" };
+            var DailyPlan3 = new DailyPlan() { Date = DateTime.Now.AddDays(-2), Today = witems1, DayBefore = witems2, Note = "Daily Plan 3" };
 
             context.DailyPlans.Add(DailyPlan1);
             context.DailyPlans.Add(DailyPlan2);

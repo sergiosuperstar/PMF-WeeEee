@@ -160,6 +160,7 @@
     <Compile Include="Infrastructure\Entities\DailyPlan.cs" />
     <Compile Include="MapperConfig\MapperProvider.cs" />
     <Compile Include="Models\DailyPlansViewModel\AddDailyPlanViewModel.cs" />
+    <Compile Include="Models\DailyPlansViewModel\DetailsDailyPlanViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\ListBoxWorkItemsViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\ListOfDailyPlansViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\DailyPlanViewModel.cs" />
@@ -178,13 +179,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -564,6 +565,8 @@
     <Content Include="Views\DailyPlan\Index.cshtml" />
     <Content Include="Views\DailyPlan\AddDailyPlan.cshtml" />
     <Content Include="Views\Project\Delete.cshtml" />
+    <Content Include="Views\DailyPlan\Edit.cshtml" />
+    <Content Include="Views\DailyPlan\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
