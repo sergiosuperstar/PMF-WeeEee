@@ -7,22 +7,22 @@
 
 <table class="table">
     <thead>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkItemID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.Label("", "Project")
-        </th>
-        <th></th>
+    <th>
+        @Html.DisplayNameFor(model => model.WorkItemID)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Title)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Description)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Status)
+    </th>
+    <th>
+        @Html.Label("", "Project Title")
+    </th>
+    <th></th>
     </thead>
 
     @foreach (var item in Model)
@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.WorkItemID)
             </td>
             <td>
-                @Html.ActionLink(item.Title, "Details", new { id = item.WorkItemID })
+                @Html.ActionLink(item.Title, "Details", new { id = item.WorkItemID }, new { @class = "index-details-link-class" })
             </td>
             <td>
                 @Html.Raw(item.Description)
@@ -51,10 +51,10 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.WorkItemID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.WorkItemID }, new { @class = "index-edit-link-class btn btn-default" })
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.WorkItemID }, new { @class = "delete btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.WorkItemID }, new { @class = "index-delete-link-class delete btn btn-default" })
             </td>
         </tr>
     }
@@ -66,7 +66,7 @@
 </div>
 
 <p>
-    @Html.ActionLink("Add", "AddWorkItem", "", new { @class = "btn btn-default" })
+    @Html.ActionLink("Add", "AddWorkItem", "", new { @class = "btn btn-default", @id = "index-add-link-id" })
 </p>
 
 @section Scripts {
@@ -75,7 +75,7 @@
     <script type="text/javascript">
         $("#dialog").hide();
         $(document).ready(function () {
-            
+
             $(".delete").click(function (e) {
                 var url = $(this).attr("href");
                 e.preventDefault();
@@ -90,8 +90,12 @@
                         within: $("body")
                     },
                     buttons: {
-                        "Confirm": function () {
-                            window.location.href = url;
+                        "Confirm": {
+                            text: "Confirm",
+                            id: "confirm-id",
+                            click: function () {
+                                window.location.href = url;
+                            }
                         },
                         "Cancel": function () {
                             $(this).dialog("close");

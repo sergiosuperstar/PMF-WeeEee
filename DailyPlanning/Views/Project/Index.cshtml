@@ -24,7 +24,7 @@
                 <td>@Html.DisplayFor(modelItem => item.ProjectID)</td>
                 <td>@Html.ActionLink(item.Title, "Details", new { id = item.ProjectID }, new { @class = "index-details-link-class" })</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { @class = "index-edit-link-class btn btn-default" })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { @class = "delete btn btn-default", @id = "index-delete-link-id" })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { @class = "index-delete-link-class delete btn btn-default" })</td>
             </tr>
         }
 
@@ -60,8 +60,12 @@
                         within: $("body")
                     },
                     buttons: {
-                        "Confirm": function () {
-                            window.location.href = url;
+                        "Confirm": {
+                            text: "Confirm",
+                            id: "confirm-id",
+                            click: function () {
+                                window.location.href = url;
+                            }
                         },
                         "Cancel": function () {
                             $(this).dialog("close");
