@@ -44,7 +44,7 @@
                 <ul>
                     @foreach (var workItem in item.DayBefore)
                     {
-                        <li>@Html.ActionLink(workItem.Title, "Details", new { id = workItem.WorkItemID })</li>
+                        <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID }, null)</li>
                     }
                 </ul>
             </td>
