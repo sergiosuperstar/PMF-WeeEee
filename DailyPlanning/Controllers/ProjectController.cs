@@ -21,6 +21,10 @@ namespace DailyPlanning.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Returns a view that displays list of Projects.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var projectsEntity = dbContext.Projects.Where(p => p.IsDeleted == false && p.IsEnabled == true).AsEnumerable();
@@ -31,12 +35,21 @@ namespace DailyPlanning.Controllers
 
         }
 
+        /// <summary>
+        /// Returns a view that displays form for adding new Project.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult AddProject()
         {
             return View();
         }
 
+        /// <summary>
+        /// Saves new Project to database.
+        /// </summary>
+        /// <param name="newProjectViewModel">Object that contains information about Project that will be saved in database.</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AddProject(AddProjectViewModel newProjectViewModel)
         {
@@ -54,6 +67,11 @@ namespace DailyPlanning.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Returns a view that displays form for editing existing Project.
+        /// </summary>
+        /// <param name="id">Id of the Project that will be updated.</param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -70,6 +88,11 @@ namespace DailyPlanning.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Saves changes from existing Project to database.
+        /// </summary>
+        /// <param name="projectViewModel">Object that contains changed information about Project that will be saved in database.</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Edit(UpdateProjectViewModel projectViewModel)
         {
@@ -86,6 +109,11 @@ namespace DailyPlanning.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Returns a view that displays information about Project.
+        /// </summary>
+        /// <param name="id">Represents an id of Project which information will be displayed.</param>
+        /// <returns></returns>
         public ActionResult Details(int id)
         {
             var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
@@ -107,6 +135,11 @@ namespace DailyPlanning.Controllers
 
         }
 
+        /// <summary>
+        /// Removes Project from database.
+        /// </summary>
+        /// <param name="id">Represents an id of Project that will be removed from database.</param>
+        /// <returns></returns>
         public ActionResult Delete(int id)
         {
 
