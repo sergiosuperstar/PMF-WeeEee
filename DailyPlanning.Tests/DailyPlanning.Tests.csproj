@@ -54,12 +54,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\AddProjectPageConst.cs" />
+    <Compile Include="Constants\AddWorkItemPageConst.cs" />
     <Compile Include="Constants\EditProjectPageConst.cs" />
+    <Compile Include="Constants\EditWorkItemPageConst.cs" />
     <Compile Include="Constants\IndexPageConst.cs" />
+    <Compile Include="Constants\ProjectsPageConst.cs" />
+    <Compile Include="Constants\WorkItemsPageConst.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestScenarios\WorkItemRelatedTests.cs" />
     <Compile Include="TestScenarios\ProjectRelatedTests.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
