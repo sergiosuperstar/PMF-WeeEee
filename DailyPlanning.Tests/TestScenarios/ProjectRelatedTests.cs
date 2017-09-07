@@ -10,54 +10,53 @@ namespace DailyPlanning.Tests.TestScenarios
     /// Summary description for CodedUITest1
     /// </summary>
     [CodedUITest]
-    public class ProjectRelatedTests
+    public class ProjectRelatedTests : BaseTest
     {
-        private BrowserWindow browser;
         private ProjectsPage projects;
 
         [TestInitialize()]
-        public void Initialize()
+        public void ProjectTestsInitialize()
         {
-            browser = BrowserWindow.Launch("http://localhost:54813");
             projects = new ProjectsPage(browser);
-            projects.Navigate();
+            projects.NavigateToProjects();
+            Assert.IsTrue(projects.CheckPageTitle());
         }
 
         [TestMethod]
-        public void AddProjectTest()
+        public void Home_CreateNewProject_Test()
         {
             var addPage = projects.GoToAddProject();
+
+            Assert.IsTrue(addPage.CheckPageTitle());
 
             addPage.AddTitle("New Project 4")
                    .SaveProject();
         }
 
         [TestMethod]
-        public void EditProjectTest()
+        public void Home_UpdateProject_Test()
         {
             var editPage = projects.GoToEditProject();
+
+            Assert.IsTrue(editPage.CheckPageTitle());
 
             editPage.EditTitle("Edited Project Title")
                     .UpdateProject();
         }
 
         [TestMethod]
-        public void ProjectDetailsTest()
+        public void Home_ProjectDetails_Test()
         {
-            var detailsPage = projects.GoToProjectDetails();           
+            var detailsPage = projects.GoToProjectDetails();
+
+            Assert.IsTrue(detailsPage.CheckPageTitle());
         }
 
         [TestMethod]
-        public void DeleteProjectTest()
+        public void Home_DeleteProject_Test()
         {
             var deleteConfirmation = projects.DeleteProject();
             deleteConfirmation.DeleteConfirmation();
-        }
-
-        [TestCleanup()]
-        public void Cleanup()
-        {
-            browser.Close();
         }
     }
 }

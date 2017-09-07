@@ -13,15 +13,6 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             this.browser = browser;
         }
 
-        public bool CheckPageTitle()
-        {
-            var uiTitle = new HtmlControl(browser);
-            uiTitle.SearchProperties.Add(HtmlControl.PropertyNames.Id, PageTitlesConst.PAGE_TITLE_ID);
-            uiTitle.Find();
-            uiTitle.WaitForControlReady();
-            return uiTitle.InnerText.ToString().Equals(PageTitlesConst.ADD_WORKITEM_TITLE);
-        }
-
         public AddWorkItemPage InsertTitle(string title)
         {
             var uiTitle = new HtmlEdit(browser);
@@ -64,6 +55,17 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             Mouse.Click(uiCreateButton);
 
             return this;
+        }
+
+        public bool CheckPageTitle()
+        {
+            var uiTitle = new HtmlControl(browser);
+
+            uiTitle.SearchProperties.Add(HtmlControl.PropertyNames.Id, PageTitlesConst.PAGE_TITLE_ID);
+            uiTitle.Find();
+            uiTitle.WaitForControlReady();
+
+            return uiTitle.InnerText.ToString().Equals(PageTitlesConst.ADD_WORKITEM_TITLE);
         }
     }
 }

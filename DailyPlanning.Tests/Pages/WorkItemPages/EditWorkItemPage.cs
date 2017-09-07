@@ -68,5 +68,16 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
 
             return this;
         }
+
+        public bool CheckPageTitle()
+        {
+            var uiTitle = new HtmlControl(browser);
+
+            uiTitle.SearchProperties.Add(HtmlControl.PropertyNames.Id, PageTitlesConst.PAGE_TITLE_ID);
+            uiTitle.Find();
+            uiTitle.WaitForControlReady();
+
+            return uiTitle.InnerText.ToString().Equals(PageTitlesConst.EDIT_WORKITEM_TITLE);
+        }
     }
 }

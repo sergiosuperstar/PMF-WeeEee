@@ -10,21 +10,20 @@ namespace DailyPlanning.Tests.TestScenarios
     /// Summary description for CodedUITest1
     /// </summary>
     [CodedUITest]
-    public class WorkItemRelatedTests
+    public class WorkItemRelatedTests : BaseTest
     {
-        private BrowserWindow browser;
         private WorkItemsPage workItems;
 
         [TestInitialize()]
-        public void Initialize()
+        public void WorkItemTestsInitialize()
         {
-            browser = BrowserWindow.Launch("http://localhost:54813");
             workItems = new WorkItemsPage(browser);
-            workItems.Navigate();
+            workItems.NavigateToWorkItems();
+            Assert.IsTrue(workItems.CheckPageTitle());
         }
 
         [TestMethod]
-        public void AddWorkItemTest()
+        public void Home_CreateNewWorkItem_Test()
         {
             AddWorkItemPage addPage = workItems.NavigateToAddWorkItem();
 
@@ -37,9 +36,11 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void EditProjectTest()
+        public void Home_UpdateProject_Test()
         {
             EditWorkItemPage editPage = workItems.NavigateToEditWorkItem();
+
+            Assert.IsTrue(editPage.CheckPageTitle());
 
             editPage.EditTitle("Edited WorkItem 1")
                     .EditDescription("Edited description")
@@ -49,22 +50,20 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void WorkItemDetailsTest()
+        public void Home_WorkItemDetails_Test()
         {
             WorkItemDetailsPage detailsPage = workItems.NavigateToDetails();
+
+            Assert.IsTrue(detailsPage.CheckPageTitle());
         }
 
         [TestMethod]
-        public void DeleteWorkItemTest()
+        public void Home_DeleteWorkItem_Test()
         {
             DeleteWorkItemPage deletePage = workItems.DeleteWorkItem();
             deletePage.DeleteConfirmation();
         }
 
-        [TestCleanup()]
-        public void Cleanup()
-        {
-            browser.Close();
-        }
+        
     }
 }
