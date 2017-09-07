@@ -36,7 +36,7 @@ namespace DailyPlanning.Tests.TestScenarios
 
 
         [TestMethod]
-        public void IndexDailyPlan_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan()
+        public void Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan()
         {
 
             AddDailyPlanPage addPage = dailyPlans.NavigateToAddDailyPlan();
@@ -56,7 +56,7 @@ namespace DailyPlanning.Tests.TestScenarios
 
 
         [TestMethod]
-        public void IndexDailyPlan_EditDailyPlan_DailyPlansPageWithEditedDailyPlan()
+        public void Home_EditDailyPlan_DailyPlansPageWithEditedDailyPlan()
         {
 
             EditDailyPlanPage editPage = dailyPlans.NavigateToEditDailyPlan();
@@ -73,7 +73,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void IndexDailyPlan_DailyPlanDetails()
+        public void Home_DailyPlanDetails()
         {
             DetailsDailyPlanPage detailsPage = dailyPlans.NavigateToDetailsDailyPlan();
 
@@ -83,19 +83,22 @@ namespace DailyPlanning.Tests.TestScenarios
 
         }
         [TestMethod]
-        public void IndexDailyPlan_WorkItemsDetailsForToday()
+        public void Home_WorkItemsDetailsForToday()
         {
             WorkItemDetailsPage detailsTodayPage = dailyPlans.NavigateToDetailsTodayWorkItem();
 
+            Assert.IsTrue(detailsTodayPage.CheckPageTitle());
 
         }
 
         [TestMethod]
-        public void IndexDailyPlan_WorkItemsDetailsForDayBefore()
+        public void Home_WorkItemsDetailsForDayBefore()
         {
 
 
             WorkItemDetailsPage detailsDayBeforePage = dailyPlans.NavigateToDetailsDayBeforeWorkItem();
+
+            Assert.IsTrue(detailsDayBeforePage.CheckPageTitle());
         }
 
         [TestCleanup()]
