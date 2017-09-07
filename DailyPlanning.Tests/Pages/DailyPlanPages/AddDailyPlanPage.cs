@@ -58,14 +58,14 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
             return this;
         }
 
-        public AddDailyPlanPage SaveDailyPlan()
+        public DailyPlansPage SaveDailyPlan()
         {
             var uiCreate = new HtmlInputButton(browser);
             uiCreate.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.CREATE_DAILY_PLAN_LINK_ID);
             uiCreate.Find();
             Mouse.Click(uiCreate);
 
-            return this;
+            return new DailyPlansPage(browser);
         }
     }
 }

@@ -20,18 +20,16 @@ namespace DailyPlanning.Tests.TestScenarios
     /// Summary description for CodedUITest1
     /// </summary>
     [CodedUITest]
-    public class DailyPlanRelatedTests
+    public class DailyPlanRelatedTests : BaseTest
     {
-        private BrowserWindow browser;
+
         private DailyPlansPage dailyPlans;
 
         [TestInitialize()]
-        public void Initialize()
+        public void InitializeDailyPlan()
         {
-            browser = BrowserWindow.Launch("http://localhost:54813");
             dailyPlans = new DailyPlansPage(browser);
             dailyPlans.NavigateDailyPlans();
-
         }
 
 
@@ -64,7 +62,7 @@ namespace DailyPlanning.Tests.TestScenarios
             Assert.IsTrue(editPage.CheckPageTitle());
 
             string[] itemsDayBefore = { "WorkItem 3" };
-            string[] itemsToday = { "WorkItem 1" };
+            string[] itemsToday = { "Edited WorkItem 1" };
             editPage.SelectWorkItemsDayBefore( itemsDayBefore)
                 .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test edit")
@@ -79,7 +77,9 @@ namespace DailyPlanning.Tests.TestScenarios
 
             Assert.IsTrue(detailsPage.CheckPageTitle());
 
-            detailsPage.NavigateBackToList();  
+            detailsPage.NavigateBackToList();
+
+            
 
         }
         [TestMethod]
