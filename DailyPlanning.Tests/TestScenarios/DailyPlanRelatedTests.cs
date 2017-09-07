@@ -36,17 +36,19 @@ namespace DailyPlanning.Tests.TestScenarios
 
 
         [TestMethod]
-        public void IndexDailyPlan_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan()
+        public void Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan()
         {
 
             AddDailyPlanPage addPage = dailyPlans.NavigateToAddDailyPlan();
+
+            Assert.IsTrue(addPage.CheckPageTitle());
 
             
 
             string[] itemsDayBefore = { "WorkItem 2" };
             string[] itemsToday = { "WorkItem 2" };
             addPage.SelectWorkItemsDayBefore(itemsDayBefore)
-                .SelectWorkItemsDayBefore(itemsToday)
+                .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test")
                 .SaveDailyPlan();
 
@@ -54,11 +56,12 @@ namespace DailyPlanning.Tests.TestScenarios
 
 
         [TestMethod]
-        public void IndexDailyPlan_EditDailyPlan_DailyPlansPageWithEditedDailyPlan()
+        public void Home_EditDailyPlan_DailyPlansPageWithEditedDailyPlan()
         {
 
             EditDailyPlanPage editPage = dailyPlans.NavigateToEditDailyPlan();
 
+            Assert.IsTrue(editPage.CheckPageTitle());
 
             string[] itemsDayBefore = { "WorkItem 3" };
             string[] itemsToday = { "WorkItem 1" };
@@ -70,26 +73,32 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void IndexDailyPlan_DailyPlanDetails()
+        public void Home_DailyPlanDetails()
         {
             DetailsDailyPlanPage detailsPage = dailyPlans.NavigateToDetailsDailyPlan();
+
+            Assert.IsTrue(detailsPage.CheckPageTitle());
 
             detailsPage.NavigateBackToList();  
 
         }
         [TestMethod]
-        public void IndexDailyPlan_WorkItemsDetailsForToday()
+        public void Home_WorkItemsDetailsForToday()
         {
             WorkItemDetailsPage detailsTodayPage = dailyPlans.NavigateToDetailsTodayWorkItem();
+
+            Assert.IsTrue(detailsTodayPage.CheckPageTitle());
 
         }
 
         [TestMethod]
-        public void IndexDailyPlan_WorkItemsDetailsForDayBefore()
+        public void Home_WorkItemsDetailsForDayBefore()
         {
 
 
             WorkItemDetailsPage detailsDayBeforePage = dailyPlans.NavigateToDetailsDayBeforeWorkItem();
+
+            Assert.IsTrue(detailsDayBeforePage.CheckPageTitle());
         }
 
         [TestCleanup()]

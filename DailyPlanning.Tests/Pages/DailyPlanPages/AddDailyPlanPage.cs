@@ -19,6 +19,15 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
             this.browser = browserWindow;
         }
 
+        public bool CheckPageTitle()
+        {
+            var uiTitle = new HtmlControl(browser);
+            uiTitle.SearchProperties.Add(HtmlControl.PropertyNames.Id, PageTitlesConst.PAGE_TITLE_ID);
+            uiTitle.Find();
+            uiTitle.WaitForControlReady();
+            return uiTitle.InnerText.ToString().Equals(PageTitlesConst.ADD_DAILY_PLAN_TITLE);
+        }
+
         public AddDailyPlanPage SelectWorkItemsToday(string[] items)
         {
             var boxDayBefore = new HtmlList(browser);
