@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Infrastructure\Context\DailyPlanningContext.cs" />
     <Compile Include="Infrastructure\Database\DailyPlanningDBInitializer.cs" />
+    <Compile Include="Infrastructure\Database\DailyPlanningInitializationHandler.cs" />
     <Compile Include="Infrastructure\Entities\Project.cs" />
     <Compile Include="Infrastructure\Entities\WorkItem.cs" />
     <Compile Include="Infrastructure\Enums\Status.cs" />
@@ -563,7 +564,6 @@
     <Content Include="Views\WorkItem\Details.cshtml" />
     <Content Include="Views\DailyPlan\Index.cshtml" />
     <Content Include="Views\DailyPlan\AddDailyPlan.cshtml" />
-    <Content Include="Views\Project\Delete.cshtml" />
     <Content Include="Views\DailyPlan\Edit.cshtml" />
     <Content Include="Views\DailyPlan\Details.cshtml" />
   </ItemGroup>

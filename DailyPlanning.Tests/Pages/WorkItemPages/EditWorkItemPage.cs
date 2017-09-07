@@ -52,7 +52,7 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             var uiDropdownProj = new HtmlComboBox(browser);
 
             uiDropdownProj.SearchProperties.Add(HtmlControl.PropertyNames.Id, EditWorkItemPageConst.EDIT_PROJECT_DROPDOWN_ID);
-            uiDropdownProj.TryFind();
+            uiDropdownProj.Find();
             uiDropdownProj.SetProperty(HtmlComboBox.PropertyNames.SelectedIndex, index);
 
             return this;
@@ -63,7 +63,7 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             var uiCreateButton = new HtmlInputButton(browser);
 
             uiCreateButton.SearchProperties.Add(HtmlControl.PropertyNames.Id, EditWorkItemPageConst.EDIT_SAVE_BUTTON_ID);
-            uiCreateButton.TryFind();
+            uiCreateButton.Find();
             Mouse.Click(uiCreateButton);
 
             return this;
