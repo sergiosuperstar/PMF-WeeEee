@@ -1,7 +1,7 @@
 ﻿@model DailyPlanning.Models.DailyPlansViewModel.DetailsDailyPlanViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "DetailsDailyPlan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -66,8 +66,8 @@
 <p>
     @if (Model.Date.Date == DateTime.Now.Date)
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.DailyPlanID }, new { @class = "btn btn=default", @id = "edit" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.DailyPlanID }, new { @class = "btn btn=default", @id = "index-daily-plan-edit-link-id" })
 
     }
-    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn=default" })
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn=default", @id = "details-back-to-list-link-id" })
 </p>
