@@ -10,6 +10,8 @@ using Microsoft.VisualStudio.TestTools.UITest.Extension;
 using Keyboard = Microsoft.VisualStudio.TestTools.UITesting.Keyboard;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 using DailyPlanning.Tests.Constants;
+using DailyPlanning.Tests.Pages.DailyPlanPages;
+using DailyPlanning.Tests.Pages.WorkItemPages;
 
 namespace DailyPlanning.Tests.TestScenarios
 {
@@ -20,124 +22,74 @@ namespace DailyPlanning.Tests.TestScenarios
     [CodedUITest]
     public class DailyPlanRelatedTests
     {
-        BrowserWindow browser;
+        private BrowserWindow browser;
+        private DailyPlansPage dailyPlans;
 
         [TestInitialize()]
         public void Initialize()
         {
             browser = BrowserWindow.Launch("http://localhost:54813");
-        }
-
-        [TestMethod]
-        public void GoToDailyPlansTest()
-        {
-            var uiLinkDailyPlans = new HtmlHyperlink(browser);
-            uiLinkDailyPlans.SearchProperties.Add(HtmlControl.PropertyNames.Id, IndexDailyPlanPageConst.MENU_DAILY_PLAN_LINK_ID);
-            uiLinkDailyPlans.Find();
-            Mouse.Click(uiLinkDailyPlans);
-            // To generate code for this test, select "Generate Code for Coded UI Test" from the shortcut menu and select one of the menu items.
+            dailyPlans = new DailyPlansPage(browser);
+            dailyPlans.NavigateDailyPlans();
 
         }
 
 
         [TestMethod]
-        public void AddDailyPlanTest()
+        public void IndexDailyPlan_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan()
         {
 
+            AddDailyPlanPage addPage = dailyPlans.NavigateToAddDailyPlan();
 
-            GoToDailyPlansTest();
+            
 
-            var uiLinkAdd = new HtmlHyperlink(browser);
-            uiLinkAdd.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.INDEX_DAILY_PLAN_ADD_LINK_ID);
-            uiLinkAdd.Find();
-            Mouse.Click(uiLinkAdd);
-
-            var box = new HtmlList(browser);
-            box.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.SELECT_DAILY_PLAN_DAY_BEFORE_LISTBOX_ID);
-            box.Find();
-            box.SelectedItems = new string[]{"WorkItem 2"};
-
-            var boxToday = new HtmlList(browser);
-            box.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.SELECT_DAILY_PLAN_TODAY_LISTBOX_ID);
-            box.Find();
-            box.SelectedItems = new string[] { "WorkItem 2" };
-
-            var uiNote = new HtmlTextArea(browser);
-            uiNote.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.ADD_NOTE_TEXT_ID);
-            uiNote.Find();
-            Keyboard.SendKeys(uiNote, "test note");
-
-            var uiCreate = new HtmlInputButton(browser);
-            uiCreate.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.CREATE_DAILY_PLAN_LINK_ID);
-            uiCreate.Find();
-            Mouse.Click(uiCreate);
+            string[] itemsDayBefore = { "WorkItem 2" };
+            string[] itemsToday = { "WorkItem 2" };
+            addPage.SelectWorkItemsDayBefore(itemsDayBefore)
+                .SelectWorkItemsDayBefore(itemsToday)
+                .InsertNote("Test")
+                .SaveDailyPlan();
 
         }
 
 
         [TestMethod]
-        public void EditDailyPlanTest()
+        public void IndexDailyPlan_EditDailyPlan_DailyPlansPageWithEditedDailyPlan()
         {
-       
-            AddDailyPlanTest();
+
+            EditDailyPlanPage editPage = dailyPlans.NavigateToEditDailyPlan();
 
 
-            var uiLinkAdd = new HtmlHyperlink(browser);
-            uiLinkAdd.SearchProperties.Add(HtmlControl.PropertyNames.Id, EditDailyPlanPageConst.INDEX_DAILY_PLAN_EDIT_LINK_ID);
-            uiLinkAdd.Find();
-            Mouse.Click(uiLinkAdd);
-
-            var box = new HtmlList(browser);
-            box.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.SELECT_DAILY_PLAN_DAY_BEFORE_LISTBOX_ID);
-            box.Find();
-            box.SelectedItems = new string[] { "WorkItem 3" };
-
-            var boxToday = new HtmlList(browser);
-            box.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.SELECT_DAILY_PLAN_TODAY_LISTBOX_ID);
-            box.Find();
-            box.SelectedItems = new string[] { "WorkItem 1" };
-
-            var uiNote = new HtmlTextArea(browser);
-            uiNote.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.ADD_NOTE_TEXT_ID);
-            uiNote.Find();
-            uiNote.SetProperty(HtmlEdit.PropertyNames.Text, "test edit note");
-
-            var uiCreate = new HtmlInputButton(browser);
-            uiCreate.SearchProperties.Add(HtmlControl.PropertyNames.Id, EditDailyPlanPageConst.SAVE_DAILY_PLAN_EDIT_BUTTON_ID);
-            uiCreate.Find();
-            Mouse.Click(uiCreate);
+            string[] itemsDayBefore = { "WorkItem 3" };
+            string[] itemsToday = { "WorkItem 1" };
+            editPage.SelectWorkItemsDayBefore( itemsDayBefore)
+                .SelectWorkItemsToday(itemsToday)
+                .InsertNote("Test edit")
+                .SaveDailyPlan();
 
         }
 
         [TestMethod]
-        public void DetailsDailyPlanTest()
+        public void IndexDailyPlan_DailyPlanDetails()
         {
-            GoToDailyPlansTest();
+            DetailsDailyPlanPage detailsPage = dailyPlans.NavigateToDetailsDailyPlan();
 
-            var uiDetails = new HtmlHyperlink(browser);
-            uiDetails.SearchProperties.Add(HtmlControl.PropertyNames.Id, DailyPlanPageConst.INDEX_DAILYPLAN_DETAILS_LINK_ID);
-            uiDetails.Find();
-            Mouse.Click(uiDetails);
+            detailsPage.NavigateBackToList();  
 
         }
         [TestMethod]
-        public void DetailsTodayWorkItemsTest()
+        public void IndexDailyPlan_WorkItemsDetailsForToday()
         {
-            GoToDailyPlansTest();
-            var uiWITodayDetails = new HtmlHyperlink(browser);
-            uiWITodayDetails.SearchProperties.Add(HtmlControl.PropertyNames.Class, DailyPlanPageConst.INDEX_DAILY_PLAN_TODAY_DETAILS_LINK_CLASS);
-            uiWITodayDetails.Find();
-            Mouse.Click(uiWITodayDetails);
+            WorkItemDetailsPage detailsTodayPage = dailyPlans.NavigateToDetailsTodayWorkItem();
+
         }
 
         [TestMethod]
-        public void DetailsDayBeforeWorkItemsTest()
+        public void IndexDailyPlan_WorkItemsDetailsForDayBefore()
         {
-            GoToDailyPlansTest();
-            var uiWIDayBeforeDetails = new HtmlHyperlink(browser);
-            uiWIDayBeforeDetails.SearchProperties.Add(HtmlControl.PropertyNames.Class, DailyPlanPageConst.INDEX_DAILY_PLAN_DAY_BEFORE_DETAILS_LINK_CLASS);
-            uiWIDayBeforeDetails.Find();
-            Mouse.Click(uiWIDayBeforeDetails);
+
+
+            WorkItemDetailsPage detailsDayBeforePage = dailyPlans.NavigateToDetailsDayBeforeWorkItem();
         }
 
         [TestCleanup()]

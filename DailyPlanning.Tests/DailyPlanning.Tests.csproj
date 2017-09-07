@@ -57,6 +57,7 @@
     <Compile Include="Constants\AddProjectPageConst.cs" />
     <Compile Include="Constants\AddWorkItemPageConst.cs" />
     <Compile Include="Constants\DailyPlanPageConst.cs" />
+    <Compile Include="Constants\DetailsDailyPlanPageConst.cs" />
     <Compile Include="Constants\EditDailyPlanPageConst.cs" />
     <Compile Include="Constants\EditProjectPageConst.cs" />
     <Compile Include="Constants\EditWorkItemPageConst.cs" />
@@ -66,6 +67,10 @@
     <Compile Include="Constants\ProjectsPageConst.cs" />
     <Compile Include="Constants\WorkItemDetailsPageConst.cs" />
     <Compile Include="Constants\WorkItemsPageConst.cs" />
+    <Compile Include="Pages\DailyPlanPages\AddDailyPlanPage.cs" />
+    <Compile Include="Pages\DailyPlanPages\DailyPlansPage.cs" />
+    <Compile Include="Pages\DailyPlanPages\DetailsDailyPlanPage.cs" />
+    <Compile Include="Pages\DailyPlanPages\EditDailyPlanPage.cs" />
     <Compile Include="Pages\ProjectPages\AddProjectPage.cs" />
     <Compile Include="Pages\ProjectPages\DeleteProjectPage.cs" />
     <Compile Include="Pages\ProjectPages\EditProjectPage.cs" />
