@@ -37,7 +37,7 @@
             @foreach(var item in Model.WorkItems)
             {
                 <tr>
-                    <td>@Html.ActionLink(item.Title, "Details", "WorkItem", new { id = item.WorkItemID }, "")</td>
+                    <td>@Html.ActionLink(item.Title, "Details", "WorkItem", new { id = item.WorkItemID }, new { @class = "details-workitem-link-class" })</td>
                     <td>@Html.Raw(item.Description)</td>
                     <td>@item.Status.ToString()</td>
                 </tr>
@@ -46,7 +46,7 @@
     </div>
 </div>
 <p>
-    @Html.ActionLink("Add Work Item", "AddWorkItem", "WorkItem", new { id = Model.Project.ProjectID }, new { @class = "btn btn-default", @id = "proj-details-add-workitem-link-id" }) &nbsp;&nbsp;
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Project.ProjectID }, new { @class = "btn btn-default" }) &nbsp;&nbsp;
+    @Html.ActionLink("Add Work Item", "AddWorkItem", "WorkItem", new { id = Model.Project.ProjectID }, new { @class = "btn btn-default", @id = "details-add-workitem-link-id" }) &nbsp;&nbsp;
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Project.ProjectID }, new { @class = "btn btn-default", @id = "details-edit-project-link-id" }) &nbsp;&nbsp;
     @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-default" })
 </p>

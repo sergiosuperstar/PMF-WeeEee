@@ -58,15 +58,25 @@
     <Compile Include="Constants\EditProjectPageConst.cs" />
     <Compile Include="Constants\EditWorkItemPageConst.cs" />
     <Compile Include="Constants\IndexPageConst.cs" />
+    <Compile Include="Constants\ProjectDetailsPageConst.cs" />
     <Compile Include="Constants\ProjectsPageConst.cs" />
+    <Compile Include="Constants\WorkItemDetailsPageConst.cs" />
     <Compile Include="Constants\WorkItemsPageConst.cs" />
+    <Compile Include="Pages\ProjectPages\AddProjectPage.cs" />
+    <Compile Include="Pages\ProjectPages\DeleteProjectPage.cs" />
+    <Compile Include="Pages\ProjectPages\EditProjectPage.cs" />
+    <Compile Include="Pages\ProjectPages\ProjectDetailsPage.cs" />
+    <Compile Include="Pages\ProjectPages\ProjectsPage.cs" />
+    <Compile Include="Pages\WorkItemPages\AddWorkItemPage.cs" />
+    <Compile Include="Pages\WorkItemPages\DeleteWorkItemPage.cs" />
+    <Compile Include="Pages\WorkItemPages\EditWorkItemPage.cs" />
+    <Compile Include="Pages\WorkItemPages\WorkItemDetailsPage.cs" />
+    <Compile Include="Pages\WorkItemPages\WorkItemsPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestScenarios\WorkItemRelatedTests.cs" />
     <Compile Include="TestScenarios\ProjectRelatedTests.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

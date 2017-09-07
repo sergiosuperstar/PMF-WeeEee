@@ -54,7 +54,7 @@
 
                 <tr>
                     <td>@Html.DisplayFor(model => model.Project.ProjectID)</td>
-                    <td>@Html.ActionLink(Model.Project.Title, "Details", "Project", new { id = Model.Project.ProjectID }, "")</td>
+                    <td>@Html.ActionLink(Model.Project.Title, "Details", "Project", new { id = Model.Project.ProjectID }, new { @class = "details-project-link-id" })</td>
                 </tr>
             </table>
         </div>
@@ -62,6 +62,6 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkItem.WorkItemID }, new { @class = "btn btn-default" }) &nbsp;&nbsp;
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkItem.WorkItemID }, new { @class = "btn btn-default", @id = "details-edit-link-id" }) &nbsp;&nbsp;
     @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-default" })
 </p>
