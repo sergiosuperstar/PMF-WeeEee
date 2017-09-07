@@ -58,5 +58,31 @@ namespace DailyPlanning.Tests.TestScenarios
             var deleteConfirmation = projects.DeleteProject();
             deleteConfirmation.DeleteConfirmation();
         }
+
+        [TestMethod]
+        public void Home_CreateNewProjectDisplayValidation_Test()
+        {
+            var addPage = projects.GoToAddProject();
+
+            Assert.IsTrue(addPage.CheckPageTitle());
+
+            addPage.AddTitle("N")
+                   .SaveProject();
+
+            Assert.IsTrue(addPage.IsValidationDisplayed());
+        }
+
+        [TestMethod]
+        public void Home_UpdateProjectDisplayValidation_Test()
+        {
+            var editPage = projects.GoToEditProject();
+
+            Assert.IsTrue(editPage.CheckPageTitle());
+
+            editPage.EditTitle("E")
+                    .UpdateProject();
+
+            Assert.IsTrue(editPage.IsValidationDisplayed());
+        }
     }
 }

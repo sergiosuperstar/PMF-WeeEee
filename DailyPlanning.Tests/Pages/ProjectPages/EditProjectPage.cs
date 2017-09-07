@@ -51,5 +51,13 @@ namespace DailyPlanning.Tests.Pages.ProjectPages
 
             return uiTitle.InnerText.ToString().Equals(PageTitlesConst.EDIT_PROJECT_TITLE);
         }
+
+        public bool IsValidationDisplayed()
+        {
+            var uiValidationError = new HtmlControl(browser);
+            uiValidationError.SearchProperties.Add(HtmlControl.PropertyNames.Id, EditProjectPageConst.EDIT_TITLE_TEXTBOX_ID_ERROR);
+
+            return uiValidationError.TryFind();
+        }
     }
 }
