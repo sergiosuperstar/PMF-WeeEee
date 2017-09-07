@@ -19,7 +19,7 @@ namespace DailyPlanning.Tests.Pages.ProjectPages
             var uiTitle = new HtmlEdit(browser);
 
             uiTitle.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddProjectPageConst.ADD_TITLE_TEXTBOX_ID);
-           uiTitle.TryFind();
+            uiTitle.Find();
             Keyboard.SendKeys(uiTitle, title);
 
             return this;
@@ -34,6 +34,17 @@ namespace DailyPlanning.Tests.Pages.ProjectPages
             Mouse.Click(uiCreateButton);
 
             return this;
+        }
+
+        public bool CheckPageTitle()
+        {
+            var uiTitle = new HtmlControl(browser);
+
+            uiTitle.SearchProperties.Add(HtmlControl.PropertyNames.Id, PageTitlesConst.PAGE_TITLE_ID);
+            uiTitle.Find();
+            uiTitle.WaitForControlReady();
+
+            return uiTitle.InnerText.ToString().Equals(PageTitlesConst.ADD_PROJECT_TITLE);
         }
     }
 }

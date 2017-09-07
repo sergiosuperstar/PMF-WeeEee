@@ -14,7 +14,7 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             this.browser = browser;
         }
         
-        public void Navigate()
+        public void NavigateToWorkItems()
         {
             var uiLinkProjects = new HtmlHyperlink(browser);
 
@@ -64,6 +64,17 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             Mouse.Click(uiLinkDelete);
 
             return new DeleteWorkItemPage(browser);
+        }
+
+        public bool CheckPageTitle()
+        {
+            var uiTitle = new HtmlControl(browser);
+
+            uiTitle.SearchProperties.Add(HtmlControl.PropertyNames.Id, PageTitlesConst.PAGE_TITLE_ID);
+            uiTitle.Find();
+            uiTitle.WaitForControlReady();
+
+            return uiTitle.InnerText.ToString().Equals(PageTitlesConst.WORKITEMS_TITLE);
         }
     }
 }
