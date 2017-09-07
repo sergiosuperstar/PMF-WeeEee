@@ -13,7 +13,7 @@ namespace DailyPlanning
     {
         protected void Application_Start()
         {
-            System.Data.Entity.Database.SetInitializer(new DailyPlanningDBInitializer());
+            DailyPlanningInitializationHandler.Initialize();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

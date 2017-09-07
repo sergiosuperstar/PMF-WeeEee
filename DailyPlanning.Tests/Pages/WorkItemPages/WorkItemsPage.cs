@@ -23,7 +23,7 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             Mouse.Click(uiLinkProjects);
         }
 
-        public AddWorkItemPage goToAddWorkItem()
+        public AddWorkItemPage NavigateToAddWorkItem()
         {
             var uiLinkAdd = new HtmlHyperlink(browser);
 
@@ -34,18 +34,18 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             return new AddWorkItemPage(browser);
         }
 
-        public EditWorkItemPage goToEditWorkItem()
+        public EditWorkItemPage NavigateToEditWorkItem()
         {
             var uiLinkEdit = new HtmlHyperlink(browser);
 
             uiLinkEdit.SearchProperties.Add(HtmlControl.PropertyNames.Class, WorkItemsPageConst.INDEX_EDIT_LINK_CLASS);
-            uiLinkEdit.TryFind();
+            uiLinkEdit.Find();
             Mouse.Click(uiLinkEdit);
 
             return new EditWorkItemPage(browser);
         }
 
-        public WorkItemDetailsPage goToDetails()
+        public WorkItemDetailsPage NavigateToDetails()
         {
             var uiLinkDetails = new HtmlHyperlink(browser);
 

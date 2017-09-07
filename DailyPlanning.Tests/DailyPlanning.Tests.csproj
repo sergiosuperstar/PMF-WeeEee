@@ -62,6 +62,7 @@
     <Compile Include="Constants\EditWorkItemPageConst.cs" />
     <Compile Include="Constants\IndexDailyPlanPageConst.cs" />
     <Compile Include="Constants\IndexPageConst.cs" />
+    <Compile Include="Constants\PageTitlesConst.cs" />
     <Compile Include="Constants\ProjectDetailsPageConst.cs" />
     <Compile Include="Constants\ProjectsPageConst.cs" />
     <Compile Include="Constants\WorkItemDetailsPageConst.cs" />
