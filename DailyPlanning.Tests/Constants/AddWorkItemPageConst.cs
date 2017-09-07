@@ -9,5 +9,7 @@
         public const string ADD_PROJECT_DROPDOWN_ID = "add-project-dropdown-id";
 
         public const string ADD_CREATE_BUTTON_ID = "add-create-button-id";
+
+        public const string ADD_TITLE_VALIDATION_ID_ERROR = "add-title-textbox-id-error";
     }
 }

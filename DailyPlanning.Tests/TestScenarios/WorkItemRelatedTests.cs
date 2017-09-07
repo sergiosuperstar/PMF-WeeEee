@@ -36,7 +36,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_UpdateProject_Test()
+        public void Home_UpdateWorkItem_Test()
         {
             EditWorkItemPage editPage = workItems.NavigateToEditWorkItem();
 
@@ -64,6 +64,35 @@ namespace DailyPlanning.Tests.TestScenarios
             deletePage.DeleteConfirmation();
         }
 
-        
+        [TestMethod]
+        public void Home_CreateNewWorkItemDisplayValidation_Test()
+        {
+            AddWorkItemPage addPage = workItems.NavigateToAddWorkItem();
+
+            Assert.IsTrue(addPage.CheckPageTitle());
+
+            addPage.InsertTitle(" ")
+                   .InsertDescription("Some description.")
+                   .SelectProject(2)
+                   .SaveWorkItem();
+
+            Assert.IsTrue(addPage.IsValidationDisplayed());
+        }
+
+        [TestMethod]
+        public void Home_UpdateWorkItemDisplayValidation_Test()
+        {
+            EditWorkItemPage editPage = workItems.NavigateToEditWorkItem();
+
+            Assert.IsTrue(editPage.CheckPageTitle());
+
+            editPage.EditTitle("E")
+                    .EditDescription("Edited description")
+                    .EditStatus(2)
+                    .EditProject(2)
+                    .UpdateWorkItem();
+
+            Assert.IsTrue(editPage.IsValidationDisplayed());
+        }
     }
 }

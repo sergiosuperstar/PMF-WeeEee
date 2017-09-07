@@ -11,5 +11,7 @@
         public const string EDIT_PROJECT_DROPDOWN_ID = "edit-project-dropdown-id";
 
         public const string EDIT_SAVE_BUTTON_ID = "edit-save-button-id";
+
+        public const string EDIT_TITLE_VALIDATION_ID_ERROR = "edit-title-textbox-id-error";
     }
 }

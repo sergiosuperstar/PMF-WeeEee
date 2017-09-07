@@ -67,5 +67,13 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
 
             return uiTitle.InnerText.ToString().Equals(PageTitlesConst.ADD_WORKITEM_TITLE);
         }
+
+        public bool IsValidationDisplayed()
+        {
+            var uiValidationError = new HtmlControl(browser);
+            uiValidationError.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddWorkItemPageConst.ADD_TITLE_VALIDATION_ID_ERROR);
+
+            return uiValidationError.TryFind();
+        }
     }
 }
