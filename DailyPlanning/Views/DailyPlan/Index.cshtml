@@ -36,7 +36,7 @@
                 <ul>
                     @foreach (var workItem in item.Today)
                     {
-                        <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID }, null)</li>
+                        <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID }, new { @class ="index-daily-plan-today-details-link-class"})</li>
                     }
                 </ul>
             </td>
@@ -44,7 +44,7 @@
                 <ul>
                     @foreach (var workItem in item.DayBefore)
                     {
-                        <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID }, null)</li>
+                        <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID },  new { @class = "index-daily-plan-day-before-details-link-class" })</li>
                     }
                 </ul>
             </td>
@@ -62,7 +62,7 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.DailyPlanID}, new {@class = "btn btn=default", @id = "details"})
+                @Html.ActionLink("Details", "Details", new { id = item.DailyPlanID}, new {@class = "btn btn=default", @id = "index-dailyplan-details-link-id"})
             </td>
         </tr>
     }

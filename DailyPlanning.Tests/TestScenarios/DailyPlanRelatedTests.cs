@@ -109,6 +109,37 @@ namespace DailyPlanning.Tests.TestScenarios
 
         }
 
+        [TestMethod]
+        public void DetailsDailyPlanTest()
+        {
+            GoToDailyPlansTest();
+
+            var uiDetails = new HtmlHyperlink(browser);
+            uiDetails.SearchProperties.Add(HtmlControl.PropertyNames.Id, DailyPlanPageConst.INDEX_DAILYPLAN_DETAILS_LINK_ID);
+            uiDetails.Find();
+            Mouse.Click(uiDetails);
+
+        }
+        [TestMethod]
+        public void DetailsTodayWorkItemsTest()
+        {
+            GoToDailyPlansTest();
+            var uiWITodayDetails = new HtmlHyperlink(browser);
+            uiWITodayDetails.SearchProperties.Add(HtmlControl.PropertyNames.Class, DailyPlanPageConst.INDEX_DAILY_PLAN_TODAY_DETAILS_LINK_CLASS);
+            uiWITodayDetails.Find();
+            Mouse.Click(uiWITodayDetails);
+        }
+
+        [TestMethod]
+        public void DetailsDayBeforeWorkItemsTest()
+        {
+            GoToDailyPlansTest();
+            var uiWIDayBeforeDetails = new HtmlHyperlink(browser);
+            uiWIDayBeforeDetails.SearchProperties.Add(HtmlControl.PropertyNames.Class, DailyPlanPageConst.INDEX_DAILY_PLAN_DAY_BEFORE_DETAILS_LINK_CLASS);
+            uiWIDayBeforeDetails.Find();
+            Mouse.Click(uiWIDayBeforeDetails);
+        }
+
         [TestCleanup()]
         public void Cleanup()
         {
