@@ -24,5 +24,13 @@ namespace DailyPlanning.Tests.Constants
         public const string WORKITEM_DETAILS_TITLE = "WorkItem Details - Daily Planner";
 
         public const string WORKITEMS_TITLE = "WorkItems - Daily Planner";
+
+        public const string ADD_DAILY_PLAN_TITLE = "Add DailyPlan - Daily Planner";
+
+        public const string EDIT_DAILY_PLAN_TITLE = "Edit DailyPlan - Daily Planner";
+
+        public const string DETAILS_DAILY_PLAN_TITLE = "Details DailyPlan - Daily Planner";
+
+        public const string INDEX_DAILY_PLAN_TITLE = "Index DailyPlan - Daily Planner";
     }
 }

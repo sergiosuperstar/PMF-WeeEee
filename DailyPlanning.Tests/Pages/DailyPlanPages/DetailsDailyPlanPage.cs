@@ -20,6 +20,14 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
             this.browser = browserWindow;
         }
 
+        public bool CheckPageTitle()
+        {
+            var uiTitle = new HtmlControl(browser);
+            uiTitle.SearchProperties.Add(HtmlControl.PropertyNames.Id, PageTitlesConst.PAGE_TITLE_ID);
+            uiTitle.Find();
+            uiTitle.WaitForControlReady();
+            return uiTitle.InnerText.ToString().Equals(PageTitlesConst.DETAILS_DAILY_PLAN_TITLE);
+        }
         public DetailsDailyPlanPage NavigateBackToList()
         {
             var uiLinkList = new HtmlHyperlink(browser);

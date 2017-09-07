@@ -41,12 +41,14 @@ namespace DailyPlanning.Tests.TestScenarios
 
             AddDailyPlanPage addPage = dailyPlans.NavigateToAddDailyPlan();
 
+            Assert.IsTrue(addPage.CheckPageTitle());
+
             
 
             string[] itemsDayBefore = { "WorkItem 2" };
             string[] itemsToday = { "WorkItem 2" };
             addPage.SelectWorkItemsDayBefore(itemsDayBefore)
-                .SelectWorkItemsDayBefore(itemsToday)
+                .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test")
                 .SaveDailyPlan();
 
@@ -59,6 +61,7 @@ namespace DailyPlanning.Tests.TestScenarios
 
             EditDailyPlanPage editPage = dailyPlans.NavigateToEditDailyPlan();
 
+            Assert.IsTrue(editPage.CheckPageTitle());
 
             string[] itemsDayBefore = { "WorkItem 3" };
             string[] itemsToday = { "WorkItem 1" };
@@ -74,6 +77,8 @@ namespace DailyPlanning.Tests.TestScenarios
         {
             DetailsDailyPlanPage detailsPage = dailyPlans.NavigateToDetailsDailyPlan();
 
+            Assert.IsTrue(detailsPage.CheckPageTitle());
+
             detailsPage.NavigateBackToList();  
 
         }
@@ -81,6 +86,7 @@ namespace DailyPlanning.Tests.TestScenarios
         public void IndexDailyPlan_WorkItemsDetailsForToday()
         {
             WorkItemDetailsPage detailsTodayPage = dailyPlans.NavigateToDetailsTodayWorkItem();
+
 
         }
 

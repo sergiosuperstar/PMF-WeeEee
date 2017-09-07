@@ -1,7 +1,7 @@
 ﻿@using DailyPlanning.Models.DailyPlansViewModel
 @model UpdateDailyPlanViewModel
 @{
-    ViewBag.Title = "EditDailyPlan";
+    ViewBag.Title = "Edit DailyPlan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,7 +29,6 @@
 
                 @Html.ListBoxFor(model => model.SelectedWorkItemsDayBefore, new MultiSelectList(Model.DayBefore, "WorkItemId", "Title"),new {@id = "select-daily-plan-day-before-listbox-id" })
                 @Html.ValidationMessageFor(model => model.SelectedWorkItemsDayBefore, "", new { @class = "text-danger" })
-
 
             </div>
         </div>
