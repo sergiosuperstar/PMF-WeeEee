@@ -23,8 +23,8 @@
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.ProjectID)</td>
                 <td>@Html.ActionLink(item.Title, "Details", new { id = item.ProjectID }, new { @class = "index-details-link-class" })</td>
-                <td>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { @class = "index-edit-link-class btn btn-default" })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { @class = "index-delete-link-class delete btn btn-default" })</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = item.ProjectID }, new { @class = "index-edit-link-class btn btn-info" })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = item.ProjectID }, new { @class = "index-delete-link-class delete btn btn-danger" })</td>
             </tr>
         }
 
@@ -36,7 +36,7 @@
 </div>
 
 <div>
-    @Html.ActionLink("Add", "AddProject", "", new { @class = "btn btn-default", @id = "index-add-link-id" })
+    @Html.ActionLink("Add", "AddProject", "", new { @class = "btn btn-success", @id = "index-add-link-id" })
 </div>
 
 @section Scripts {

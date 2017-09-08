@@ -49,14 +49,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Note)
             </td>
+            
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.DailyPlanID}, new {@class = "btn btn-default", @id = "index-dailyplan-details-link-id"})
+            </td>
             <td>
                 @if (item.Date.Date == DateTime.Now.Date)
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID }, new { @class = "btn btn-primary", @id = "index-daily-plan-edit-link-id" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID }, new { @class = "btn btn-info", @id = "index-daily-plan-edit-link-id" })
                 }
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.DailyPlanID}, new {@class = "btn btn-default", @id = "index-dailyplan-details-link-id"})
             </td>
         </tr>
     }

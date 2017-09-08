@@ -51,10 +51,10 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.WorkItemID }, new { @class = "index-edit-link-class btn btn-default" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.WorkItemID }, new { @class = "index-edit-link-class btn btn-info" })
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.WorkItemID }, new { @class = "index-delete-link-class delete btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.WorkItemID }, new { @class = "index-delete-link-class delete btn btn-danger" })
             </td>
         </tr>
     }
@@ -66,7 +66,7 @@
 </div>
 
 <p>
-    @Html.ActionLink("Add", "AddWorkItem", "", new { @class = "btn btn-default", @id = "index-add-link-id" })
+    @Html.ActionLink("Add", "AddWorkItem", "", new { @class = "btn btn-success", @id = "index-add-link-id" })
 </p>
 
 @section Scripts {

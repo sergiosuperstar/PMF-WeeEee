@@ -57,7 +57,7 @@
 <p>
     @if (Model.Date.Date == DateTime.Now.Date)
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.DailyPlanID }, new { @class = "btn btn-default", @id = "index-daily-plan-edit-link-id" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.DailyPlanID }, new { @class = "btn btn-info", @id = "index-daily-plan-edit-link-id" })
     }
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default", @id = "details-back-to-list-link-id" })
 </p>
