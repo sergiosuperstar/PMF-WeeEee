@@ -12,9 +12,7 @@ using DailyPlanning.Infrastructure.Database;
 
 namespace DailyPlanning.Tests.TestScenarios
 {
-    /// <summary>
-    /// Summary description for CodedUITest1
-    /// </summary>
+    
     [CodedUITest]
     public class BaseTest
     {
@@ -23,7 +21,6 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestInitialize()]
         public void Initialize()
         {
-        //    DailyPlanningInitializationHandler.Initialize();
             browser = BrowserWindow.Launch("http://localhost:54813");
         }
 
@@ -31,6 +28,7 @@ namespace DailyPlanning.Tests.TestScenarios
         public void Cleanup()
         {
             browser.Close();
+            
         }
     }
 }
