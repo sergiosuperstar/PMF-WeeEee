@@ -8,7 +8,6 @@
 
 <h2>Daily Plans</h2>
 
-
 <table class="table">
     <tr>
         <th>
@@ -25,7 +24,6 @@
         </th>
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
@@ -48,17 +46,13 @@
                     }
                 </ul>
             </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.Note)
             </td>
-
-
             <td>
                 @if (item.Date.Date == DateTime.Now.Date)
                 {
                     @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID }, new { @class = "btn btn=default", @id = "index-daily-plan-edit-link-id" })
-
                 }
             </td>
             <td>
@@ -66,23 +60,19 @@
             </td>
         </tr>
     }
-
-
-
 </table>
 
 <p id="button">
         @Html.ActionLink("Add Daily Plan", "AddDailyPlan", null, new {@id = "index-daily-plan-add-link-id", @class = "btn btn-default" })
 </p>
+
 @section Scripts{
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
     <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <script type="text/javascript">
-            if ($('#edit').length > 0) {
-                $('#add').attr('disabled', 'disabled');
-                $('#add').attr('href', '#');
+            if ($('#index-daily-plan-edit-link-id').length > 0) {
+                $('#index-daily-plan-add-link-id').attr('disabled', 'disabled');
+                $('#index-daily-plan-add-link-id').attr('href', '#');
             }
-            
-
     </script>
 }

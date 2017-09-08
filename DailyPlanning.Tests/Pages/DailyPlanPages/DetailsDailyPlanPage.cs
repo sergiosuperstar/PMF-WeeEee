@@ -28,14 +28,14 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
             uiTitle.WaitForControlReady();
             return uiTitle.InnerText.ToString().Equals(PageTitlesConst.DETAILS_DAILY_PLAN_TITLE);
         }
-        public DetailsDailyPlanPage NavigateBackToList()
+        public DailyPlansPage NavigateBackToList()
         {
             var uiLinkList = new HtmlHyperlink(browser);
             uiLinkList.SearchProperties.Add(HtmlControl.PropertyNames.Id, DetailsDailyPlanPageConst.DETAILS_BACK_TO_LIST_LINK_ID);
             uiLinkList.Find();
             Mouse.Click(uiLinkList);
 
-            return this;
+            return new DailyPlansPage(browser);
         }
 
     }

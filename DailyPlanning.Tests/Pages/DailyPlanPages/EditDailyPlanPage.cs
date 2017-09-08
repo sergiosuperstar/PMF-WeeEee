@@ -67,5 +67,29 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
             Mouse.Click(uiSave);
             return new DailyPlansPage(browser);
         }
+
+        public bool IsValidationDisplayedForSelectTodayWorkItems()
+        {
+            var uiValidationError = new HtmlControl(browser);
+            uiValidationError.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.SELECT_DAILY_PLAN_TODAY_TEXT_ERROR_ID);
+
+            return uiValidationError.TryFind();
+        }
+
+        public bool IsValidationDisplayedForSelectDayBeforeWorkItems()
+        {
+            var uiValidationError = new HtmlControl(browser);
+            uiValidationError.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.SELECT_DAILY_PLAN_DAY_BEFORE_TEXT_ERROR_ID);
+
+            return uiValidationError.TryFind();
+        }
+
+        public bool IsValidationDisplayedForNote()
+        {
+            var uiValidationError = new HtmlControl(browser);
+            uiValidationError.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.ADD_NOTE_TEXT_ERROR_ID);
+
+            return uiValidationError.TryFind();
+        }
     }
 }
