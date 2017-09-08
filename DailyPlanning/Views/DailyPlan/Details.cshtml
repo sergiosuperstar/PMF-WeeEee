@@ -40,7 +40,7 @@
                 {
                     <li>
                         @Html.ActionLink(item.Title, "Details", "WorkItem", new { id = item.WorkItemID }, null)
-                        @Html.ValidationMessageFor(model => model.DayBefore, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.DayBefore, null, new { @class = "text-danger" })
                     </li>
                 }
             </ul>
