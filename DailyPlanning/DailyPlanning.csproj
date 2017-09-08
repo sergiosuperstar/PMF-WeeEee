@@ -162,7 +162,6 @@
     <Compile Include="MapperConfig\MapperProvider.cs" />
     <Compile Include="Models\DailyPlansViewModel\AddDailyPlanViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\DetailsDailyPlanViewModel.cs" />
-    <Compile Include="Models\DailyPlansViewModel\ListOfDailyPlansViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\DailyPlanViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\UpdateDailyPlanViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\AddProjectViewModel.cs" />

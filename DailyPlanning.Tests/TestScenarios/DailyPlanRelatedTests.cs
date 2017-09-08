@@ -25,16 +25,18 @@ namespace DailyPlanning.Tests.TestScenarios
 
         private DailyPlansPage dailyPlans;
 
+
         [TestInitialize()]
         public void InitializeDailyPlan()
         {
+            base.Initialize();
             dailyPlans = new DailyPlansPage(browser);
             dailyPlans.NavigateDailyPlans();
         }
 
 
         [TestMethod]
-        public void Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan()
+        public void Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test()
         {
 
             AddDailyPlanPage addPage = dailyPlans.NavigateToAddDailyPlan();
@@ -54,15 +56,17 @@ namespace DailyPlanning.Tests.TestScenarios
 
 
         [TestMethod]
-        public void Home_EditDailyPlan_DailyPlansPageWithEditedDailyPlan()
+        public void Home_EditDailyPlan_DailyPlansPageWithEditedDailyPlan_Test()
         {
-
+            Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test();
             EditDailyPlanPage editPage = dailyPlans.NavigateToEditDailyPlan();
 
             Assert.IsTrue(editPage.CheckPageTitle());
 
+
+
             string[] itemsDayBefore = { "WorkItem 3" };
-            string[] itemsToday = { "Edited WorkItem 1" };
+            string[] itemsToday = { "WorkItem 1" };
             editPage.SelectWorkItemsDayBefore( itemsDayBefore)
                 .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test edit")
@@ -71,7 +75,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_DailyPlanDetails()
+        public void Home_DailyPlanDetails_Test()
         {
             DetailsDailyPlanPage detailsPage = dailyPlans.NavigateToDetailsDailyPlan();
 
@@ -83,7 +87,7 @@ namespace DailyPlanning.Tests.TestScenarios
 
         }
         [TestMethod]
-        public void Home_WorkItemsDetailsForToday()
+        public void Home_WorkItemsDetailsForToday_Test()
         {
             WorkItemDetailsPage detailsTodayPage = dailyPlans.NavigateToDetailsTodayWorkItem();
 
@@ -92,7 +96,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_WorkItemsDetailsForDayBefore()
+        public void Home_WorkItemsDetailsForDayBefore_Test()
         {
 
 
@@ -101,10 +105,41 @@ namespace DailyPlanning.Tests.TestScenarios
             Assert.IsTrue(detailsDayBeforePage.CheckPageTitle());
         }
 
-        [TestCleanup()]
-        public void Cleanup()
+        [TestMethod]
+        public void Home_InsertNewDailyPlanValidation_Test()
         {
-            browser.Close();
+            var addDailyPlan = dailyPlans.NavigateToAddDailyPlan();
+
+            Assert.IsTrue(addDailyPlan.CheckPageTitle());
+
+            string[] items = { };
+            addDailyPlan.SelectWorkItemsDayBefore(items)
+                        .SelectWorkItemsToday(items)
+                        .InsertNote("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890")
+                        .SaveDailyPlan();
+
+            Assert.IsTrue(addDailyPlan.IsValidationDisplayedForSelectDayBeforeWorkItems());
+            Assert.IsTrue(addDailyPlan.IsValidationDisplayedForSelectTodayWorkItems());
+            Assert.IsTrue(addDailyPlan.IsValidationDisplayedForNote());
+
+        }
+        [TestMethod]
+        public void Home_EditNewDailyPlanValidation_Test()
+        {
+            Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test();
+            var editDailyPlan = dailyPlans.NavigateToEditDailyPlan();
+
+            Assert.IsTrue(editDailyPlan.CheckPageTitle());
+
+            string[] items = { };
+            editDailyPlan.SelectWorkItemsDayBefore(items)
+                         .SelectWorkItemsToday(items)
+                         .InsertNote("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890")
+                         .SaveDailyPlan();
+
+            Assert.IsTrue(editDailyPlan.IsValidationDisplayedForSelectDayBeforeWorkItems());
+            Assert.IsTrue(editDailyPlan.IsValidationDisplayedForSelectTodayWorkItems());
+            Assert.IsTrue(editDailyPlan.IsValidationDisplayedForNote());
         }
 
     }

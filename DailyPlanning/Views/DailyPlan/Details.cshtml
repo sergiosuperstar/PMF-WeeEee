@@ -13,12 +13,9 @@
         <dt>
             @Html.DisplayNameFor(model => model.Date)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Date)
         </dd>
-
-
         <dt>
             @Html.DisplayNameFor(model => model.Today)
         </dt>
@@ -34,7 +31,6 @@
             </ul>
 
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.DayBefore)
         </dt>
@@ -50,24 +46,18 @@
             </ul>
 
         </dd>
-
-
-
         <dt>
             @Html.DisplayNameFor(model => model.Note)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Note)
         </dd>
-
     </dl>
 </div>
 <p>
     @if (Model.Date.Date == DateTime.Now.Date)
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.DailyPlanID }, new { @class = "btn btn=default", @id = "index-daily-plan-edit-link-id" })
-
     }
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn=default", @id = "details-back-to-list-link-id" })
 </p>
