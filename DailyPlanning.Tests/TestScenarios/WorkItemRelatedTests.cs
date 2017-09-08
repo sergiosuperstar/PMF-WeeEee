@@ -23,7 +23,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_CreateNewWorkItem_Test()
+        public void Home_CreateNewWorkItem_ReturnsListWithAddedWorkItem()
         {
             AddWorkItemPage addPage = workItems.NavigateToAddWorkItem();
 
@@ -31,12 +31,13 @@ namespace DailyPlanning.Tests.TestScenarios
 
             addPage.InsertTitle("New WorkItem 4")
                    .InsertDescription("Some description.")
-                   .SelectProject(2)
+                   .SelectStatus("TO_DO")
+                   .SelectProject("Project 2")
                    .SaveWorkItem();
         }
 
         [TestMethod]
-        public void Home_UpdateWorkItem_Test()
+        public void Home_UpdateWorkItem_ReturnsListWithUpdatedWorkItem()
         {
             EditWorkItemPage editPage = workItems.NavigateToEditWorkItem();
 
@@ -44,13 +45,13 @@ namespace DailyPlanning.Tests.TestScenarios
 
             editPage.EditTitle("Edited WorkItem 1")
                     .EditDescription("Edited description")
-                    .EditStatus(2)
-                    .EditProject(2)
+                    .EditStatus("DONE")
+                    .EditProject("Project 2")
                     .UpdateWorkItem();
         }
 
         [TestMethod]
-        public void Home_WorkItemDetails_Test()
+        public void Home_WorkItemDetails_ReturnsDetailsAboutSelectedWorkItem()
         {
             WorkItemDetailsPage detailsPage = workItems.NavigateToDetails();
 
@@ -58,14 +59,14 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_DeleteWorkItem_Test()
+        public void Home_DeleteWorkItem_ReturnsListWithoutDeletedWorkItem()
         {
             DeleteWorkItemPage deletePage = workItems.DeleteWorkItem();
             deletePage.DeleteConfirmation();
         }
 
         [TestMethod]
-        public void Home_CreateNewWorkItemDisplayValidation_Test()
+        public void Home_CreateNewWorkItemDisplayValidation_ReturnsAddWorkItemPageWithValidationMessages()
         {
             AddWorkItemPage addPage = workItems.NavigateToAddWorkItem();
 
@@ -73,14 +74,15 @@ namespace DailyPlanning.Tests.TestScenarios
 
             addPage.InsertTitle(" ")
                    .InsertDescription("Some description.")
-                   .SelectProject(2)
+                   .SelectStatus("TO_DO")
+                   .SelectProject("Project 2")
                    .SaveWorkItem();
 
             Assert.IsTrue(addPage.IsValidationDisplayed());
         }
 
         [TestMethod]
-        public void Home_UpdateWorkItemDisplayValidation_Test()
+        public void Home_UpdateWorkItemDisplayValidation_ReturnsEditWorkItemPageWithValidationMessages()
         {
             EditWorkItemPage editPage = workItems.NavigateToEditWorkItem();
 
@@ -88,8 +90,8 @@ namespace DailyPlanning.Tests.TestScenarios
 
             editPage.EditTitle("E")
                     .EditDescription("Edited description")
-                    .EditStatus(2)
-                    .EditProject(2)
+                    .EditStatus("DONE")
+                    .EditProject("Project 2")
                     .UpdateWorkItem();
 
             Assert.IsTrue(editPage.IsValidationDisplayed());

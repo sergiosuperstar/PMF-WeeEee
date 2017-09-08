@@ -24,6 +24,17 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             return this;
         }
 
+        public AddWorkItemPage SelectStatus(string itemName)
+        {
+            var uiDropdownStatus = new HtmlComboBox(browser);
+
+            uiDropdownStatus.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddWorkItemPageConst.ADD_STATUS_DROPDOWN_ID);
+            uiDropdownStatus.Find();
+            uiDropdownStatus.SetProperty(HtmlComboBox.PropertyNames.SelectedItem, itemName);
+
+            return this;
+        }
+
         public AddWorkItemPage InsertDescription(string description)
         {
             var uiDescription = new HtmlTextArea(browser);
@@ -35,13 +46,13 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             return this;
         }
 
-        public AddWorkItemPage SelectProject(int index)
+        public AddWorkItemPage SelectProject(string itemName)
         {
             var uiDropdownProj = new HtmlComboBox(browser);
 
             uiDropdownProj.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddWorkItemPageConst.ADD_PROJECT_DROPDOWN_ID);
             uiDropdownProj.Find();
-            uiDropdownProj.SetProperty(HtmlComboBox.PropertyNames.SelectedIndex, index);
+            uiDropdownProj.SetProperty(HtmlComboBox.PropertyNames.SelectedItem, itemName);
 
             return this;
         }
