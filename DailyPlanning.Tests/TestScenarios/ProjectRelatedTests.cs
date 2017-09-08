@@ -23,7 +23,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_CreateNewProject_Test()
+        public void Home_CreateNewProject_ReturnsListWithAddedProject()
         {
             var addPage = projects.GoToAddProject();
 
@@ -34,7 +34,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_UpdateProject_Test()
+        public void Home_UpdateProject_ReturnsListWithUpdatedProject()
         {
             var editPage = projects.GoToEditProject();
 
@@ -45,7 +45,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_ProjectDetails_Test()
+        public void Home_ProjectDetails_ReturnsDetailsAboutSelectedProject()
         {
             var detailsPage = projects.GoToProjectDetails();
 
@@ -53,14 +53,14 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_DeleteProject_Test()
+        public void Home_DeleteProject_ReturnsListWithoutDeletedProject()
         {
             var deleteConfirmation = projects.DeleteProject();
             deleteConfirmation.DeleteConfirmation();
         }
 
         [TestMethod]
-        public void Home_CreateNewProjectDisplayValidation_Test()
+        public void Home_CreateNewProjectDisplayValidation_ReturnsAddProjectPageWithValidationMessages()
         {
             var addPage = projects.GoToAddProject();
 
@@ -73,7 +73,7 @@ namespace DailyPlanning.Tests.TestScenarios
         }
 
         [TestMethod]
-        public void Home_UpdateProjectDisplayValidation_Test()
+        public void Home_UpdateProjectDisplayValidation_ReturnsEditProjectPageWithValidationMessages()
         {
             var editPage = projects.GoToEditProject();
 

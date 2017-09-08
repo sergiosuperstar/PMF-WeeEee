@@ -26,7 +26,7 @@ namespace DailyPlanning.Controllers
         /// <summary>
         /// Returns a view that displays list of WorkItems.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>View with list of all workitems</returns>
         public ActionResult Index()
         {            
             var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable();
@@ -40,7 +40,7 @@ namespace DailyPlanning.Controllers
         /// Returns a view that displays form for adding new WorkItem.
         /// </summary>
         /// <param name="id">A <see cref="int"/> type representing an ProjectID.</param>
-        /// <returns></returns>
+        /// <returns>View with input form for adding new workitem</returns>
         [HttpGet]
         public ActionResult AddWorkItem(int? id)
         {
@@ -62,7 +62,7 @@ namespace DailyPlanning.Controllers
         /// Saves new WorkItem to database.
         /// </summary>
         /// <param name="newWorkItemViewModel">Object that contains information about WorkItem that will be saved in database.</param>
-        /// <returns></returns>
+        /// <returns>If model is valid, returns view with list of all workitems, else returns view with input form</returns>
         [HttpPost]
         public ActionResult AddWorkItem(AddWorkItemViewModel newWorkItemViewModel)
         {
@@ -75,7 +75,6 @@ namespace DailyPlanning.Controllers
                 dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
-
             }
 
             return View();
@@ -85,7 +84,7 @@ namespace DailyPlanning.Controllers
         /// Returns a view that displays form for editing existing WorkItem.
         /// </summary>
         /// <param name="id">Id of the WorkItem that will be updated.</param>
-        /// <returns></returns>
+        /// <returns>Input form for updating selected workitem</returns>
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -94,9 +93,10 @@ namespace DailyPlanning.Controllers
             workItemViewModel.ListOfProjectIDs = getAllProjects();
 
             if (workItemViewModel != null)
+            {
                 return View(workItemViewModel);
-
-
+            }
+                
             return RedirectToAction("Index");
         }
 
@@ -104,7 +104,7 @@ namespace DailyPlanning.Controllers
         /// Saves changes from existing WorkItem to database.
         /// </summary>
         /// <param name="workItemViewModel">Object that contains changed information about WorkItem that will be saved in database.</param>
-        /// <returns></returns>
+        /// <returns>View with list of all workitems</returns>
         [HttpPost]
         public ActionResult Edit(UpdateWorkItemViewModel workItemViewModel)
         {
@@ -128,7 +128,7 @@ namespace DailyPlanning.Controllers
         /// Removes WorkItem from database.
         /// </summary>
         /// <param name="id">Represents an id of WorkItem that will be removed from database.</param>
-        /// <returns></returns>
+        /// <returns>View with list od all workitems</returns>
         public ActionResult Delete(int id)
         {
 
@@ -150,7 +150,7 @@ namespace DailyPlanning.Controllers
         /// Returns a view that displays information about WorkItem.
         /// </summary>
         /// <param name="id">Represents an id of WorkItem which information will be displayed.</param>
-        /// <returns></returns>
+        /// <returns>View with details about selected workitem</returns>
         public ActionResult Details(int id)
         { 
             var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
@@ -172,9 +172,9 @@ namespace DailyPlanning.Controllers
         }
 
         /// <summary>
-        /// Helper method for retrieving all projects from database and puts them in a list, which will be used for dropdown list.
+        /// Helper method for retrieving all projects from database and putting them in a list, which will be used for dropdown list.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List of all projects</returns>
         private IEnumerable<SelectListItem> getAllProjects()
         {
             var allProjects = dbContext.Projects.Where(p => p.IsEnabled == true && p.IsDeleted == false).Select(p =>

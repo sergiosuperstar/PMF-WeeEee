@@ -165,12 +165,10 @@
     <Compile Include="Models\DailyPlansViewModel\DailyPlanViewModel.cs" />
     <Compile Include="Models\DailyPlansViewModel\UpdateDailyPlanViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\AddProjectViewModel.cs" />
-    <Compile Include="Models\ProjectsViewModel\ListOfProjectsViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\ProjectDetailsViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\ProjectViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\UpdateProjectViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\AddWorkItemViewModel.cs" />
-    <Compile Include="Models\WorkItemsViewModel\ListOfWorkItemsViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\UpdateWorkItemViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\WorkItemDetailsViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\WorkItemViewModel.cs" />

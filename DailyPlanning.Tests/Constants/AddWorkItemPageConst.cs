@@ -11,5 +11,7 @@
         public const string ADD_CREATE_BUTTON_ID = "add-create-button-id";
 
         public const string ADD_TITLE_VALIDATION_ID_ERROR = "add-title-textbox-id-error";
+
+        public const string ADD_STATUS_DROPDOWN_ID = "add-status-dropdown-id";
     }
 }

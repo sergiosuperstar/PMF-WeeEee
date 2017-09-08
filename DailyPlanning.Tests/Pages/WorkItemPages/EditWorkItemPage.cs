@@ -36,24 +36,24 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             return this;
         }
 
-        public EditWorkItemPage EditStatus(int index)
+        public EditWorkItemPage EditStatus(string itemName)
         {
             var uiDropdownStatus = new HtmlComboBox(browser);
 
             uiDropdownStatus.SearchProperties.Add(HtmlControl.PropertyNames.Id, EditWorkItemPageConst.EDIT_STATUS_DROPDOWN_ID);
             uiDropdownStatus.Find();
-            uiDropdownStatus.SetProperty(HtmlComboBox.PropertyNames.SelectedIndex, index);
+            uiDropdownStatus.SetProperty(HtmlComboBox.PropertyNames.SelectedItem, itemName);
 
             return this;
         }
 
-        public EditWorkItemPage EditProject(int index)
+        public EditWorkItemPage EditProject(string itemName)
         {
             var uiDropdownProj = new HtmlComboBox(browser);
 
             uiDropdownProj.SearchProperties.Add(HtmlControl.PropertyNames.Id, EditWorkItemPageConst.EDIT_PROJECT_DROPDOWN_ID);
             uiDropdownProj.Find();
-            uiDropdownProj.SetProperty(HtmlComboBox.PropertyNames.SelectedIndex, index);
+            uiDropdownProj.SetProperty(HtmlComboBox.PropertyNames.SelectedItem, itemName);
 
             return this;
         }
