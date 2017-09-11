@@ -11,6 +11,10 @@ namespace DailyPlanning.Infrastructure.Context
         public DbSet<WorkItem> WorkItems { get; set; }
 
         public DbSet<DailyPlan> DailyPlans { get; set; }
-       
+
+        private void FixEfProviderServicesProblem()
+        {
+            var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
+        }
     }
 }

@@ -23,5 +23,14 @@ namespace DailyPlanning.Tests.Pages.ProjectPages
 
             return this;
         }
+
+        public int RowCount()
+        {
+            var uiTable = new HtmlTable(browser);
+            uiTable.SearchProperties.Add(HtmlControl.PropertyNames.Class, ProjectsPageConst.INDEX_TABLE_CLASS);
+            uiTable.Find();
+
+            return uiTable.RowCount;
+        }
     }
 }

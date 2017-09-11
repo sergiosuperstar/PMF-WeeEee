@@ -10,7 +10,6 @@ namespace DailyPlanning.Infrastructure.Database
         public static void Initialize()
         {
             System.Data.Entity.Database.SetInitializer(new DailyPlanningDBInitializer());
-
             using (var db = new DailyPlanningContext())
             {
                 db.Database.Initialize(false);

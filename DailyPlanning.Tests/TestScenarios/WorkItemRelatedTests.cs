@@ -1,4 +1,4 @@
-﻿using DailyPlanning.Tests.Pages;
+﻿using System.Data.SqlClient;
 using DailyPlanning.Tests.Pages.WorkItemPages;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,27 +13,33 @@ namespace DailyPlanning.Tests.TestScenarios
     public class WorkItemRelatedTests : BaseTest
     {
         private WorkItemsPage workItems;
+        private int rowCountBefore;
 
         [TestInitialize()]
         public void WorkItemTestsInitialize()
         {
             workItems = new WorkItemsPage(browser);
             workItems.NavigateToWorkItems();
+            
             Assert.IsTrue(workItems.CheckPageTitle());
-        }
 
-        [TestMethod]
+            rowCountBefore = workItems.RowCount();
+        }
+       
+       [TestMethod]
         public void Home_CreateNewWorkItem_ReturnsListWithAddedWorkItem()
         {
             AddWorkItemPage addPage = workItems.NavigateToAddWorkItem();
 
             Assert.IsTrue(addPage.CheckPageTitle());
-
+            
             addPage.InsertTitle("New WorkItem 4")
                    .InsertDescription("Some description.")
                    .SelectStatus("TO_DO")
                    .SelectProject("Project 2")
                    .SaveWorkItem();
+
+            Assert.IsTrue(rowCountBefore + 1 == addPage.RowCount());
         }
 
         [TestMethod]
@@ -56,6 +62,11 @@ namespace DailyPlanning.Tests.TestScenarios
             WorkItemDetailsPage detailsPage = workItems.NavigateToDetails();
 
             Assert.IsTrue(detailsPage.CheckPageTitle());
+
+            workItems = detailsPage.NavigateToWorkItemsPage();
+
+            Assert.IsTrue(workItems.CheckPageTitle());
+
         }
 
         [TestMethod]
@@ -63,6 +74,8 @@ namespace DailyPlanning.Tests.TestScenarios
         {
             DeleteWorkItemPage deletePage = workItems.DeleteWorkItem();
             deletePage.DeleteConfirmation();
+
+            Assert.IsTrue(rowCountBefore - 1 == deletePage.RowCount());
         }
 
         [TestMethod]

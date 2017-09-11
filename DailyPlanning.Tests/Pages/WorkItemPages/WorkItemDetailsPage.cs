@@ -15,7 +15,7 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             this.browser = browser;
         }
 
-        public EditWorkItemPage goToEditPage()
+        public EditWorkItemPage NavigateToEditPage()
         {
             var uiLinkEdit = new HtmlHyperlink(browser);
 
@@ -26,15 +26,26 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
             return new EditWorkItemPage(browser);
         }
 
-        public ProjectDetailsPage goToProjectDetails()
+        public ProjectDetailsPage NavigateToProjectDetails()
         {
             var uiLinkDetails = new HtmlHyperlink(browser);
 
-            uiLinkDetails.SearchProperties.Add(HtmlControl.PropertyNames.Class, ProjectsPageConst.INDEX_DETAILS_LINK_CLASS);
+            uiLinkDetails.SearchProperties.Add(HtmlControl.PropertyNames.Class, WorkItemDetailsPageConst.DETAILS_PROJECT_LINK_ID);
             uiLinkDetails.Find();
             Mouse.Click(uiLinkDetails);
 
             return new ProjectDetailsPage(browser);
+        }
+
+        public WorkItemsPage NavigateToWorkItemsPage()
+        {
+            var uiLinkDetails = new HtmlHyperlink(browser);
+
+            uiLinkDetails.SearchProperties.Add(HtmlControl.PropertyNames.Id, WorkItemDetailsPageConst.DETAILS_BACK_TO_LIST_LINK_ID);
+            uiLinkDetails.Find();
+            Mouse.Click(uiLinkDetails);
+
+            return new WorkItemsPage(browser);
         }
 
         public bool CheckPageTitle()
