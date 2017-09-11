@@ -87,6 +87,16 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
             return new WorkItemDetailsPage(browser);
         }
 
+        public int TableRowCount()
+        {
+            var uiTable = new HtmlTable(browser);
+            uiTable.SearchProperties.Add(HtmlControl.PropertyNames.Id, IndexDailyPlanPageConst.INDEX_TABLE_ID);
+            uiTable.Find();
+
+            return uiTable.RowCount;
+
+        }
+
 
 
 

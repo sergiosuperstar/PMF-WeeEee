@@ -1,11 +1,6 @@
 ﻿using DailyPlanning.Tests.Constants;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DailyPlanning.Tests.Pages.DailyPlanPages
 {
@@ -55,8 +50,9 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
             uiCreate.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.CREATE_DAILY_PLAN_LINK_ID);
             uiCreate.Find();
             Mouse.Click(uiCreate);
+           
 
-            return new DailyPlansPage(browser);
+            return new DailyPlansPage(browser); ;
         }
         public bool CheckPageTitle()
         {
@@ -90,6 +86,8 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
 
             return uiValidationError.TryFind();
         }
+
+       
 
     }
 }

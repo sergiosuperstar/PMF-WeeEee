@@ -55,7 +55,7 @@ namespace DailyPlanning.Controllers
                 var dailyPlanEntity = mapper.Map<AddDailyPlanViewModel, DailyPlan>(newDailyPlanViewModel);
                 var workItemsToday = new List<WorkItem>();
                 var workItemsDayBefore = new List<WorkItem>();
-
+                var listDailyPlansBeforeAdd = context.DailyPlans.Select(dp => dp.DailyPlanID);
 
 
                 foreach (var id in newDailyPlanViewModel.SelectedWorkItemsToday)

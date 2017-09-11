@@ -24,15 +24,20 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test()
         {
+            var countRowsBefore = dailyPlans.TableRowCount();
             AddDailyPlanPage addPage = dailyPlans.NavigateToAddDailyPlan();
             Assert.IsTrue(addPage.CheckPageTitle());
 
+         
             string[] itemsDayBefore = { "WorkItem 2" };
             string[] itemsToday = { "WorkItem 2" };
             addPage.SelectWorkItemsDayBefore(itemsDayBefore)
                 .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test")
                 .SaveDailyPlan();
+            var currentRows = dailyPlans.TableRowCount();
+
+            Assert.IsTrue(currentRows == countRowsBefore + 1);
         }
 
         [TestMethod]
