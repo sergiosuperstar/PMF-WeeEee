@@ -7,6 +7,7 @@ namespace DailyPlanning.Models.DailyPlansViewModel
 {
     public class AddDailyPlanViewModel
     {
+
         [Required]
         public DateTime Date { get; set; }
 
