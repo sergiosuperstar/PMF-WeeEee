@@ -1,7 +1,6 @@
 ﻿using DailyPlanning.Tests.Constants;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DailyPlanning.Tests.Pages.ProjectPages
 {
@@ -23,7 +22,7 @@ namespace DailyPlanning.Tests.Pages.ProjectPages
             Mouse.Click(uiLinkProjects);
         }
 
-        public AddProjectPage GoToAddProject()
+        public AddProjectPage NavigateToAddProject()
         {
             var uiLinkAdd = new HtmlHyperlink(browser);
 
@@ -34,7 +33,7 @@ namespace DailyPlanning.Tests.Pages.ProjectPages
             return new AddProjectPage(browser);
         }
 
-        public EditProjectPage GoToEditProject()
+        public EditProjectPage NavigateToEditProject()
         {
             var uiLinkEdit = new HtmlHyperlink(new HtmlTable(browser));
 
@@ -45,7 +44,7 @@ namespace DailyPlanning.Tests.Pages.ProjectPages
             return new EditProjectPage(browser);
         }
 
-        public ProjectDetailsPage GoToProjectDetails()
+        public ProjectDetailsPage NavigateToProjectDetails()
         {
             var uiLinkDetails = new HtmlHyperlink(browser);
 

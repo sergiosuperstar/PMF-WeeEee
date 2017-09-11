@@ -1,7 +1,4 @@
 ﻿using DailyPlanning.Infrastructure.Context;
-using System.Data.Entity;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.SqlClient;
 
 namespace DailyPlanning.Infrastructure.Database
 {

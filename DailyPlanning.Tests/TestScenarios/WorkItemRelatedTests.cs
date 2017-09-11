@@ -1,14 +1,10 @@
-﻿using System.Data.SqlClient;
-using DailyPlanning.Tests.Pages.WorkItemPages;
+﻿using DailyPlanning.Tests.Pages.WorkItemPages;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
 namespace DailyPlanning.Tests.TestScenarios
 {
-    /// <summary>
-    /// Summary description for CodedUITest1
-    /// </summary>
     [CodedUITest]
     public class WorkItemRelatedTests : BaseTest
     {

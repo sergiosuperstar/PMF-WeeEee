@@ -2,7 +2,6 @@
 using DailyPlanning.Tests.Pages.ProjectPages;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DailyPlanning.Tests.Pages.WorkItemPages
 {

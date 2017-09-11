@@ -1,14 +1,9 @@
-﻿using DailyPlanning.Tests.Constants;
-using DailyPlanning.Tests.Pages.ProjectPages;
+﻿using DailyPlanning.Tests.Pages.ProjectPages;
 using Microsoft.VisualStudio.TestTools.UITesting;
-using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DailyPlanning.Tests.TestScenarios
 {
-    /// <summary>
-    /// Summary description for CodedUITest1
-    /// </summary>
     [CodedUITest]
     public class ProjectRelatedTests : BaseTest
     {
@@ -29,7 +24,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_CreateNewProject_ReturnsListWithAddedProject()
         {
-            var addPage = projects.GoToAddProject();
+            var addPage = projects.NavigateToAddProject();
 
             Assert.IsTrue(addPage.CheckPageTitle());
 
@@ -42,7 +37,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_UpdateProject_ReturnsListWithUpdatedProject()
         {
-            var editPage = projects.GoToEditProject();
+            var editPage = projects.NavigateToEditProject();
 
             Assert.IsTrue(editPage.CheckPageTitle());
 
@@ -53,7 +48,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_ProjectDetails_ReturnsDetailsAboutSelectedProject()
         {
-            var detailsPage = projects.GoToProjectDetails();
+            var detailsPage = projects.NavigateToProjectDetails();
 
             Assert.IsTrue(detailsPage.CheckPageTitle());
 
@@ -74,7 +69,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_CreateNewProjectDisplayValidation_ReturnsAddProjectPageWithValidationMessages()
         {
-            var addPage = projects.GoToAddProject();
+            var addPage = projects.NavigateToAddProject();
 
             Assert.IsTrue(addPage.CheckPageTitle());
 
@@ -87,7 +82,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_UpdateProjectDisplayValidation_ReturnsEditProjectPageWithValidationMessages()
         {
-            var editPage = projects.GoToEditProject();
+            var editPage = projects.NavigateToEditProject();
 
             Assert.IsTrue(editPage.CheckPageTitle());
 

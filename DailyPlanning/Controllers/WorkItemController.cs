@@ -131,7 +131,6 @@ namespace DailyPlanning.Controllers
         /// <returns>View with list od all workitems</returns>
         public ActionResult Delete(int id)
         {
-
             var workItemEntity = dbContext.WorkItems.Where(w => w.WorkItemID == id).FirstOrDefault();
 
             if (workItemEntity != null)

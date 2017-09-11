@@ -1,7 +1,5 @@
-﻿using DailyPlanning.Infrastructure.Database;
-using Microsoft.VisualStudio.TestTools.UITesting;
+﻿using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Data.SqlClient;
 
 namespace DailyPlanning.Tests.TestScenarios
 {

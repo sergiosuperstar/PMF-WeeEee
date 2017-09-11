@@ -1,7 +1,6 @@
 ﻿using DailyPlanning.Tests.Constants;
 using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UITesting.HtmlControls;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DailyPlanning.Tests.Pages.ProjectPages
 {
