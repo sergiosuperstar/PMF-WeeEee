@@ -76,5 +76,14 @@ namespace DailyPlanning.Tests.Pages.WorkItemPages
 
             return uiTitle.InnerText.ToString().Equals(PageTitlesConst.WORKITEMS_TITLE);
         }
+
+        public int RowCount()
+        {
+            var uiTable = new HtmlTable(browser);
+            uiTable.SearchProperties.Add(HtmlControl.PropertyNames.Class, WorkItemsPageConst.INDEX_TABLE_CLASS);
+            uiTable.Find();
+
+            return uiTable.RowCount;
+        }
     }
 }

@@ -48,5 +48,5 @@
 <p>
     @Html.ActionLink("Add Work Item", "AddWorkItem", "WorkItem", new { id = Model.Project.ProjectID }, new { @class = "btn btn-default", @id = "details-add-workitem-link-id" }) &nbsp;&nbsp;
     @Html.ActionLink("Edit", "Edit", new { id = Model.Project.ProjectID }, new { @class = "btn btn-default", @id = "details-edit-project-link-id" }) &nbsp;&nbsp;
-    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-default", @id = "details-back-to-list-link-id" })
 </p>

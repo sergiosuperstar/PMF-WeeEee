@@ -11,5 +11,7 @@
         public const string INDEX_DETAILS_LINK_CLASS = "index-details-link-class";
 
         public const string INDEX_CONFIRM_BUTTON_ID = "confirm-id";
+
+        public const string INDEX_TABLE_CLASS = "table";
     }
 }

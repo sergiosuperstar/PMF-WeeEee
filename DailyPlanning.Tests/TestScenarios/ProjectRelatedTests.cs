@@ -13,13 +13,17 @@ namespace DailyPlanning.Tests.TestScenarios
     public class ProjectRelatedTests : BaseTest
     {
         private ProjectsPage projects;
+        private int rowCountBefore;
 
         [TestInitialize()]
         public void ProjectTestsInitialize()
         {
             projects = new ProjectsPage(browser);
             projects.NavigateToProjects();
+
             Assert.IsTrue(projects.CheckPageTitle());
+
+            rowCountBefore = projects.RowCount();
         }
 
         [TestMethod]
@@ -31,6 +35,8 @@ namespace DailyPlanning.Tests.TestScenarios
 
             addPage.AddTitle("New Project 4")
                    .SaveProject();
+
+            Assert.IsTrue(rowCountBefore + 1 == addPage.RowCount());
         }
 
         [TestMethod]
@@ -50,6 +56,10 @@ namespace DailyPlanning.Tests.TestScenarios
             var detailsPage = projects.GoToProjectDetails();
 
             Assert.IsTrue(detailsPage.CheckPageTitle());
+
+            projects = detailsPage.NavigateToProjectsPage();
+
+            Assert.IsTrue(projects.CheckPageTitle());
         }
 
         [TestMethod]
@@ -57,6 +67,8 @@ namespace DailyPlanning.Tests.TestScenarios
         {
             var deleteConfirmation = projects.DeleteProject();
             deleteConfirmation.DeleteConfirmation();
+
+            Assert.IsTrue(rowCountBefore - 1 == deleteConfirmation.RowCount());
         }
 
         [TestMethod]
