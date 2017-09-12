@@ -19,6 +19,8 @@ namespace DailyPlanning.Tests.TestScenarios
         {
             dailyPlans = new DailyPlansPage(browser);
             dailyPlans.NavigateDailyPlans();
+
+ 
         }
 
         [TestMethod]
@@ -59,8 +61,11 @@ namespace DailyPlanning.Tests.TestScenarios
         public void Home_DailyPlanDetails_Test()
         {
             DetailsDailyPlanPage detailsPage = dailyPlans.NavigateToDetailsDailyPlan();
+
             Assert.IsTrue(detailsPage.CheckPageTitle());
             detailsPage.NavigateBackToList();
+            var isIndexPage = dailyPlans.CheckPageTitle();
+            Assert.IsTrue(isIndexPage);
         }
 
         [TestMethod]
