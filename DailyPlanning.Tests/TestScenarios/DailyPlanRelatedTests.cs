@@ -104,7 +104,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_EditNewDailyPlanValidation_Test()
         {
-            //Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test();
+            Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test();
             var editDailyPlan = dailyPlans.NavigateToEditDailyPlan();
 
             Assert.IsTrue(editDailyPlan.CheckPageTitle());
