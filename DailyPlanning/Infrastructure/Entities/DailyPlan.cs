@@ -22,11 +22,11 @@ namespace DailyPlanning.Infrastructure.Entities
         [Required]
         public DateTime Date { get; set; }
 
-        [Required(ErrorMessage = "Select one at least")]
+        [Required]
         [InverseProperty("DailyPlansDayBefore")]
         public virtual ICollection<WorkItem> DayBefore { get; set; }
 
-        [Required(ErrorMessage = "Select one at least")]
+        [Required]
         [InverseProperty("DailyPlansToday")]
         public virtual ICollection<WorkItem> Today { get; set; }
         
