@@ -29,10 +29,10 @@ namespace DailyPlanning.Tests.TestScenarios
 
             Assert.IsTrue(addPage.CheckPageTitle());
             
-            addPage.InsertTitle("New WorkItem 4")
+            addPage.InsertTitle("New Project")
                    .InsertDescription("Some description.")
                    .SelectStatus("TO_DO")
-                   .SelectProject("Project 2")
+                   .SelectProject("DailyPlan tracker")
                    .SaveWorkItem();
 
             Assert.IsTrue(rowCountBefore + 1 == addPage.RowCount());
@@ -45,10 +45,10 @@ namespace DailyPlanning.Tests.TestScenarios
 
             Assert.IsTrue(editPage.CheckPageTitle());
 
-            editPage.EditTitle("Edited WorkItem 1")
+            editPage.EditTitle("Edited WorkItem")
                     .EditDescription("Edited description")
                     .EditStatus("DONE")
-                    .EditProject("Project 2")
+                    .EditProject("DailyPlan tracker")
                     .UpdateWorkItem();
         }
 
@@ -81,10 +81,10 @@ namespace DailyPlanning.Tests.TestScenarios
 
             Assert.IsTrue(addPage.CheckPageTitle());
 
-            addPage.InsertTitle(" ")
+            addPage.InsertTitle("Ahdas")
                    .InsertDescription("Some description.")
                    .SelectStatus("TO_DO")
-                   .SelectProject("Project 2")
+                   .SelectProject("DailyPlan tracker")
                    .SaveWorkItem();
 
             Assert.IsTrue(addPage.IsValidationDisplayed());
@@ -100,7 +100,7 @@ namespace DailyPlanning.Tests.TestScenarios
             editPage.EditTitle("E")
                     .EditDescription("Edited description")
                     .EditStatus("DONE")
-                    .EditProject("Project 2")
+                    .EditProject("DailyPlan tracker")
                     .UpdateWorkItem();
 
             Assert.IsTrue(editPage.IsValidationDisplayed());
