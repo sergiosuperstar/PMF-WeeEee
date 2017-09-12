@@ -11,7 +11,6 @@ namespace DailyPlanning.ExtendedMethods
 
         public static string Parse(this String html)
         {
-
             if (String.IsNullOrEmpty(html))
             {
                 return html;
