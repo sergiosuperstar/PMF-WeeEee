@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DayBefore, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(model => model.SelectedWorkItemsDayBefore, new MultiSelectList(Model.DayBefore, "WorkItemId", "Title"), new { @id = "select-daily-plan-day-before-listbox-id"})
+                @Html.ListBoxFor(model => model.SelectedWorkItemsDayBefore, new MultiSelectList(Model.DayBefore, "WorkItemId", "Title"), new { @class = "select-daily-plan-day-before-listbox-class"})
                 @Html.ValidationMessageFor(model => model.SelectedWorkItemsDayBefore, null, new { @class = "text-danger", @id = "select-daily-plan-day-before-text-error-id"})
             </div>
         </div>
@@ -34,14 +34,14 @@
             @Html.LabelFor(model => model.Today, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                
-                    @Html.ListBoxFor(model => model.SelectedWorkItemsToday, new MultiSelectList(Model.Today, "WorkItemId", "Title"), new { @id = "select-daily-plan-today-listbox-id"})
+                    @Html.ListBoxFor(model => model.SelectedWorkItemsToday, new MultiSelectList(Model.Today, "WorkItemId", "Title"), new { @class = "select-daily-plan-today-listbox-class"})
                     @Html.ValidationMessageFor(model => model.SelectedWorkItemsToday, null, new { @class = "text-danger", @id = "select-daily-plan-today-text-error-id" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Note, new { @class = "form-control", @id = "add-note-text-id" })
+                @Html.TextAreaFor(model => model.Note, new { @class = "form-control add-note-text-class"})
                 @Html.ValidationMessageFor(model => model.Note, null, new { @class = "text-danger", @id = "add-note-text-error-id"})
             </div>
         </div>
