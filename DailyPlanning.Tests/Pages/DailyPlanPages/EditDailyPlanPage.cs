@@ -30,7 +30,7 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
         public EditDailyPlanPage SelectWorkItemsDayBefore(string[] items)
         {
             var boxDayBefore = new HtmlList(browser);
-            boxDayBefore.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.SELECT_DAILY_PLAN_DAY_BEFORE_LISTBOX_ID);
+            boxDayBefore.SearchProperties.Add(HtmlControl.PropertyNames.Class, AddDailyPlanPageConst.SELECT_DAILY_PLAN_DAY_BEFORE_LISTBOX_CLASS);
             boxDayBefore.Find();
             boxDayBefore.SelectedItems = items;
 
@@ -40,7 +40,7 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
         public EditDailyPlanPage SelectWorkItemsToday(string[] items)
         {
             var boxToday = new HtmlList(browser);
-            boxToday.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.SELECT_DAILY_PLAN_TODAY_LISTBOX_ID);
+            boxToday.SearchProperties.Add(HtmlControl.PropertyNames.Class, AddDailyPlanPageConst.SELECT_DAILY_PLAN_TODAY_LISTBOX_CLASS);
             boxToday.Find();
             boxToday.SelectedItems =items;
 
@@ -51,7 +51,7 @@ namespace DailyPlanning.Tests.Pages.DailyPlanPages
         {
 
             var uiNote = new HtmlTextArea(browser);
-            uiNote.SearchProperties.Add(HtmlControl.PropertyNames.Id, AddDailyPlanPageConst.ADD_NOTE_TEXT_ID);
+            uiNote.SearchProperties.Add(HtmlControl.PropertyNames.Class, AddDailyPlanPageConst.ADD_NOTE_TEXT_CLASS);
             uiNote.Find();
             uiNote.SetProperty(HtmlEdit.PropertyNames.Text, note);
 

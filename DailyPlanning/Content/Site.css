@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.select-daily-plan-day-before-listbox-class,
+.select-daily-plan-today-listbox-class,
+.add-note-text-class {
+    max-width: 400px;
+    width:400px;
+}
+

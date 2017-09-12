@@ -31,8 +31,8 @@ namespace DailyPlanning.Tests.TestScenarios
             Assert.IsTrue(addPage.CheckPageTitle());
 
          
-            string[] itemsDayBefore = { "WorkItem 2" };
-            string[] itemsToday = { "WorkItem 2" };
+            string[] itemsDayBefore = { "Investigate HtmlSanitizer" };
+            string[] itemsToday = { "Add Assert in DetailsDailyPlan test method" };
             addPage.SelectWorkItemsDayBefore(itemsDayBefore)
                 .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test")
@@ -49,8 +49,8 @@ namespace DailyPlanning.Tests.TestScenarios
             EditDailyPlanPage editPage = dailyPlans.NavigateToEditDailyPlan();
             Assert.IsTrue(editPage.CheckPageTitle());
 
-            string[] itemsDayBefore = { "WorkItem 3" };
-            string[] itemsToday = { "WorkItem 1" };
+            string[] itemsDayBefore = { "Implement CKEditor for Description in WorkItems" };
+            string[] itemsToday = { "Initialize database before each test scenario" };
             editPage.SelectWorkItemsDayBefore( itemsDayBefore)
                 .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test edit")
