@@ -45,7 +45,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_EditDailyPlan_DailyPlansPageWithEditedDailyPlan_Test()
         {
-            ////Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test();
+            Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test();
             EditDailyPlanPage editPage = dailyPlans.NavigateToEditDailyPlan();
             Assert.IsTrue(editPage.CheckPageTitle());
 
