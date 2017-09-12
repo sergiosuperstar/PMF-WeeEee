@@ -38,10 +38,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -68,6 +75,7 @@
     <Compile Include="Constants\ProjectsPageConst.cs" />
     <Compile Include="Constants\WorkItemDetailsPageConst.cs" />
     <Compile Include="Constants\WorkItemsPageConst.cs" />
+    <Compile Include="Database\TestDBInitializer.cs" />
     <Compile Include="Pages\DailyPlanPages\AddDailyPlanPage.cs" />
     <Compile Include="Pages\DailyPlanPages\DailyPlansPage.cs" />
     <Compile Include="Pages\DailyPlanPages\DetailsDailyPlanPage.cs" />
@@ -93,6 +101,9 @@
       <Project>{A39B12E6-7546-4C39-8193-45840B0A7AC6}</Project>
       <Name>DailyPlanning</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

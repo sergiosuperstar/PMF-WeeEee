@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UITesting;
+﻿using DailyPlanning.Tests.Database;
+using Microsoft.VisualStudio.TestTools.UITesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DailyPlanning.Tests.TestScenarios
@@ -11,6 +12,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestInitialize()]
         public void Initialize()
         {
+            TestDBInitializer.Initialize();
             browser = BrowserWindow.Launch("http://localhost:54813");
         }
 
