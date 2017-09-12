@@ -28,7 +28,7 @@ namespace DailyPlanning.Controllers
             var dailyPlansEntities = context.DailyPlans.Where(dp => dp.DayBefore.Any(wi => context.WorkItems
                                             .Select(x => x.WorkItemID).Contains(wi.WorkItemID)) || dp.Today.Any(wi => context.WorkItems
                                             .Select(x => x.WorkItemID)
-                                            .Contains(wi.WorkItemID))).OrderBy(dp => dp.Date);
+                                            .Contains(wi.WorkItemID))).OrderByDescending(dp => dp.Date);
             var dailyPlanViewModel = mapper.Map<IEnumerable<DailyPlan>, IEnumerable<DailyPlanViewModel>>(dailyPlansEntities);
             return View(dailyPlanViewModel);
         }
