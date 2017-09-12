@@ -5,6 +5,10 @@
 }
 <h2>Work Items</h2>
 
+<div>
+    @Html.ActionLink("Add", "AddWorkItem", "", new { @class = "btn btn-success", @id = "index-add-link-id" })
+</div>
+
 <table class="table">
     <thead>
     <th>
@@ -65,17 +69,12 @@
     <p>Are you sure you want to delete this?</p>
 </div>
 
-<p>
-    @Html.ActionLink("Add", "AddWorkItem", "", new { @class = "btn btn-success", @id = "index-add-link-id" })
-</p>
+
 
 @section Scripts {
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $("#dialog").hide();
         $(document).ready(function () {
-
             $(".delete").click(function (e) {
                 var url = $(this).attr("href");
                 e.preventDefault();
