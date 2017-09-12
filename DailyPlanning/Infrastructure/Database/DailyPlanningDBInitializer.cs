@@ -41,6 +41,12 @@ namespace DailyPlanning.Infrastructure.Database
             var DailyPlan1 = new DailyPlan() { Date = DateTime.Now.AddDays(-1), Today = witems1, DayBefore = witems2, Note = "Daily Plan 1" };
             var DailyPlan2 = new DailyPlan() { Date = DateTime.Now.AddDays(-2), Today = witems1, DayBefore = witems2, Note = "Daily Plan 2" };
             var DailyPlan3 = new DailyPlan() { Date = DateTime.Now.AddDays(-3), Today = witems1, DayBefore = witems2, Note = "Daily Plan 3" };
+            var DailyPlan4 = new DailyPlan() { Date = DateTime.Now.AddDays(-4), Today = witems1, DayBefore = witems2, Note = "Daily Plan 1" };
+            var DailyPlan5 = new DailyPlan() { Date = DateTime.Now.AddDays(-5), Today = witems1, DayBefore = witems2, Note = "Daily Plan 2" };
+            var DailyPlan6 = new DailyPlan() { Date = DateTime.Now.AddDays(-6), Today = witems1, DayBefore = witems2, Note = "Daily Plan 3" };
+            var DailyPlan7 = new DailyPlan() { Date = DateTime.Now.AddDays(-7), Today = witems1, DayBefore = witems2, Note = "Daily Plan 1" };
+            var DailyPlan8 = new DailyPlan() { Date = DateTime.Now.AddDays(-8), Today = witems1, DayBefore = witems2, Note = "Daily Plan 2" };
+            
 
             context.DailyPlans.Add(DailyPlan1);
             context.DailyPlans.Add(DailyPlan2);
