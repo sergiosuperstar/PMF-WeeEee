@@ -8,72 +8,76 @@
 
 <h2>Daily Plans</h2>
 
+<p id="button">
+    @Html.ActionLink("Add Daily Plan", "AddDailyPlan", null, new { @id = "index-daily-plan-add-link-id", @class = "btn btn-success" })
+</p>
 <table class="table" id="index-table-id">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Today)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DayBefore)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                <ul>
-                    @foreach (var workItem in item.Today)
-                    {
-                        <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID }, new { @class = "index-daily-plan-today-details-link-class" })</li>
-                    }
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    @foreach (var workItem in item.DayBefore)
-                    {
-                        <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID },  new { @class = "index-daily-plan-day-before-details-link-class" })</li>
-                    }
-                </ul>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Note)
-            </td>
-            
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.DailyPlanID}, new {@class = "btn btn-default", @id = "index-dailyplan-details-link-id"})
-            </td>
-            <td>
-                @if (item.Date.Date == DateTime.Now.Date)
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID }, new { @class = "btn btn-info", @id = "index-daily-plan-edit-link-id" })
-                }
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Today)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DayBefore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th></th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>     
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var workItem in item.Today)
+                        {
+                            <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID }, new { @class = "index-daily-plan-today-details-link-class" })</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var workItem in item.DayBefore)
+                        {
+                            <li>@Html.ActionLink(workItem.Title, "Details", "WorkItem", new { id = workItem.WorkItemID }, new { @class = "index-daily-plan-day-before-details-link-class" })</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.DailyPlanID }, new { @class = "btn btn-default", @id = "index-dailyplan-details-link-id" })
+                </td>
+                <td>
+                    @if (item.Date.Date == DateTime.Now.Date)
+                {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.DailyPlanID }, new { @class = "btn btn-info", @id = "index-daily-plan-edit-link-id" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
-<p id="button">
-        @Html.ActionLink("Add Daily Plan", "AddDailyPlan", null, new {@id = "index-daily-plan-add-link-id", @class = "btn btn-success" })
-</p>
+
 
 @section Scripts{
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-        <script type="text/javascript">
-            if ($('#index-daily-plan-edit-link-id').length > 0) {
-                $('#index-daily-plan-add-link-id').attr('disabled', 'disabled');
-                $('#index-daily-plan-add-link-id').attr('href', '#');
-            }
+    <script type="text/javascript">
+        if ($('#index-daily-plan-edit-link-id').length > 0) {
+            $('#index-daily-plan-add-link-id').attr('disabled', 'disabled');
+            $('#index-daily-plan-add-link-id').attr('href', '#');
+        }
     </script>
 }

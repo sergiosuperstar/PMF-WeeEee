@@ -19,6 +19,8 @@ namespace DailyPlanning.Tests.TestScenarios
         {
             dailyPlans = new DailyPlansPage(browser);
             dailyPlans.NavigateDailyPlans();
+
+ 
         }
 
         [TestMethod]
@@ -29,8 +31,8 @@ namespace DailyPlanning.Tests.TestScenarios
             Assert.IsTrue(addPage.CheckPageTitle());
 
          
-            string[] itemsDayBefore = { "WorkItem 2" };
-            string[] itemsToday = { "WorkItem 2" };
+            string[] itemsDayBefore = { "Investigate HtmlSanitizer" };
+            string[] itemsToday = { "Add Assert in DetailsDailyPlan test method" };
             addPage.SelectWorkItemsDayBefore(itemsDayBefore)
                 .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test")
@@ -47,8 +49,8 @@ namespace DailyPlanning.Tests.TestScenarios
             EditDailyPlanPage editPage = dailyPlans.NavigateToEditDailyPlan();
             Assert.IsTrue(editPage.CheckPageTitle());
 
-            string[] itemsDayBefore = { "WorkItem 3" };
-            string[] itemsToday = { "WorkItem 1" };
+            string[] itemsDayBefore = { "Implement CKEditor for Description in WorkItems" };
+            string[] itemsToday = { "Initialize database before each test scenario" };
             editPage.SelectWorkItemsDayBefore( itemsDayBefore)
                 .SelectWorkItemsToday(itemsToday)
                 .InsertNote("Test edit")
@@ -59,8 +61,11 @@ namespace DailyPlanning.Tests.TestScenarios
         public void Home_DailyPlanDetails_Test()
         {
             DetailsDailyPlanPage detailsPage = dailyPlans.NavigateToDetailsDailyPlan();
+
             Assert.IsTrue(detailsPage.CheckPageTitle());
             detailsPage.NavigateBackToList();
+            var isIndexPage = dailyPlans.CheckPageTitle();
+            Assert.IsTrue(isIndexPage);
         }
 
         [TestMethod]
@@ -99,7 +104,7 @@ namespace DailyPlanning.Tests.TestScenarios
         [TestMethod]
         public void Home_EditNewDailyPlanValidation_Test()
         {
-            //Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test();
+            Home_InsertNewDailyPlan_DailyPlansPageWithAddedDailyPlan_Test();
             var editDailyPlan = dailyPlans.NavigateToEditDailyPlan();
 
             Assert.IsTrue(editDailyPlan.CheckPageTitle());

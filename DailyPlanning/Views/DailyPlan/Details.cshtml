@@ -25,7 +25,6 @@
                 {
                     <li>
                         @Html.ActionLink(item.Title,"Details","WorkItem",new {id = item.WorkItemID }, null)
-                        @Html.ValidationMessageFor(model => model.Today, "", new { @class = "text-danger" })
                     </li>
                 }
             </ul>
@@ -40,7 +39,6 @@
                 {
                     <li>
                         @Html.ActionLink(item.Title, "Details", "WorkItem", new { id = item.WorkItemID }, null)
-                        @Html.ValidationMessageFor(model => model.DayBefore, null, new { @class = "text-danger" })
                     </li>
                 }
             </ul>

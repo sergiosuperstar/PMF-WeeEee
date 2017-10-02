@@ -8,7 +8,7 @@ namespace DailyPlanning.Models.DailyPlansViewModel
     public class DailyPlanViewModel
     {
         public int DailyPlanID { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy hh:mm:ss}",
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy hh:mm}",
               ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
