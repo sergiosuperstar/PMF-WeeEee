@@ -70,14 +70,15 @@ namespace DailyPlanning.Controllers
             {
                 WorkItem newWorkItemEntity = mapper.Map<AddWorkItemViewModel, WorkItem>(newWorkItemViewModel);
                 newWorkItemEntity.IsEnabled = true;
-                newWorkItemEntity.Description = newWorkItemEntity.Description.Parse();
+                newWorkItemEntity.Description = newWorkItemEntity.Description.Parse(); 
                 dbContext.WorkItems.Add(newWorkItemEntity);
                 dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            return View();
+            newWorkItemViewModel.ListOfProjectIDs = getAllProjects();
+            return View(newWorkItemViewModel);
         }
 
         /// <summary>
@@ -121,7 +122,8 @@ namespace DailyPlanning.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View();
+            workItemViewModel.ListOfProjectIDs = getAllProjects();
+            return View(workItemViewModel);
         }
 
         /// <summary>
