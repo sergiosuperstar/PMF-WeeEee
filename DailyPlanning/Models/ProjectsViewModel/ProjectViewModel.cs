@@ -9,5 +9,8 @@ namespace DailyPlanning.Models.ProjectsViewModel
 
         [Display(Name = "Title")]
         public string Title { get; set; }
+
+        public bool IsEnabled { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

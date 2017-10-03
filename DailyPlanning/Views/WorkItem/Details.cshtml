@@ -5,6 +5,12 @@
 }
 
 <h2>Details</h2>
+<p>
+    @if(Model.WorkItem.IsDeleted)
+    {
+        <h3>Removed</h3>
+    }
+</p>
 
 <div>
     <hr />
@@ -62,6 +68,12 @@
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkItem.WorkItemID }, new { @class = "btn btn-default", @id = "details-edit-link-id" }) &nbsp;&nbsp;
+ 
+    @if (Model.WorkItem.IsEnabled)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.WorkItem.WorkItemID }, new { @class = "btn btn-default", @id = "details-edit-link-id" })
+    }
     @Html.ActionLink("Back to List", "Index", "", new { @class = "btn btn-default", @id = "details-back-to-list-link-id" })
+
+
 </p>
