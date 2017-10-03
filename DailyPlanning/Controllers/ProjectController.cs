@@ -27,7 +27,7 @@ namespace DailyPlanning.Controllers
         /// <returns>View with list of all projects</returns>
         public ActionResult Index()
         {
-            var projectsEntity = dbContext.Projects.Where(p => p.IsDeleted == false && p.IsEnabled == true).AsEnumerable();
+            var projectsEntity = dbContext.Projects.Where(p => p.IsDeleted == false && p.IsEnabled == true).AsEnumerable().OrderByDescending(p => p.ProjectID); ;
 
             var projectsViewModel = mapper.Map<IEnumerable<Project>, IEnumerable<ProjectViewModel>>(projectsEntity);
 
@@ -116,7 +116,7 @@ namespace DailyPlanning.Controllers
 
             if (projectViewModel != null)
             {
-                var workItemsEntity = dbContext.WorkItems.Where(w => w.ProjectID == projectViewModel.ProjectID).AsEnumerable();
+                var workItemsEntity = dbContext.WorkItems.Where(w => w.ProjectID == projectViewModel.ProjectID).AsEnumerable().OrderByDescending(w => w.WorkItemID);
                 var workItemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemsEntity);
 
                 var projectDetails = new ProjectDetailsViewModel();

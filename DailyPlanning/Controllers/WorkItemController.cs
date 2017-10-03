@@ -29,7 +29,7 @@ namespace DailyPlanning.Controllers
         /// <returns>View with list of all workitems</returns>
         public ActionResult Index()
         {            
-            var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable();
+            var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable().OrderByDescending(w => w.WorkItemID);
 
             var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
 
