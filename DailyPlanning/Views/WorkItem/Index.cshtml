@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DailyPlanning.Models.WorkItemsViewModel.WorkItemViewModel>
+﻿@using DailyPlanning.Models.WorkItemsViewModel
+@model CompleteWorkItemViewModel
 
 @{
     ViewBag.Title = "WorkItems";
@@ -9,28 +10,58 @@
     @Html.ActionLink("Add", "AddWorkItem", "", new { @class = "btn btn-success", @id = "index-add-link-id" })
 </div>
 
+
 <table class="table">
-    <thead>
+ @using (Html.BeginForm("QuickAddWorkItem", "WorkItem", "" ))
+ {
+    <tr>
+        <td>       
+            <button type="submit" class="btn btn-sm btn-success" id="add-create-button-id" title="Quick Add">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+        <td >
+            @Html.TextBoxFor(model => model.QuickAddWorkItem.Title, htmlAttributes: new { @class = "form-control", @id = "add-title-textbox-id", @placeholder = "Please enter title" , @title = "Please enter title to quick add Work Item" })
+            @Html.ValidationMessageFor(model => model.QuickAddWorkItem.Title, "", new { @class = "text-danger" })
+        </td>
+        <td  >
+            @Html.TextBoxFor(model => model.QuickAddWorkItem.Description, htmlAttributes: new { @class = "form-control", @id = "add-quick-description-textbox-id", @placeholder = "Please enter description", @title = "Please enter description to quick add Work Item" })
+            @Html.ValidationMessageFor(model => model.QuickAddWorkItem.Description, "", new { @class = "text-danger" })
+        </td>
+
+        <td colspan="4">
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.QuickAddWorkItem.ProjectID, Model.QuickAddWorkItem.ListOfProjectIDs, string.Empty, htmlAttributes: new { @class = "form-control", @id = "add-quick-project-dropdown-id" })
+                    @Html.ValidationMessageFor(model => model.QuickAddWorkItem.ProjectID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </td>
+        
+    </tr>
+} 
+    
     <th>
-        @Html.DisplayNameFor(model => model.WorkItemID)
+        @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().WorkItemID)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.Title)
+        @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Title)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.Description)
+        @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Description)
     </th>
     <th>
-        @Html.DisplayNameFor(model => model.Status)
+        @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Status)
     </th>
     <th>
         @Html.Label("", "Project Title")
     </th>
     <th></th>
-    </thead>
 
-    @foreach (var item in Model)
-    {
+
+
+    @foreach (var item in Model.WorkItems)
+            {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.WorkItemID)

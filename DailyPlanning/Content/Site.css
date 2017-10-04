@@ -30,3 +30,14 @@ textarea {
     width:400px;
 }
 
+#add-quick-description-textbox-id {
+    min-width:500px;
+    max-width:500px;
+    width:500px;
+
+    
+}
+
+#add-quick-project-dropdown-id {
+    min-width:300px;
+}

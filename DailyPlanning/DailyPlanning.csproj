@@ -171,6 +171,8 @@
     <Compile Include="Models\ProjectsViewModel\ProjectViewModel.cs" />
     <Compile Include="Models\ProjectsViewModel\UpdateProjectViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\AddWorkItemViewModel.cs" />
+    <Compile Include="Models\WorkItemsViewModel\CompleteWorkItemViewModel.cs" />
+    <Compile Include="Models\WorkItemsViewModel\QuickAddWorkItemViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\UpdateWorkItemViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\WorkItemDetailsViewModel.cs" />
     <Compile Include="Models\WorkItemsViewModel\WorkItemViewModel.cs" />

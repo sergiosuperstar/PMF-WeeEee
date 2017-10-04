@@ -32,8 +32,13 @@ namespace DailyPlanning.Controllers
             var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable().OrderByDescending(w => w.WorkItemID);
 
             var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
+            var completeWorkitemsViewModel = new CompleteWorkItemViewModel();
+            completeWorkitemsViewModel.WorkItems = workitemsViewModel;
 
-            return View(workitemsViewModel);
+            completeWorkitemsViewModel.QuickAddWorkItem = new QuickAddWorkItemViewModel();
+            completeWorkitemsViewModel.QuickAddWorkItem.ListOfProjectIDs = getAllProjects();
+
+                return View(completeWorkitemsViewModel);
         }
 
         /// <summary>
@@ -79,6 +84,28 @@ namespace DailyPlanning.Controllers
 
             newWorkItemViewModel.ListOfProjectIDs = getAllProjects();
             return View(newWorkItemViewModel);
+        }
+        [HttpPost]
+        public ActionResult QuickAddWorkItem(CompleteWorkItemViewModel newWorkItemViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                WorkItem newWorkItemEntity = mapper.Map<QuickAddWorkItemViewModel, WorkItem>(newWorkItemViewModel.QuickAddWorkItem);
+                newWorkItemEntity.IsEnabled = true;
+                newWorkItemEntity.IsDeleted = false;
+                newWorkItemEntity.Status = Infrastructure.Enums.Status.TO_DO;
+                dbContext.WorkItems.Add(newWorkItemEntity);
+                dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            newWorkItemViewModel.QuickAddWorkItem.ListOfProjectIDs = getAllProjects();
+            var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable().OrderByDescending(w => w.WorkItemID);
+
+            var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
+            newWorkItemViewModel.WorkItems = workitemsViewModel;
+            return View("Index",newWorkItemViewModel);
         }
 
         /// <summary>

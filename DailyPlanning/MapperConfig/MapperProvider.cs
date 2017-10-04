@@ -18,7 +18,9 @@ namespace DailyPlanning.MapperConfig
                 cfg.CreateMap<UpdateProjectViewModel, Project>();
 
                 cfg.CreateMap<WorkItem, WorkItemViewModel>();
+                cfg.CreateMap<WorkItem, QuickAddWorkItemViewModel>();
                 cfg.CreateMap<WorkItemViewModel, WorkItem>();
+                cfg.CreateMap<QuickAddWorkItemViewModel, WorkItem>();
                 cfg.CreateMap<AddWorkItemViewModel, WorkItem>();
                 cfg.CreateMap<WorkItem, UpdateWorkItemViewModel>();
                 cfg.CreateMap<UpdateWorkItemViewModel, WorkItem>();
