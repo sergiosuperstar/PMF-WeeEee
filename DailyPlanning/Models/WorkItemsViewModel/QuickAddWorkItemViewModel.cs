@@ -16,7 +16,7 @@ namespace DailyPlanning.Models.WorkItemsViewModel
 
         [Display(Name = "Description")]
         [Required]
-        [StringLength(500, MinimumLength = 3, ErrorMessage = "Description cannot be shorter than 5 characters and longer than 500 characters.")]
+        [StringLength(500, MinimumLength = 3, ErrorMessage = "Description cannot be shorter than 3 characters and longer than 500 characters.")]
         public string Description { get; set; }
 
         [Display(Name = "Project ID")]
