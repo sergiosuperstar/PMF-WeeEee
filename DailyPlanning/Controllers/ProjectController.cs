@@ -137,13 +137,21 @@ namespace DailyPlanning.Controllers
         public ActionResult Delete(int id)
         {
             var projectEntity = dbContext.Projects.Where(p => p.ProjectID == id).FirstOrDefault();
+            var workItems = dbContext.WorkItems.Where(wi => wi.ProjectID == id);
 
             if (projectEntity != null)
             {
                 projectEntity.IsDeleted = true;
                 projectEntity.IsEnabled = false;
+                foreach(var workItem in workItems)
+                {
+                    workItem.IsDeleted = true;
+                    workItem.IsEnabled = false;
+                    dbContext.Entry(workItem).State = EntityState.Modified;
+                }
 
                 dbContext.Entry(projectEntity).State = EntityState.Modified;
+
                 dbContext.SaveChanges();
             }
 

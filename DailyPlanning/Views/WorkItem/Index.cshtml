@@ -1,4 +1,5 @@
 ﻿@using DailyPlanning.Models.WorkItemsViewModel
+@using DailyPlanning.Infrastructure.Enums
 @model CompleteWorkItemViewModel
 
 @{
@@ -60,9 +61,20 @@
 
 
 
-    @foreach (var item in Model.WorkItems)
-            {
-        <tr>
+    @foreach (var item in Model)
+    {
+        var className = "well";
+
+        if (item.Status == Status.IN_PROGRESS)
+        {
+            className = "warning";
+        }
+        else if (item.Status == Status.DONE)
+        {
+            className = "success";
+        }
+
+        <tr class="@className">
             <td>
                 @Html.DisplayFor(modelItem => item.WorkItemID)
             </td>

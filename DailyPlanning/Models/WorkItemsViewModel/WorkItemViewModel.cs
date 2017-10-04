@@ -23,5 +23,8 @@ namespace DailyPlanning.Models.WorkItemsViewModel
         public int ProjectID { get; set; }
         
         public Project Project { get; set; }
+
+        public bool IsEnabled { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
