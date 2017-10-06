@@ -14,7 +14,7 @@ namespace DailyPlanning.Models.DailyPlansViewModel
         [Required(ErrorMessage = "Please select at least one item")]
         public IEnumerable<int> SelectedWorkItemsToday { get; set; }
         [Required(ErrorMessage = "Please select at least one item")]
-        public IEnumerable<int> SelectedWorkItemsDayBefore { get; set; }
+        public IEnumerable<string> SelectedWorkItemsDayBefore { get; set; }
         
         public IEnumerable<WorkItemViewModel> DayBefore { get; set; }
         

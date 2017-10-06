@@ -1,5 +1,8 @@
 ﻿@using DailyPlanning.Models.DailyPlansViewModel
 @model UpdateDailyPlanViewModel
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+
 @{
     ViewBag.Title = "Edit DailyPlan";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,14 +27,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DayBefore, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(model => model.SelectedWorkItemsDayBefore, new MultiSelectList(Model.DayBefore, "WorkItemId", "Title"), new {  @class = "select-daily-plan-day-before-listbox-class" })
+                @Html.ListBoxFor(model => model.SelectedWorkItemsDayBefore, new MultiSelectList(Model.DayBefore, "WorkItemId", "Title"), new { @class = "daily-plan-day-before-listbox-class", @id = "daily-plan-day-before-listbox-id" })
                 @Html.ValidationMessageFor(model => model.SelectedWorkItemsDayBefore, null, new { @class = "text-danger", @id = "select-daily-plan-day-before-text-error-id" })
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Today, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(model => model.SelectedWorkItemsToday, new MultiSelectList(Model.Today, "WorkItemId", "Title"), new { @class = "select-daily-plan-today-listbox-class" })
+                @Html.ListBoxFor(model => model.SelectedWorkItemsToday, new MultiSelectList(Model.Today, "WorkItemId", "Title"), new { @class = "daily-plan-today-listbox-class" })
                 @Html.ValidationMessageFor(model => model.SelectedWorkItemsToday, null, new { @class = "text-danger", @id = "select-daily-plan-today-text-error-id" })
             </div>
         </div>
@@ -52,3 +55,13 @@
 <div>
     @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
 </div>
+
+<script type="text/javascript">
+
+    $('select.daily-plan-day-before-listbox-class').select2({
+        tags: true,
+        placeholder: "Please select or create a Work Item"
+    });
+
+
+</script>

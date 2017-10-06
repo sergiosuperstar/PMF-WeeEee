@@ -18,13 +18,14 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
 textarea {
     max-width: 280px;
 }
 
-.select-daily-plan-day-before-listbox-class,
-.select-daily-plan-today-listbox-class,
+#daily-plan-day-before-listbox-id {
+     width:100%;
+}
+.daily-plan-today-listbox-class,
 .add-note-text-class {
     max-width: 400px;
     width:400px;
