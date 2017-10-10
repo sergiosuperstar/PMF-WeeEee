@@ -22,5 +22,6 @@ namespace DailyPlanning.Models.DailyPlansViewModel
 
         [StringLength(100, ErrorMessage = "Note cannot be longer then 100 characters")]
         public string Note { get; set; }
+      
     }
 }
