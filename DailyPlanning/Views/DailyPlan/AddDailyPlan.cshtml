@@ -2,6 +2,9 @@
 
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
 
@@ -30,11 +33,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DayBefore, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SelectedWorkItemsDayBefore, new MultiSelectList(Model.DayBefore, "WorkItemId", "Title"), new { @class = "select-daily-plan-day-before-listbox-class" })
-                @Html.ValidationMessageFor(model => model.SelectedWorkItemsDayBefore, null, new { @class = "text-danger", @id = "select-daily-plan-day-before-text-error-id" })
+                @Html.ListBoxFor(model => model.SelectedWorkItemsDayBefore, new MultiSelectList(Model.DayBefore, "WorkItemId", "Title"), new { @class = "daily-plan-day-before-listbox-class", @id= "daily-plan-day-before-listbox-id" })
+                @Html.ValidationMessageFor(model => model.SelectedWorkItemsDayBefore, null, new { @class = "text-danger", @id = "select-daily-plan-day-before-text-error-id"})
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Today, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -69,6 +71,14 @@
 <div>
     @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
 </div>
+<script type="text/javascript">
+    
+    $('select.daily-plan-day-before-listbox-class').select2({
+        tags: true,
+        placeholder: "Please select or create a Work Item"
+    });
+    
+</script>
 
 <script>
     $(function () {

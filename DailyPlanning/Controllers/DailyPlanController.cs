@@ -54,21 +54,37 @@ namespace DailyPlanning.Controllers
             if (ModelState.IsValid)
             {
                 var dailyPlanEntity = mapper.Map<AddDailyPlanViewModel, DailyPlan>(newDailyPlanViewModel);
-                var workItemsToday = new List<WorkItem>();
                 var workItemsDayBefore = new List<WorkItem>();
+                var workItemsToday = new List<WorkItem>();
                 var listDailyPlansBeforeAdd = context.DailyPlans.Select(dp => dp.DailyPlanID);
 
-
                 foreach (var id in newDailyPlanViewModel.SelectedWorkItemsToday)
-                {
+                { 
                     var workItem = context.WorkItems.Where(x => x.WorkItemID == id).FirstOrDefault();
                     workItemsToday.Add(workItem);
                 }
 
                 foreach (var id in newDailyPlanViewModel.SelectedWorkItemsDayBefore)
                 {
-                    var workItem = context.WorkItems.Where(x => x.WorkItemID == id).FirstOrDefault();
-                    workItemsDayBefore.Add(workItem);
+                    int number = 0;
+                    if (int.TryParse(id, out number))
+                    { 
+                        var workItem = context.WorkItems.Where(x => x.WorkItemID == number).FirstOrDefault();
+                        workItemsDayBefore.Add(workItem);
+                    }
+                    if (id.ToString().Length >= 3 && id.ToString().Length <= 100)
+                    {
+                        var workItem = new WorkItem();
+                        workItem.Title = id.ToString();
+                        workItem.Description = "No description at this time";
+                        workItem.Status = Infrastructure.Enums.Status.IN_PROGRESS;
+                        workItem.IsEnabled = true;
+                        workItem.IsDeleted = false;
+                        context.WorkItems.Add(workItem);
+
+                        workItemsDayBefore.Add(workItem);     
+                    }
+
                 }
                 dailyPlanEntity.Date = DateTime.Now;
                 dailyPlanEntity.Today = workItemsToday;
@@ -98,7 +114,8 @@ namespace DailyPlanning.Controllers
             dailyPlanViewModel.Date = DateTime.Now;
             dailyPlanViewModel.Today = FillListWorkItemsToday();
             dailyPlanViewModel.DayBefore = FillListWorkItemsDayBefore();
-            dailyPlanViewModel.SelectedWorkItemsDayBefore = dailyPlanEntity.DayBefore.Select(model => model.WorkItemID);
+
+            dailyPlanViewModel.SelectedWorkItemsDayBefore = dailyPlanEntity.DayBefore.Select(model => model.WorkItemID.ToString());
             dailyPlanViewModel.SelectedWorkItemsToday = dailyPlanEntity.Today.Select(model => model.WorkItemID);
 
             return View(dailyPlanViewModel);
@@ -122,12 +139,40 @@ namespace DailyPlanning.Controllers
                     .ToList().ForEach(workItem => dailyPlanEntity.Today.Add(workItem));
 
                 // Takes all unselected work items and remove them from day before list
-                dailyPlanEntity.DayBefore.Where(m => !newDailyPlanViewModel.SelectedWorkItemsDayBefore.Contains(m.WorkItemID))
+                dailyPlanEntity.DayBefore.Where(m => !newDailyPlanViewModel.SelectedWorkItemsDayBefore.Contains(m.WorkItemID.ToString()))
                     .ToList().ForEach(workItem => dailyPlanEntity.DayBefore.Remove(workItem));
                 // Takes all new selected work items and put them in list day before list
-                var existingWorkItemsDayBefore = dailyPlanEntity.DayBefore.Select(m => m.WorkItemID);
-                context.WorkItems.Where(m => newDailyPlanViewModel.SelectedWorkItemsDayBefore.Except(existingWorkItemsDayBefore).Contains(m.WorkItemID))
+                var existingWorkItemsDayBefore = dailyPlanEntity.DayBefore.Select(m => m.WorkItemID.ToString());
+
+                context.WorkItems.Where(m => newDailyPlanViewModel.SelectedWorkItemsDayBefore.Except(existingWorkItemsDayBefore).Contains(m.WorkItemID.ToString()))
                     .ToList().ForEach(workItem => dailyPlanEntity.DayBefore.Add(workItem));
+
+                if (newDailyPlanViewModel.SelectedWorkItemsDayBefore.ToList().Count != dailyPlanEntity.DayBefore.Count)
+                {
+                    foreach (var id in newDailyPlanViewModel.SelectedWorkItemsDayBefore.Except(existingWorkItemsDayBefore))
+                    {
+                        
+                        int number = 0;
+                        if (int.TryParse(id, out number))
+                        {
+                            var workItem = context.WorkItems.Where(x => x.WorkItemID == number).FirstOrDefault();
+                        }
+                        if (id.ToString().Length >= 3 && id.ToString().Length <= 100)
+                        {
+                            var workItem = new WorkItem();
+                            workItem.Title = id.ToString();
+                            workItem.Description = "No description at this time";
+                            workItem.Status = Infrastructure.Enums.Status.IN_PROGRESS;
+                            workItem.IsEnabled = true;
+                            workItem.IsDeleted = false;
+                            context.WorkItems.Add(workItem);
+                            context.SaveChanges();
+                            dailyPlanEntity.DayBefore.Add(workItem);
+                        }
+
+                    }
+                    
+                }
 
                 dailyPlanEntity.Date = DateTime.Now;
                 dailyPlanEntity.Note = newDailyPlanViewModel.Note;
@@ -158,7 +203,6 @@ namespace DailyPlanning.Controllers
             var workItemEntitiesToday = context.WorkItems.Where(w => w.Status == Status.TO_DO || w.Status == Status.IN_PROGRESS);
 
             return mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workItemEntitiesToday);
-
         }
 
         private IEnumerable<WorkItemViewModel> FillListWorkItemsDayBefore()
