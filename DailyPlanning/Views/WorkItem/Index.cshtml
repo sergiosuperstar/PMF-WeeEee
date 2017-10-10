@@ -41,25 +41,25 @@
         
     </tr>
 } 
-    
-    <th>
-        @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().WorkItemID)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Title)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Description)
-    </th>
-    <th>
-        @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Status)
-    </th>
-    <th>
-        @Html.Label("", "Project Title")
-    </th>
-    <th></th>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().WorkItemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkItems.FirstOrDefault().Status)
+        </th>
+        <th>
+            @Html.Label("", "Project Title")
+        </th>
+        <th></th>
 
-
+    </tr>
 
     @foreach (var item in Model.WorkItems)
     {
@@ -107,6 +107,11 @@
     }
 
 </table>
+
+<div>
+     @Html.Partial("_Paging") 
+</div>
+
 
 <div id="dialog" title="Confirm delete" hidden>
     <p>Are you sure you want to delete this?</p>

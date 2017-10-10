@@ -4,11 +4,13 @@ using DailyPlanning.Infrastructure.Context;
 using DailyPlanning.Infrastructure.Entities;
 using DailyPlanning.Models.ProjectsViewModel;
 using DailyPlanning.Models.WorkItemsViewModel;
+using DailyPlanning.Models.PagingModel;
 using Ganss.XSS;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+
 
 namespace DailyPlanning.Controllers
 {
@@ -27,18 +29,22 @@ namespace DailyPlanning.Controllers
         /// Returns a view that displays list of WorkItems.
         /// </summary>
         /// <returns>View with list of all workitems</returns>
-        public ActionResult Index()
-        {            
-            var workitemsEntity = dbContext.WorkItems.Where(w => !w.IsDeleted && w.IsEnabled).AsEnumerable().OrderByDescending(w => w.WorkItemID);
+        public ActionResult Index(int? page)
+        {
+            var pager = new Pager(dbContext.WorkItems.Count(), page);
+            var workitemsEntity = dbContext.WorkItems.Where(w => !w.IsDeleted && w.IsEnabled).AsEnumerable().OrderByDescending(w => w.WorkItemID).Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize);
+            
 
             var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
             var completeWorkitemsViewModel = new CompleteWorkItemViewModel();
             completeWorkitemsViewModel.WorkItems = workitemsViewModel;
-
+            completeWorkitemsViewModel.Pager = pager;
             completeWorkitemsViewModel.QuickAddWorkItem = new QuickAddWorkItemViewModel();
             completeWorkitemsViewModel.QuickAddWorkItem.ListOfProjectIDs = getAllProjects();
 
-                return View(completeWorkitemsViewModel);
+       
+
+            return View(completeWorkitemsViewModel);
         }
 
         /// <summary>
