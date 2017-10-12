@@ -14,5 +14,7 @@ namespace DailyPlanning.Infrastructure.Context
         public DbSet<WorkItem> WorkItems { get; set; }
 
         public DbSet<DailyPlan> DailyPlans { get; set; }
+
+        public DbSet<TimeSheet> TimeSheets { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using DailyPlanning.Infrastructure.Entities;
 using DailyPlanning.Models.DailyPlansViewModel;
 using DailyPlanning.Models.ProjectsViewModel;
+using DailyPlanning.Models.TimeSheetsViewModel;
 using DailyPlanning.Models.WorkItemsViewModel;
 
 namespace DailyPlanning.MapperConfig
@@ -30,6 +31,12 @@ namespace DailyPlanning.MapperConfig
                 cfg.CreateMap<DailyPlan, UpdateDailyPlanViewModel>();
                 cfg.CreateMap<DailyPlan, DetailsDailyPlanViewModel>();
                 cfg.CreateMap<UpdateDailyPlanViewModel, DailyPlan>();
+
+
+                cfg.CreateMap<TimeSheet, TimeSheetViewModel>();
+                cfg.CreateMap<TimeSheet, QuickAddTimeSheetViewModel>();
+                cfg.CreateMap<TimeSheetViewModel, TimeSheet>();
+                cfg.CreateMap<QuickAddTimeSheetViewModel, TimeSheet>();
             });
 
             return config;

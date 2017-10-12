@@ -1,0 +1,98 @@
+﻿@using DailyPlanning.Models.TimeSheetsViewModel
+@model CompleteTimeSheetViewModel
+
+
+@{
+    ViewBag.Title = "TimeSheets";
+}
+
+<h2>Time sheets</h2>
+
+<table class="table">
+    @using (Html.BeginForm("QuickAddTimeSheet", "TimeSheets"))
+    {
+        <tr>
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.QuickAddTimeSheet.Date, new { @class = "form-control", @readonly = "readonly", @id = "add-date-textbox-id", @placeholder = "Please enter date", @title = "Please enter date to quick add Time Sheet" })
+                @Html.ValidationMessageFor(model => model.QuickAddTimeSheet.Date, null, new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                @Html.TextBoxFor(model => model.QuickAddTimeSheet.Task, htmlAttributes: new { @class = "form-control", @id = "add-task-textbox-id", @placeholder = "Please enter your task", @title = "Please enter your task to quick add Time Sheet" })
+                @Html.ValidationMessageFor(model => model.QuickAddTimeSheet.Task, "", new { @class = "text-danger" })
+            </div>
+        <div class="col-md-2">
+            @Html.TextBoxFor(model => model.QuickAddTimeSheet.Comment, htmlAttributes: new { @class = "form-control", @id = "add-quick-comment-textbox-id", @placeholder = "Please enter tour comment", @title = "Please enter comment to quick add Time Sheet" })
+            @Html.ValidationMessageFor(model => model.QuickAddTimeSheet.Comment, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-2">
+
+            @Html.EditorFor(model => model.QuickAddTimeSheet.TimeFrom, new { htmlAttributes = new { @class = "form-control  date-picker", @id = "datetimepicker", @placeholder = "Please enter time from", @title = "Please enter time to quick add Time Sheet" } })
+
+        </div>
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.QuickAddTimeSheet.TimeTo, new { htmlAttributes = new { @class = "form-control  date-picker", @id = "add-quick-timeto-textbox-id", @placeholder = "Please enter time to", @title = "Please enter time to quick add Time Sheet" } })
+        </div>
+
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-sm btn-success" id="add-create-button-id" title="Quick Add">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+        </tr>
+    }
+
+    <th>
+        @Html.DisplayNameFor(model => model.TimeSheets.FirstOrDefault().TimeSheetID)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.TimeSheets.FirstOrDefault().Date)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.TimeSheets.FirstOrDefault().Task)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.TimeSheets.FirstOrDefault().Comment)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.TimeSheets.FirstOrDefault().TimeFrom)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.TimeSheets.FirstOrDefault().TimeTo)
+    </th>
+    <th></th>
+
+    @foreach (var item in Model.TimeSheets)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeSheetID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeTo)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<script>
+    jQuery('#datetimepicker').timepicker({
+        timeFormat: 'hh:mm:ss'
+    });
+    jQuery('#add-quick-timeto-textbox-id').timepicker({
+        timeFormat: 'hh:mm:ss'
+    });
+</script>
