@@ -8,21 +8,26 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <h2>Daily plans</h2>
         <p>
             List of Daily Plans 
         </p>
         <p>@Html.ActionLink("Daily Plans", "Index", "DailyPlan", null, new {@class = "btn btn-primary btn-lg", @id = "menu-daily-plan-link-id" })</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <h2>Projects</h2>
         <p>List of Projects</p>
         <p>@Html.ActionLink("Projects", "Index", "Project", null, new { @class = "btn btn-primary btn-lg", @id = "menu-project-link-id" })</p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <h2>Work items</h2>
         <p>List of Work items</p>
         <p>@Html.ActionLink("Work Items", "Index", "WorkItem", null, new { @class = "btn btn-primary btn-lg", @id = "menu-workitem-link-id" })</p>
+    </div>
+    <div class="col-md-3">
+        <h2>Time sheets</h2>
+        <p>List of Time Sheets</p>
+        <p>@Html.ActionLink("Time Sheets", "Index", "TimeSheets", null, new { @class = "btn btn-primary btn-lg", @id = "menu-timesheets-link-id" })</p>
     </div>
 </div>

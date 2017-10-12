@@ -10,6 +10,12 @@ namespace DailyPlanning.Infrastructure.Database
     {
         protected override void Seed(DailyPlanningContext context)
         {
+            var timeSheet1 = new TimeSheet() { Date = DateTime.Now.AddDays(-1), Task = "Create autocomplete textbox/combobox for lists of Work Items", Comment = "When I add an item to the list below and when i try to take back the item in the previous list, the item disappears. And I also have a little problem with adding an item which is not selected.", TimeFrom = DateTime.Now.TimeOfDay, TimeTo = DateTime.Now.TimeOfDay };
+
+            context.TimeSheets.Add(timeSheet1);
+            context.SaveChanges();
+
+
             var project1 = new Project() { Title = "DailyPlan tracker", IsEnabled = true, IsDeleted = false };
             var project2 = new Project() { Title = "DailyPlan tracker tests", IsEnabled = true, IsDeleted = false };
 
