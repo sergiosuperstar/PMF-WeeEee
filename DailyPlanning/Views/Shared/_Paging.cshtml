@@ -1,32 +1,43 @@
-﻿<div>
-    @if (Model.Pager.EndPage > 1)
+﻿@using DailyPlanning.Models.PagingModel
+@model Pager
+<div>
+
+    @if (Model.CurrentPage == Model.EndPage)
+    {
+        <p> @(Model.TotalItems+1-(Model.TotalItems-Model.PageSize*(Model.TotalPages - 1))) - @Model.TotalItems of @Model.TotalItems </p>
+    }
+    @if (Model.CurrentPage == Model.StartPage)
+    {
+        <p> @(Model.StartPage) - @(Model.CurrentPage * Model.PageSize) of @Model.TotalItems </p>
+    }
+    @if (Model.CurrentPage != Model.StartPage && Model.CurrentPage != Model.EndPage)
+    {
+        <p> @(Model.CurrentPage * Model.PageSize - (Model.PageSize-1)) - @(Model.CurrentPage * Model.PageSize) of @Model.TotalItems </p>
+    }
+
+    @if (Model.EndPage > 1)
     {
         <ul class="pagination">
-            @if (Model.Pager.CurrentPage > 1)
+            <li id="first-page-id">
+                @Html.ActionLink("First", Model.Action, Model.Controller, new { page = 1 }, null)
+            </li>
+            <li id="previous-page-id">
+                @Html.ActionLink("<<", Model.Action, Model.Controller, new { page = Model.CurrentPage - 1 }, null)
+            </li>
+
+            @for (var page = Model.StartPage; page <= Model.EndPage; page++)
             {
-                <li>
-                    <a href="~/WorkItem/Index">First</a>
-                </li>
-                <li>
-                    <a href="~/WorkItem/Index?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                <li class="@(page == Model.CurrentPage ? "active" : "")">
+                    @Html.ActionLink(page.ToString(), Model.Action, Model.Controller, new { page = page }, null)
                 </li>
             }
+            <li id="next-page-id">
+                @Html.ActionLink(">>", Model.Action, Model.Controller, new { page = (Model.CurrentPage + 1) }, null)
+            </li>
+            <li id="last-page-id">
+                @Html.ActionLink("Last", Model.Action, Model.Controller, new { page = (Model.TotalPages) }, null)
+            </li>
 
-            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-            {
-                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                    <a href="~/WorkItem/Index?page=@page">@page</a>
-                </li>}
-
-            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-            {
-                <li>
-                    <a href="~/WorkItem/Index?page=@(Model.Pager.CurrentPage + 1)">Next</a>
-                </li>
-                <li>
-                    <a href="~/WorkItem/Index?page=@(Model.Pager.TotalPages)">Last</a>
-                </li>
-            }
         </ul>
     }
 </div>

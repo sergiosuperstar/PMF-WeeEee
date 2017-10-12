@@ -31,18 +31,19 @@ namespace DailyPlanning.Controllers
         /// <returns>View with list of all workitems</returns>
         public ActionResult Index(int? page)
         {
-            var pager = new Pager(dbContext.WorkItems.Count(), page);
+            string actionName = this.ControllerContext.RouteData.Values["action"].ToString();
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var pager = new Pager(dbContext.WorkItems.Count(), page, controllerName, actionName);
             var workitemsEntity = dbContext.WorkItems.Where(w => !w.IsDeleted && w.IsEnabled).AsEnumerable().OrderByDescending(w => w.WorkItemID).Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize);
-            
 
             var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
             var completeWorkitemsViewModel = new CompleteWorkItemViewModel();
             completeWorkitemsViewModel.WorkItems = workitemsViewModel;
-            completeWorkitemsViewModel.Pager = pager;
+            
             completeWorkitemsViewModel.QuickAddWorkItem = new QuickAddWorkItemViewModel();
             completeWorkitemsViewModel.QuickAddWorkItem.ListOfProjectIDs = getAllProjects();
 
-       
+            completeWorkitemsViewModel.Pager = pager;
 
             return View(completeWorkitemsViewModel);
         }
@@ -92,7 +93,7 @@ namespace DailyPlanning.Controllers
             return View(newWorkItemViewModel);
         }
         [HttpPost]
-        public ActionResult QuickAddWorkItem(CompleteWorkItemViewModel newWorkItemViewModel)
+        public ActionResult QuickAddWorkItem(CompleteWorkItemViewModel newWorkItemViewModel, int? page)
         {
             if (ModelState.IsValid)
             {
@@ -105,12 +106,17 @@ namespace DailyPlanning.Controllers
 
                 return RedirectToAction("Index");
             }
+            string actionName = this.ControllerContext.RouteData.Values["action"].ToString(); // index
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            var pager = new Pager(dbContext.WorkItems.Count(),page, controllerName, actionName);
 
             newWorkItemViewModel.QuickAddWorkItem.ListOfProjectIDs = getAllProjects();
-            var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable().OrderByDescending(w => w.WorkItemID);
+            var workitemsEntity = dbContext.WorkItems.Where(w => w.IsDeleted == false && w.IsEnabled == true).AsEnumerable().OrderByDescending(w => w.WorkItemID).Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize);
 
             var workitemsViewModel = mapper.Map<IEnumerable<WorkItem>, IEnumerable<WorkItemViewModel>>(workitemsEntity);
             newWorkItemViewModel.WorkItems = workitemsViewModel;
+            newWorkItemViewModel.Pager = pager;
+
             return View("Index",newWorkItemViewModel);
         }
 

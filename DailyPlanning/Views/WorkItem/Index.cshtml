@@ -109,7 +109,7 @@
 </table>
 
 <div>
-     @Html.Partial("_Paging") 
+     @Html.Partial("_Paging", Model.Pager) 
 </div>
 
 
@@ -121,6 +121,15 @@
 
 @section Scripts {
     <script type="text/javascript">
+        if (@Model.Pager.CurrentPage == 1 ) {
+            $("#first-page-id").addClass('disabled');
+            $("#previous-page-id").addClass('disabled');
+        }
+        if (@Model.Pager.CurrentPage == @Model.Pager.TotalPages)
+        {
+           $("#next-page-id").addClass('disabled');
+             $("#last-page-id").addClass('disabled');
+        }
         $("#dialog").hide();
         $(document).ready(function () {
             $(".delete").click(function (e) {

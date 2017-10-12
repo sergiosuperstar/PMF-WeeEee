@@ -164,3 +164,10 @@
   cursor: not-allowed;
   background-color: #ffffff;
 }
+
+.disabled {
+  color: #999999;
+  cursor: not-allowed;
+  background-color: #ffffff;
+  border-color: #dddddd;
+}
