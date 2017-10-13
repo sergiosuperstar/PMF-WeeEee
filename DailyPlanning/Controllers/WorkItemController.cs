@@ -106,7 +106,7 @@ namespace DailyPlanning.Controllers
 
                 return RedirectToAction("Index");
             }
-            string actionName = this.ControllerContext.RouteData.Values["action"].ToString(); // index
+            string actionName = nameof(Index);
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             var pager = new Pager(dbContext.WorkItems.Count(),page, controllerName, actionName);
 
