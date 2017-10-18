@@ -13,7 +13,7 @@
     {
         <tr>
             <div class="col-md-2">
-                @Html.TextBoxFor(model => model.QuickAddTimeSheet.Date, new { @class = "form-control", @readonly = "readonly", @id = "add-date-textbox-id", @placeholder = "Please enter date", @title = "Please enter date to quick add Time Sheet" })
+                @Html.TextBoxFor(model => model.QuickAddTimeSheet.Date, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "readonly", @id = "add-date-textbox-id", @placeholder = "Please enter date", @title = "Please enter date to quick add Time Sheet" })
                 @Html.ValidationMessageFor(model => model.QuickAddTimeSheet.Date, null, new { @class = "text-danger" })
             </div>
             <div class="col-md-2">
@@ -26,11 +26,12 @@
         </div>
         <div class="col-md-2">
 
-            @Html.EditorFor(model => model.QuickAddTimeSheet.TimeFrom, new { htmlAttributes = new { @class = "form-control  date-picker", @id = "datetimepicker", @placeholder = "Please enter time from", @title = "Please enter time to quick add Time Sheet" } })
-
+            @Html.EditorFor(model => model.QuickAddTimeSheet.TimeFrom, "{0:%h}:{0:%m}", new { htmlAttributes = new { @class = "form-control  date-picker", @id = "datetimepicker", @placeholder = "Please enter time from", @title = "Please enter time to quick add Time Sheet"} })
+            @Html.ValidationMessageFor(model => model.QuickAddTimeSheet.TimeFrom, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-2">
-            @Html.EditorFor(model => model.QuickAddTimeSheet.TimeTo, new { htmlAttributes = new { @class = "form-control  date-picker", @id = "add-quick-timeto-textbox-id", @placeholder = "Please enter time to", @title = "Please enter time to quick add Time Sheet" } })
+            @Html.EditorFor(model => model.QuickAddTimeSheet.TimeTo, "{0:%h}:{0:%m}", new { htmlAttributes = new { @class = "form-control  date-picker", @id = "add-quick-timeto-textbox-id", @placeholder = "Please enter time to", @title = "Please enter time to quick add Time Sheet" } })
+            @Html.ValidationMessageFor(model => model.QuickAddTimeSheet.TimeTo, "", new { @class = "text-danger" })
         </div>
 
             <div class="col-md-2">
@@ -89,10 +90,10 @@
 
 
 <script>
-    jQuery('#datetimepicker').timepicker({
-        timeFormat: 'hh:mm:ss'
+    $('#datetimepicker').timepicker({
+        timeFormat: "HH:mm"
     });
-    jQuery('#add-quick-timeto-textbox-id').timepicker({
-        timeFormat: 'hh:mm:ss'
+    $('#add-quick-timeto-textbox-id').timepicker({
+        timeFormat: "HH:mm"
     });
 </script>

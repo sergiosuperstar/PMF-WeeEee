@@ -30,7 +30,7 @@ namespace DailyPlanning.Controllers
             completeTimeSheedViewModel.TimeSheets = timeSheedViewModel;
 
             completeTimeSheedViewModel.QuickAddTimeSheet = new QuickAddTimeSheetViewModel();
-            completeTimeSheedViewModel.QuickAddTimeSheet.Date = DateTime.Now;
+            completeTimeSheedViewModel.QuickAddTimeSheet.Date = DateTime.Now.Date;
             completeTimeSheedViewModel.QuickAddTimeSheet.TimeFrom = DateTime.Now.TimeOfDay;
             completeTimeSheedViewModel.QuickAddTimeSheet.TimeTo = DateTime.Now.TimeOfDay;
 
@@ -43,13 +43,21 @@ namespace DailyPlanning.Controllers
             if (ModelState.IsValid)
             {
                 var newTimeSheetEntity = mapper.Map<QuickAddTimeSheetViewModel, TimeSheet>(newTimeSheetViewModel.QuickAddTimeSheet);
-                newTimeSheetEntity.Date = DateTime.Now;
+
+                var date = newTimeSheetEntity.Date;
+                 date = DateTime.Now.Date;
+                var dateOnly = new DateTime(date.Year, date.Month, date.Day);
+
                 dbContext.TimeSheets.Add(newTimeSheetEntity);
                 dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-           
+
+            var timeSheetEntity = dbContext.TimeSheets.AsEnumerable().OrderByDescending(w => w.TimeSheetID);
+
+            var timeSheetViewModel = mapper.Map<IEnumerable<TimeSheet>, IEnumerable<TimeSheetViewModel>>(timeSheetEntity);
+            newTimeSheetViewModel.TimeSheets = timeSheetViewModel;
             return View("Index", newTimeSheetViewModel);
         }
     }
