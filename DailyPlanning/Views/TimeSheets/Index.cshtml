@@ -29,11 +29,6 @@
             @Html.EditorFor(model => model.QuickAddTimeSheet.TimeFrom, "{0:%h}:{0:%m}", new { htmlAttributes = new { @class = "form-control  date-picker", @id = "datetimepicker", @placeholder = "Please enter time from", @title = "Please enter time to quick add Time Sheet"} })
             @Html.ValidationMessageFor(model => model.QuickAddTimeSheet.TimeFrom, "", new { @class = "text-danger" })
         </div>
-        @*<div class="col-md-2">
-            @Html.EditorFor(model => model.QuickAddTimeSheet.TimeTo, "{0:%h}:{0:%m}", new { htmlAttributes = new { @class = "form-control  date-picker", @id = "add-quick-timeto-textbox-id", @placeholder = "Please enter time to", @title = "Please enter time to quick add Time Sheet" } })
-            @Html.ValidationMessageFor(model => model.QuickAddTimeSheet.TimeTo, "", new { @class = "text-danger" })
-        </div>*@
-
             <div class="col-md-2">
                 <button type="submit" class="btn btn-sm btn-success" id="add-create-button-id" title="Quick Add">
                     <span class="glyphicon glyphicon-plus"></span>
@@ -83,7 +78,7 @@
             @if (item.TimeTo == TimeSpan.Zero)
             {
                 <td colspan="2">
-                @Html.EditorFor(model => model.FinishTime, new { htmlAttributes = new { @class = "form-control  date-picker", @id = "timepicker" } })
+                @Html.EditorFor(model => model.FinishTime, "{0:%h}:{0:%m}", new { htmlAttributes = new { @class = "form-control  date-picker", @id = "timepicker" } })
                 </td>
                 <td>
                     @Html.ActionLink("+", "AddTimeTo", "TimeSheets", new { id = item.TimeSheetID, time = Model.FinishTime.ToString() }, new { @class = "btn btn-sm btn-success" })
@@ -105,8 +100,8 @@
     $('#datetimepicker').timepicker({
         timeFormat: "HH:mm"
     });
-    jQuery('#timepicker').timepicker({
-        timeFormat: 'hh:mm:ss'
+    $('#timepicker').timepicker({
+        timeFormat: 'HH:mm'
     });
        
 </script>
