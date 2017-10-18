@@ -69,21 +69,22 @@ namespace DailyPlanning.Controllers
             return View("Index", newTimeSheetViewModel);
         }
 
-        public ActionResult AddTimeTo(int id,string time)
+        public ActionResult AddTimeTo(CompleteTimeSheetViewModel model)
         {
-                var existingTimeSheetEntity = dbContext.TimeSheets.Where(t => t.TimeSheetID == id).FirstOrDefault();
+            if(ModelState.IsValid)
+            {
+                var existingTimeSheetEntity = dbContext.TimeSheets.Where(t => t.TimeSheetID == model.FinishTimeSheetID).FirstOrDefault();
 
                 if (existingTimeSheetEntity != null)
                 {
-                existingTimeSheetEntity.TimeTo = TimeSpan.Parse(time);
+                    existingTimeSheetEntity.TimeTo = model.FinishTime;
                     dbContext.Entry(existingTimeSheetEntity).State = EntityState.Modified;
                     dbContext.SaveChanges();
                 }
-            
-            
 
+            }
             return RedirectToAction("Index");
-            
+
         }
     }
 }

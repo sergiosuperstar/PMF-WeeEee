@@ -77,12 +77,20 @@
             </td>
             @if (item.TimeTo == TimeSpan.Zero)
             {
-                <td colspan="2">
-                @Html.EditorFor(model => model.FinishTime, "{0:%h}:{0:%m}", new { htmlAttributes = new { @class = "form-control  date-picker", @id = "timepicker" } })
-                </td>
-                <td>
-                    @Html.ActionLink("+", "AddTimeTo", "TimeSheets", new { id = item.TimeSheetID, time = Model.FinishTime.ToString() }, new { @class = "btn btn-sm btn-success" })
-                </td>
+                using (Html.BeginForm("AddTimeTo", "TimeSheets"))
+                {
+                    <td colspan="2">
+                        @Html.EditorFor(model => model.FinishTime, "{0:%h}:{0:%m}", new { htmlAttributes = new { @class = "form-control  date-picker", @id = "timepicker" } })
+                        @Html.ValidationMessageFor(model => model.FinishTime, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.FinishTimeSheetID, new { @id = item.TimeSheetID, @Value = item.TimeSheetID } )
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-sm btn-success" id="add-create-button-id" title="Add time to">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </td>
+                }
+
             }
             else
             {
