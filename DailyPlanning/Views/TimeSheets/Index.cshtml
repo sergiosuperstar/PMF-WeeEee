@@ -80,9 +80,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TimeFrom)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeTo)
-            </td>
+            @if (item.TimeTo == TimeSpan.Zero)
+            {
+                <td colspan="2">
+                @Html.EditorFor(model => model.FinishTime, new { htmlAttributes = new { @class = "form-control  date-picker", @id = "timepicker" } })
+                </td>
+                <td>
+                    @Html.ActionLink("+", "AddTimeTo", "TimeSheets", new { id = item.TimeSheetID, time = Model.FinishTime.ToString() }, new { @class = "btn btn-sm btn-success" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeTo)
+                </td>
+            }
         </tr>
     }
 
@@ -93,7 +105,8 @@
     $('#datetimepicker').timepicker({
         timeFormat: "HH:mm"
     });
-    $('#add-quick-timeto-textbox-id').timepicker({
-        timeFormat: "HH:mm"
+    jQuery('#timepicker').timepicker({
+        timeFormat: 'hh:mm:ss'
     });
+       
 </script>

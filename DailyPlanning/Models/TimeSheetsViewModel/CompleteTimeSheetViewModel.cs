@@ -11,5 +11,7 @@ namespace DailyPlanning.Models.TimeSheetsViewModel
 
         public QuickAddTimeSheetViewModel QuickAddTimeSheet { get; set; }
 
+        public TimeSpan FinishTime { get; set; }
+
     }
 }

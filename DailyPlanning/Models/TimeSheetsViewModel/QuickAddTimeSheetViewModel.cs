@@ -34,5 +34,6 @@ namespace DailyPlanning.Models.TimeSheetsViewModel
         [RegularExpression(@"(00|0[0-9]|1[0-9]|2[0-3]):([0-9]|[0-5][0-9]):([0-9]|[0-5][0-9])$", ErrorMessage = "Invalid Time.")]
         [Display(Name = "Time to")]
         public TimeSpan TimeTo { get; set; }
+
     }
 }
