@@ -4,6 +4,7 @@ using DailyPlanning.Infrastructure.Entities;
 using DailyPlanning.Models.TimeSheetsViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -33,6 +34,7 @@ namespace DailyPlanning.Controllers
             completeTimeSheedViewModel.QuickAddTimeSheet.Date = DateTime.Now;
             completeTimeSheedViewModel.QuickAddTimeSheet.TimeFrom = DateTime.Now.TimeOfDay;
             completeTimeSheedViewModel.QuickAddTimeSheet.TimeTo = DateTime.Now.TimeOfDay;
+            completeTimeSheedViewModel.FinishTime = DateTime.Now.TimeOfDay;
 
             return View(completeTimeSheedViewModel);
         }
@@ -44,6 +46,11 @@ namespace DailyPlanning.Controllers
             {
                 var newTimeSheetEntity = mapper.Map<QuickAddTimeSheetViewModel, TimeSheet>(newTimeSheetViewModel.QuickAddTimeSheet);
                 newTimeSheetEntity.Date = DateTime.Now;
+                var last = dbContext.TimeSheets.OrderByDescending(w => w.TimeSheetID).FirstOrDefault();
+                if (last.TimeTo == TimeSpan.Zero)
+                {
+                    last.TimeTo = newTimeSheetViewModel.QuickAddTimeSheet.TimeFrom;
+                }
                 dbContext.TimeSheets.Add(newTimeSheetEntity);
                 dbContext.SaveChanges();
 
@@ -51,6 +58,23 @@ namespace DailyPlanning.Controllers
             }
            
             return View("Index", newTimeSheetViewModel);
+        }
+
+        public ActionResult AddTimeTo(int id,string time)
+        {
+                var existingTimeSheetEntity = dbContext.TimeSheets.Where(t => t.TimeSheetID == id).FirstOrDefault();
+
+                if (existingTimeSheetEntity != null)
+                {
+                existingTimeSheetEntity.TimeTo = TimeSpan.Parse(time);
+                    dbContext.Entry(existingTimeSheetEntity).State = EntityState.Modified;
+                    dbContext.SaveChanges();
+                }
+            
+            
+
+            return RedirectToAction("Index");
+            
         }
     }
 }

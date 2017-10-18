@@ -26,5 +26,6 @@ namespace DailyPlanning.Models.TimeSheetsViewModel
 
         [Display(Name = "Time to")]
         public TimeSpan TimeTo { get; set; }
+
     }
 }

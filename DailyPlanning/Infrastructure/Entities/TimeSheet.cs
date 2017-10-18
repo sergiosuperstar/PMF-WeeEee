@@ -29,7 +29,7 @@ namespace DailyPlanning.Infrastructure.Entities
         [Required]
         public TimeSpan TimeFrom { get; set; }
 
-        [Required]
+        
         public TimeSpan TimeTo { get; set; }
 
 
